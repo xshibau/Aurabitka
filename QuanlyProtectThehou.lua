@@ -1,5 +1,9 @@
 local PremiumKeys = {  
-    "4COUS-54S49-5R4DM-IQB3P-64WJD",  
+"RH7CX-XMNS7-YTXEE-D16PO-HFU9O", -- 30/9 hết hạn
+"76UPD-M3FOC-NP1KN-3ULEN-0ZZ2T", -- 30/9 hết hạn
+"LGZWR-U6HTL-6Q08K-AI766-8U2W7", -- 30/9 hết hạn
+"QC2V6-BKOYC-VH1M4-F1EWJ-7KNRI", -- 30/9 hết hạn
+"6VQAR-H3PQT-HZK1H-HC59H-RBX3W", -- 30/9 hết hạn
 }  
   
 local BlacklistKeys = {  
