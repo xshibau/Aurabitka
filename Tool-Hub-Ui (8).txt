@@ -74,6 +74,7 @@ function SkUI:CreateWindow(title)
     local Holder = Create("Frame", {
          Name = "Holder",
          Size = UDim2.new(0, 550, 0, 380),
+         BackgroundTransparency = 0.5,
          Position = UDim2.new(0.5, -275, 0, -60),
          BackgroundColor3 = Color3.fromRGB(22, 22, 22),
          BorderSizePixel = 0,
@@ -102,13 +103,32 @@ function SkUI:CreateWindow(title)
         Parent = Header
     })
 
-    local TabsBackground = Create("Frame", {
+local TabsBackground = Create("Frame", {
         Size = UDim2.new(1, 0, 0, 35),
         Position = UDim2.new(0, 0, 0, 35),
         BackgroundTransparency = 1,
         BorderSizePixel = 0,
         Parent = Holder
     })
+
+    local bgGradient = Instance.new("UIGradient")
+    bgGradient.Color = ColorSequence.new{
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(148,0,211)),
+        ColorSequenceKeypoint.new(0.16, Color3.fromRGB(75,0,130)),
+        ColorSequenceKeypoint.new(0.33, Color3.fromRGB(0,0,255)),
+        ColorSequenceKeypoint.new(0.5, Color3.fromRGB(0,255,0)),
+        ColorSequenceKeypoint.new(0.66, Color3.fromRGB(255,255,0)),
+        ColorSequenceKeypoint.new(0.83, Color3.fromRGB(255,127,0)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(255,0,0))
+    }
+    bgGradient.Rotation = 0
+    bgGradient.Parent = TabsBackground
+
+    task.spawn(function()
+        while task.wait() do
+            bgGradient.Rotation = (bgGradient.Rotation + 1) % 360
+        end
+    end)
 
     local TabsScroll = Create("ScrollingFrame", {
         Size = UDim2.new(1, 0, 0, 35),
@@ -121,6 +141,25 @@ function SkUI:CreateWindow(title)
         ScrollingDirection = Enum.ScrollingDirection.X,
         Parent = TabsBackground
     })
+
+    local gradient = Instance.new("UIGradient")
+    gradient.Color = ColorSequence.new{
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(255,0,0)),
+        ColorSequenceKeypoint.new(0.16, Color3.fromRGB(255,127,0)),
+        ColorSequenceKeypoint.new(0.33, Color3.fromRGB(255,255,0)),
+        ColorSequenceKeypoint.new(0.5, Color3.fromRGB(0,255,0)),
+        ColorSequenceKeypoint.new(0.66, Color3.fromRGB(0,0,255)),
+        ColorSequenceKeypoint.new(0.83, Color3.fromRGB(75,0,130)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(148,0,211))
+    }
+    gradient.Rotation = 0
+    gradient.Parent = TabsScroll
+
+    task.spawn(function()
+        while task.wait() do
+            gradient.Rotation = (gradient.Rotation + 1) % 360
+        end
+    end)
 
     local TabsLayout = Instance.new("UIListLayout")
     TabsLayout.FillDirection = Enum.FillDirection.Horizontal
@@ -149,6 +188,25 @@ function ui:Create(buttonWidth, tabname)
     })
     Roundify(Button, 6)
 
+    local buttonGradient = Instance.new("UIGradient")
+    buttonGradient.Color = ColorSequence.new{
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(255,0,0)),
+        ColorSequenceKeypoint.new(0.16, Color3.fromRGB(255,127,0)),
+        ColorSequenceKeypoint.new(0.33, Color3.fromRGB(255,255,0)),
+        ColorSequenceKeypoint.new(0.5, Color3.fromRGB(0,255,0)),
+        ColorSequenceKeypoint.new(0.66, Color3.fromRGB(0,0,255)),
+        ColorSequenceKeypoint.new(0.83, Color3.fromRGB(75,0,130)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(148,0,211))
+    }
+    buttonGradient.Rotation = 0
+    buttonGradient.Parent = Button
+
+    task.spawn(function()
+        while task.wait() do
+            buttonGradient.Rotation = (buttonGradient.Rotation + 1) % 360
+        end
+    end)
+
     Button.MouseButton1Click:Connect(function()
         for _, child in ipairs(TabsScroll:GetChildren()) do
             if child:IsA("TextButton") then
@@ -165,12 +223,13 @@ function ui:Create(buttonWidth, tabname)
         layout.SortOrder = Enum.SortOrder.LayoutOrder
         layout.Parent = TabsScroll
     end
+end
 
 local Page = Create("Frame", {
     Size = UDim2.new(1, 0, 1, -70),
     Position = UDim2.new(0, 0, 0, 70),
     BackgroundColor3 = Color3.fromRGB(0, 0, 0),
-    BackgroundTransparency = 0,
+    BackgroundTransparency = 0.5,
     Visible = false,
     Parent = Holder,
     ClipsDescendants = true
@@ -234,6 +293,25 @@ function tab:AddToggle(side, text, default, callback)
     })
     Roundify(Toggle, 6)
 
+    local toggleGradient = Instance.new("UIGradient")
+    toggleGradient.Color = ColorSequence.new{
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(255,0,0)),
+        ColorSequenceKeypoint.new(0.16, Color3.fromRGB(255,127,0)),
+        ColorSequenceKeypoint.new(0.33, Color3.fromRGB(255,255,0)),
+        ColorSequenceKeypoint.new(0.5, Color3.fromRGB(0,255,0)),
+        ColorSequenceKeypoint.new(0.66, Color3.fromRGB(0,0,255)),
+        ColorSequenceKeypoint.new(0.83, Color3.fromRGB(75,0,130)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(148,0,211))
+    }
+    toggleGradient.Rotation = 0
+    toggleGradient.Parent = Toggle
+
+    task.spawn(function()
+        while task.wait() do
+            toggleGradient.Rotation = (toggleGradient.Rotation + 1) % 360
+        end
+    end)
+
     local label = Instance.new("TextLabel", Toggle)
     label.BackgroundTransparency = 1
     label.Position = UDim2.new(0, 10, 0, 0)
@@ -280,7 +358,7 @@ function tab:AddTextLabel(side, text)
     Label.Size = UDim2.new(1, 0, 0, 30)
     Label.BackgroundTransparency = 1
     Label.Text = text
-    Label.Font = Enum.Font.Gotham
+    Label.Font = Enum.Font.GothamBold
     Label.TextSize = 15
     Label.TextColor3 = Color3.fromRGB(200, 200, 200)
     Label.TextXAlignment = Enum.TextXAlignment.Center
@@ -288,6 +366,25 @@ function tab:AddTextLabel(side, text)
     Label.AnchorPoint = Vector2.new(0.5, 0)
     Label.Position = UDim2.new(0.5, 0, 0, 0)
     Label.Parent = parent
+
+    local textGradient = Instance.new("UIGradient")
+    textGradient.Color = ColorSequence.new{
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(255,0,0)),
+        ColorSequenceKeypoint.new(0.16, Color3.fromRGB(255,127,0)),
+        ColorSequenceKeypoint.new(0.33, Color3.fromRGB(255,255,0)),
+        ColorSequenceKeypoint.new(0.5, Color3.fromRGB(0,255,0)),
+        ColorSequenceKeypoint.new(0.66, Color3.fromRGB(0,0,255)),
+        ColorSequenceKeypoint.new(0.83, Color3.fromRGB(75,0,130)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(148,0,211))
+    }
+    textGradient.Rotation = 0
+    textGradient.Parent = Label
+
+    task.spawn(function()
+        while task.wait() do
+            textGradient.Rotation = (textGradient.Rotation + 1) % 360
+        end
+    end)
 end
 function tab:AddNiceTextLabel(side, text)
     local parent = (side == "Left") and LeftScroll or RightScroll
@@ -336,8 +433,28 @@ function tab:AddButton(side, text, callback)
 
     Roundify(Button, 6)
 
+    local buttonGradient = Instance.new("UIGradient")
+    buttonGradient.Color = ColorSequence.new{
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(255,0,0)),
+        ColorSequenceKeypoint.new(0.16, Color3.fromRGB(255,127,0)),
+        ColorSequenceKeypoint.new(0.33, Color3.fromRGB(255,255,0)),
+        ColorSequenceKeypoint.new(0.5, Color3.fromRGB(0,255,0)),
+        ColorSequenceKeypoint.new(0.66, Color3.fromRGB(0,0,255)),
+        ColorSequenceKeypoint.new(0.83, Color3.fromRGB(75,0,130)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(148,0,211))
+    }
+    buttonGradient.Rotation = 0
+    buttonGradient.Parent = Button
+
+    task.spawn(function()
+        while task.wait() do
+            buttonGradient.Rotation = (buttonGradient.Rotation + 1) % 360
+        end
+    end)
+
     Button.MouseButton1Click:Connect(callback)
-end        
+end
+
 function tab:AddLabel(side, text)
     local parent = (side == "Left") and LeftScroll or RightScroll
     local Label = Instance.new("TextLabel")
@@ -353,7 +470,6 @@ function tab:AddLabel(side, text)
     Label.Parent = parent
     Roundify(Label, 6)
 end
-
 function tab:AddTextbox(side, text, placeholder, callback)
     local Box = Instance.new("Frame")
     Box.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
@@ -390,6 +506,25 @@ function tab:AddTextbox(side, text, placeholder, callback)
     local corner2 = Instance.new("UICorner", Input)
     corner2.CornerRadius = UDim.new(0, 4)
 
+    local inputGradient = Instance.new("UIGradient")
+    inputGradient.Color = ColorSequence.new{
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(255,0,0)),
+        ColorSequenceKeypoint.new(0.16, Color3.fromRGB(255,127,0)),
+        ColorSequenceKeypoint.new(0.33, Color3.fromRGB(255,255,0)),
+        ColorSequenceKeypoint.new(0.5, Color3.fromRGB(0,255,0)),
+        ColorSequenceKeypoint.new(0.66, Color3.fromRGB(0,0,255)),
+        ColorSequenceKeypoint.new(0.83, Color3.fromRGB(75,0,130)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(148,0,211))
+    }
+    inputGradient.Rotation = 0
+    inputGradient.Parent = Input
+
+    task.spawn(function()
+        while task.wait() do
+            inputGradient.Rotation = (inputGradient.Rotation + 1) % 360
+        end
+    end)
+
     Input.FocusLost:Connect(function(enterPressed)
         if enterPressed then
             callback(Input.Text)
@@ -397,6 +532,23 @@ function tab:AddTextbox(side, text, placeholder, callback)
     end)
 
     AddElement(side, Box)
+end
+
+function tab:AddText(side, text)
+    local parent = (side == "Left") and LeftScroll or RightScroll
+    local Label = Instance.new("TextLabel")
+    Label.Size = UDim2.new(1, 0, 0, 30)
+    Label.AnchorPoint = Vector2.new(0.5, 0)
+    Label.BackgroundTransparency = 1
+    Label.Text = text
+    Label.Position = UDim2.new(0.5, 0, 0, 0)
+    Label.Font = Enum.Font.Gotham
+    Label.TextSize = 12
+    Label.TextColor3 = Color3.fromRGB(200, 200, 200)
+    Label.TextXAlignment = Enum.TextXAlignment.Center
+    Label.TextYAlignment = Enum.TextYAlignment.Center
+    Label.TextWrapped = true
+    Label.Parent = parent
 end
 function tab:AddSlider(side, text, min, max, default, callback)
     local parent = (side == "Left") and LeftScroll or RightScroll
@@ -456,6 +608,15 @@ function tab:AddSlider(side, text, min, max, default, callback)
     local FillCorner = Instance.new("UICorner", Fill)
     FillCorner.CornerRadius = UDim.new(0, 5)
 
+    task.spawn(function()
+        local t = 0
+        while Fill.Parent do
+            t = t + 0.01
+            Fill.BackgroundColor3 = Color3.fromHSV(t % 1, 1, 1)
+            task.wait(0.03)
+        end
+    end)
+
     ValueButton.MouseButton1Click:Connect(function()
         local inputBox = Instance.new("TextBox")
         inputBox.Size = ValueButton.Size
@@ -482,7 +643,6 @@ function tab:AddSlider(side, text, min, max, default, callback)
         end)
     end)
 end
-
 function tab:RealLine(side)
     local parent = (side == "Left") and LeftScroll or RightScroll
 
@@ -498,25 +658,33 @@ function tab:RealLine(side)
     local Corner = Instance.new("UICorner")
     Corner.CornerRadius = UDim.new(0, 3)
     Corner.Parent = Line
+
+    task.spawn(function()
+        local t = 0
+        while Line.Parent do
+            t = t + 0.01
+            Line.BackgroundColor3 = Color3.fromHSV(t % 1, 1, 1)
+            task.wait(0.03)
+        end
+    end)
 end
 
-function tab:AddText(side, text)
+function tab:AddHideLine(side)
     local parent = (side == "Left") and LeftScroll or RightScroll
-    local Label = Instance.new("TextLabel")
-    Label.Size = UDim2.new(1, 0, 0, 30)
-    Label.AnchorPoint = Vector2.new(0.5, 0)
-    Label.BackgroundTransparency = 1
-    Label.Text = text
-    Label.Position = UDim2.new(0.5, 0, 0, 0)
-    Label.Font = Enum.Font.Gotham
-    Label.TextSize = 12
-    Label.TextColor3 = Color3.fromRGB(200, 200, 200)
-    Label.TextXAlignment = Enum.TextXAlignment.Center
-    Label.TextYAlignment = Enum.TextYAlignment.Center
-    Label.TextWrapped = true
-    Label.Parent = parent
-end
 
+    local Line = Instance.new("Frame")
+    Line.Size = UDim2.new(1, 0, 0, 9)
+    Line.AnchorPoint = Vector2.new(0.5, 0)
+    Line.Position = UDim2.new(0.5, 0, 0, 0)
+    Line.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+    Line.BackgroundTransparency = 1
+    Line.BorderSizePixel = 0
+    Line.Parent = parent
+
+    local Corner = Instance.new("UICorner")
+    Corner.CornerRadius = UDim.new(0, 3)
+    Corner.Parent = Line
+end
 function tab:AddDropdown(side, text, list, callback)
     local parent = (side == "Left") and LeftScroll or RightScroll
 
@@ -571,15 +739,15 @@ function tab:AddDropdown(side, text, list, callback)
     Scroll.BackgroundTransparency = 1
     Scroll.ScrollBarImageTransparency = 1
     Scroll.CanvasSize = UDim2.new(0,0,0,0)
-    Scroll.HorizontalScrollBarInset = Enum.ScrollBarInset.None -- chỉ dọc
+    Scroll.HorizontalScrollBarInset = Enum.ScrollBarInset.None
 
     local UIList = Instance.new("UIListLayout", Scroll)
     UIList.SortOrder = Enum.SortOrder.LayoutOrder
     UIList.Padding = UDim.new(0,2)
 
-    local selectedItem = nil -- giữ 1 item
-
+    local selectedItem = nil
     local open = false
+
     Button.MouseButton1Click:Connect(function()
         open = not open
         DropdownFrame.Visible = open
@@ -589,7 +757,7 @@ function tab:AddDropdown(side, text, list, callback)
     local function updateScroll()
         local total = 0
         for _, child in pairs(Scroll:GetChildren()) do
-            if child:IsA("TextButton") then
+            if child:IsA("TextButton") and child.Visible then
                 total = total + child.Size.Y.Offset + UIList.Padding.Offset
             end
         end
@@ -749,24 +917,6 @@ function tab:AddMultiDropdown(side, text, list, callback)
         Button.Text = text .. (open and " ▲" or " ▼")
     end)
 end
-
-function tab:AddHideLine(side)
-    local parent = (side == "Left") and LeftScroll or RightScroll
-
-    local Line = Instance.new("Frame")
-    Line.Size = UDim2.new(1, 0, 0, 9)
-    Line.AnchorPoint = Vector2.new(0.5, 0)
-    Line.Position = UDim2.new(0.5, 0, 0, 0)
-    Line.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-    Line.BackgroundTransparency = 1
-    Line.BorderSizePixel = 0
-    Line.Parent = parent
-
-    local Corner = Instance.new("UICorner")
-    Corner.CornerRadius = UDim.new(0, 3)
-    Corner.Parent = Line
-end
-
 function tab:AddParagraph(side, title, desc)
     local parent = (side == "Left") and LeftScroll or RightScroll
     
