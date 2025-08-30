@@ -75,7 +75,7 @@ function SkUI:CreateWindow(title)
          Name = "Holder",
          Size = UDim2.new(0, 550, 0, 380),
          Position = UDim2.new(0.5, -275, 0, -60),
-         BackgroundTransparency = 0.7,
+         BackgroundTransparency = 0.5,
          BackgroundColor3 = Color3.fromRGB(255, 0, 0),
          BorderSizePixel = 0,
          Visible = true,
@@ -95,7 +95,7 @@ function SkUI:CreateWindow(title)
 
     local Title = Create("TextLabel", {
         Size = UDim2.new(1, 0, 1, 0),
-        BackgroundTransparency = 0.7,
+        BackgroundTransparency = 0.3,
         Text = title or "SkUI",
         TextColor3 = Color3.fromRGB(255, 255, 255),
         Font = Enum.Font.GothamBold,
