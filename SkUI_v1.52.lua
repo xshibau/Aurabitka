@@ -75,6 +75,7 @@ function SkUI:CreateWindow(title)
          Name = "Holder",
          Size = UDim2.new(0, 550, 0, 380),
          Position = UDim2.new(0.5, -275, 0, -60),
+         BackgroundTransparency = 0.7,
          BackgroundColor3 = Color3.fromRGB(22, 22, 22),
          BorderSizePixel = 0,
          Visible = true,
@@ -192,7 +193,7 @@ local function makeScroll(posX, widthScale)
         Size = UDim2.new(widthScale, -10, 0, 298),
         Position = posX,
         BackgroundColor3 = Color3.fromRGB(30, 30, 30),
-        BackgroundTransparency = 0,
+        BackgroundTransparency = 1,
         BorderSizePixel = 0,
         ScrollBarThickness = 0,
         AutomaticCanvasSize = Enum.AutomaticSize.Y,
@@ -225,7 +226,6 @@ local RightScroll = makeScroll(UDim2.new(0.5, 5, 0, 5), 0.5)
 function tab:AddToggle(side, text, default, callback)
     local Toggle = Create("TextButton", {
         BackgroundColor3 = Color3.fromRGB(45, 45, 45),
-        BackgroundTransparency = 0.7,
         Text = "",
         Font = Enum.Font.Gotham,
         TextSize = 13,
@@ -250,10 +250,10 @@ function tab:AddToggle(side, text, default, callback)
     icon.AnchorPoint = Vector2.new(1, 0.5)
     icon.Position = UDim2.new(1, -10, 0.5, 0)
     icon.Size = UDim2.new(0, 22, 0, 22)
-    icon.BackgroundColor3 = default and Color3.fromRGB(16,753,920) or Color3.fromRGB(80, 80, 80)
+    icon.BackgroundColor3 = default and Color3.fromRGB(255,165,0) or Color3.fromRGB(80, 80, 80)
     icon.BorderSizePixel = 0
     icon.ZIndex = 2
-    Roundify(icon, 0,5)
+    Roundify(icon, 5)
 
     local tick = Instance.new("TextLabel", icon)
     tick.Size = UDim2.new(1, 0, 1, 0)
@@ -269,7 +269,7 @@ function tab:AddToggle(side, text, default, callback)
 
     Toggle.MouseButton1Click:Connect(function()
         state = not state
-        icon.BackgroundColor3 = state and Color3.fromRGB(16,753,920) or Color3.fromRGB(80, 80, 80)
+        icon.BackgroundColor3 = state and Color3.fromRGB(255,165,0) or Color3.fromRGB(80, 80, 80)
         tick.TextTransparency = state and 0 or 1
         callback(state)
     end)
@@ -328,7 +328,6 @@ function tab:AddButton(side, text, callback)
     Button.Size = UDim2.new(1, 0, 0, 25)
     Button.AnchorPoint = Vector2.new(0.5, 0)
     Button.Position = UDim2.new(0.5, 0, 0, 0)
-    Button.BackgroundTransparency = 0.7
     Button.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
     Button.Font = Enum.Font.Gotham
     Button.TextSize = 13
@@ -361,7 +360,6 @@ function tab:AddTextbox(side, text, placeholder, callback)
     local Box = Instance.new("Frame")
     Box.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
     Box.Size = UDim2.new(1, 0, 0, 38)
-    Box.BackgroundTransparency = 0.7
     Box.AnchorPoint = Vector2.new(0.5, 0)
     Box.Position = UDim2.new(0.5, 0, 0, 0)
     Box.ClipsDescendants = true
@@ -411,7 +409,6 @@ function tab:AddSlider(side, text, min, max, default, callback)
     Container.Size = UDim2.new(1, 0, 0, 60)
     Container.AnchorPoint = Vector2.new(0.5, 0)
     Container.Position = UDim2.new(0.5, 0, 0, 0)
-    Container.BackgroundTransparency = 0.7
     Container.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
     Container.BorderSizePixel = 0
     Container.Parent = parent
@@ -539,7 +536,6 @@ function tab:AddDropdown(side, text, list, callback)
     Button.Size = UDim2.new(1,0,0,35)
     Button.BackgroundColor3 = Color3.fromRGB(55, 55, 55)
     Button.AutoButtonColor = false
-    Button.BackgroundTransparency = 0.7,l
     Button.Font = Enum.Font.Gotham
     Button.TextSize = 12
     Button.TextColor3 = Color3.fromRGB(255,255,255)
@@ -658,7 +654,6 @@ function tab:AddMultiDropdown(side, text, list, callback)
     Button.Size = UDim2.new(1, 0, 0, 35)
     Button.BackgroundColor3 = Color3.fromRGB(55, 55, 55)
     Button.AutoButtonColor = false
-    Button.BackgroundTransparency = 0.7
     Button.Font = Enum.Font.Gotham
     Button.TextSize = 12
     Button.TextColor3 = Color3.fromRGB(255, 255, 255)
