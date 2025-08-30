@@ -416,6 +416,7 @@ function tab:AddLeftTextLabel(side, text)
     Label.Position = UDim2.new(0.5, 0, 0, 0)
     Label.Parent = parent
 end
+
 function tab:AddButton(side, text, callback)
     local parent = (side == "Left") and LeftScroll or RightScroll
 
@@ -454,7 +455,6 @@ function tab:AddButton(side, text, callback)
 
     Button.MouseButton1Click:Connect(callback)
 end
-
 function tab:AddLabel(side, text)
     local parent = (side == "Left") and LeftScroll or RightScroll
     local Label = Instance.new("TextLabel")
@@ -469,6 +469,23 @@ function tab:AddLabel(side, text)
     Label.ClipsDescendants = true
     Label.Parent = parent
     Roundify(Label, 6)
+end
+
+function tab:AddText(side, text)
+    local parent = (side == "Left") and LeftScroll or RightScroll
+    local Label = Instance.new("TextLabel")
+    Label.Size = UDim2.new(1, 0, 0, 30)
+    Label.AnchorPoint = Vector2.new(0.5, 0)
+    Label.BackgroundTransparency = 1
+    Label.Text = text
+    Label.Position = UDim2.new(0.5, 0, 0, 0)
+    Label.Font = Enum.Font.Gotham
+    Label.TextSize = 12
+    Label.TextColor3 = Color3.fromRGB(200, 200, 200)
+    Label.TextXAlignment = Enum.TextXAlignment.Center
+    Label.TextYAlignment = Enum.TextYAlignment.Center
+    Label.TextWrapped = true
+    Label.Parent = parent
 end
 function tab:AddTextbox(side, text, placeholder, callback)
     local Box = Instance.new("Frame")
@@ -532,23 +549,6 @@ function tab:AddTextbox(side, text, placeholder, callback)
     end)
 
     AddElement(side, Box)
-end
-
-function tab:AddText(side, text)
-    local parent = (side == "Left") and LeftScroll or RightScroll
-    local Label = Instance.new("TextLabel")
-    Label.Size = UDim2.new(1, 0, 0, 30)
-    Label.AnchorPoint = Vector2.new(0.5, 0)
-    Label.BackgroundTransparency = 1
-    Label.Text = text
-    Label.Position = UDim2.new(0.5, 0, 0, 0)
-    Label.Font = Enum.Font.Gotham
-    Label.TextSize = 12
-    Label.TextColor3 = Color3.fromRGB(200, 200, 200)
-    Label.TextXAlignment = Enum.TextXAlignment.Center
-    Label.TextYAlignment = Enum.TextYAlignment.Center
-    Label.TextWrapped = true
-    Label.Parent = parent
 end
 function tab:AddSlider(side, text, min, max, default, callback)
     local parent = (side == "Left") and LeftScroll or RightScroll
