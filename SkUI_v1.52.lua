@@ -378,7 +378,7 @@ function tab:AddTextbox(side, text, placeholder, callback)
     Label.Text = text
     Label.Font = Enum.Font.Gotham
     Label.TextSize = 12
-    Label.TextColor3 = Color3.fromRGB(200, 200, 200)
+    Label.TextColor3 = Color3.fromRGB(255, 255, 255)
     Label.TextXAlignment = Enum.TextXAlignment.Left
 
     local Input = Instance.new("TextBox", Box)
