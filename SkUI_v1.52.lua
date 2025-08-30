@@ -286,9 +286,9 @@ function tab:AddTextLabel(side, text)
     Label.Size = UDim2.new(1, 0, 0, 30)
     Label.BackgroundTransparency = 1
     Label.Text = text
-    Label.Font = Enum.Font.Gotham
+    Label.Font = Enum.Font.GothamBold
     Label.TextSize = 15
-    Label.TextColor3 = Color3.fromRGB(200, 200, 200)
+    Label.TextColor3 = Color3.fromRGB(255, 255, 255)
     Label.TextXAlignment = Enum.TextXAlignment.Center
     Label.TextYAlignment = Enum.TextYAlignment.Center
     Label.AnchorPoint = Vector2.new(0.5, 0)
@@ -316,7 +316,7 @@ function tab:AddLeftTextLabel(side, text)
     Label.Size = UDim2.new(1, 0, 0, 30)
     Label.BackgroundTransparency = 1
     Label.Text = text
-    Label.Font = Enum.Font.Gotham
+    Label.Font = Enum.Font.GothamBold
     Label.TextSize = 13
     Label.TextColor3 = Color3.fromRGB(200, 200, 200)
     Label.TextXAlignment = Enum.TextXAlignment.Center
