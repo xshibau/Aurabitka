@@ -95,7 +95,7 @@ function SkUI:CreateWindow(title)
 
     local Title = Create("TextLabel", {
         Size = UDim2.new(1, 0, 1, 0),
-        BackgroundTransparency = 1,
+        BackgroundTransparency = 0.7,
         Text = title or "SkUI",
         TextColor3 = Color3.fromRGB(255, 255, 255),
         Font = Enum.Font.GothamBold,
@@ -141,6 +141,7 @@ function ui:Create(buttonWidth, tabname)
 
     local Button = Create("TextButton", {
         Size = UDim2.new(0, buttonWidth, 1, 0),
+        BackgroundTransparency = 0.5,
         BackgroundColor3 = Color3.fromRGB(70, 70, 70),
         Text = tabname,
         Font = Enum.Font.Gotham,
