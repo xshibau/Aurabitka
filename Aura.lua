@@ -75,6 +75,7 @@ if _G.NewUI == true then
 else
     if isPremiumKey(getgenv().Key) then
         local ScriptsPremium = {
+           [8014099969] = "https://raw.githubusercontent.com/xshibau/Aurabitka/refs/heads/main/QuanLyPTHFM.luau",
            [7326934954] = "https://raw.githubusercontent.com/ziugpro/Tool-Hub/refs/heads/main/Quanly99Night.lua",
            [7709344486] = "https://raw.githubusercontent.com/ziugpro/Tool-Hub/refs/heads/main/QuanlySaB.lua",
            [7851663243] = "https://raw.githubusercontent.com/ziugpro/Tool-Hub/refs/heads/main/QuanlyStealaMeme.lua",
