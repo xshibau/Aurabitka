@@ -248,7 +248,7 @@ function tab:AddToggle(side, text, default, callback)
 
     local iconBorder = Instance.new("Frame", Toggle)
     iconBorder.AnchorPoint = Vector2.new(1, 0.5)
-    iconBorder.Position = UDim2.new(1, -27, 0.5, 0)
+    iconBorder.Position = UDim2.new(1, -23, 0.5, 0)
     iconBorder.Size = UDim2.new(0, 24, 0, 24)
     iconBorder.BackgroundColor3 = Color3.fromRGB(80,80,80)
     iconBorder.BorderSizePixel = 0
@@ -258,8 +258,9 @@ function tab:AddToggle(side, text, default, callback)
     icon.AnchorPoint = Vector2.new(0.5, 0.5)
     icon.Position = UDim2.new(0.5, 0, 0.5, 0)
     icon.Size = default and UDim2.new(0, 19, 0, 19) or UDim2.new(0, 0, 0, 0)
-    icon.BackgroundColor3 = default and Color3.fromRGB(255,165,0) or Color3.fromRGB(80, 80, 80)
+    icon.BackgroundColor3 = default and Color3.fromRGB(255, 165, 0) or Color3.fromRGB(80, 80, 80)
     icon.BorderSizePixel = 0
+    icon.ZIndex = 3
     Roundify(icon, 100)
 
     local tick = Instance.new("TextLabel", icon)
@@ -270,26 +271,29 @@ function tab:AddToggle(side, text, default, callback)
     tick.TextSize = 12
     tick.TextColor3 = Color3.fromRGB(255, 255, 255)
     tick.TextTransparency = default and 0 or 1
-    tick.ZIndex = 3
+    tick.ZIndex = 5
 
     local state = default or false
 
-    Toggle.MouseButton1Click:Connect(function()
-        state = not state
+Toggle.MouseButton1Click:Connect(function()
+    state = not state
 
-        local goalSize
-        if state then
-            goalSize = UDim2.new(0, 19, 0, 19)
-            tick.TextTransparency = 0
-        else
-            goalSize = UDim2.new(0, 0, 0, 0)
-            tick.TextTransparency = 1
-        end
+    local goalSize
+    local goalColor
+    if state then
+        goalSize = UDim2.new(0, 19, 0, 19)
+        goalColor = Color3.fromRGB(255, 165, 0)
+        tick.TextTransparency = 0
+    else
+        goalSize = UDim2.new(0, 0, 0, 0)
+        goalColor = Color3.fromRGB(80, 80, 80)
+        tick.TextTransparency = 1
+    end
 
-        TweenService:Create(icon, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = goalSize}):Play()
+    TweenService:Create(icon, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = goalSize, BackgroundColor3 = goalColor}):Play()
 
-        callback(state)
-    end)
+    callback(state)
+end)
 
     AddElement(side, Toggle)
         end
