@@ -248,7 +248,7 @@ function tab:AddToggle(side, text, default, callback)
     iconBorder.AnchorPoint = Vector2.new(1, 0.5)
     iconBorder.Position = UDim2.new(1, -10, 0.5, 0)
     iconBorder.Size = UDim2.new(0, 22, 0, 22)
-    iconBorder.BackgroundColor3 = Color3.fromRGB(255,0,0)
+    iconBorder.BackgroundColor3 = Color3.fromRGB(80,80,80)
     iconBorder.BorderSizePixel = 0
     Roundify(iconBorder, 100)
 
@@ -259,7 +259,17 @@ function tab:AddToggle(side, text, default, callback)
     icon.BackgroundColor3 = default and Color3.fromRGB(255,165,0) or Color3.fromRGB(80, 80, 80)
     icon.BorderSizePixel = 0
     Roundify(icon, 100)
-
+            
+    local tick = Instance.new("TextLabel", icon)
+    tick.Size = UDim2.new(1, 0, 1, 0)
+    tick.BackgroundTransparency = 1
+    tick.Text = "✔️"
+    tick.Font = Enum.Font.GothamBold
+    tick.TextSize = 13
+    tick.TextColor3 = Color3.fromRGB(255, 255, 255)
+    tick.TextTransparency = default and 0 or 1
+    tick.ZIndex = 3
+            
     local state = default or false
 
     Toggle.MouseButton1Click:Connect(function()
