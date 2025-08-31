@@ -261,7 +261,7 @@ function tab:AddToggle(side, text, default, callback)
     local icon = Instance.new("Frame", iconBorder)
     icon.AnchorPoint = Vector2.new(0.5, 0.5)
     icon.Position = UDim2.new(0.5, 0, 0.5, 0)
-    icon.Size = UDim2.new(0, 16, 0, 16)
+    icon.Size = UDim2.new(0, 14, 0, 14)
     icon.BackgroundColor3 = default and Color3.fromRGB(255,0,0) or Color3.fromRGB(80, 80, 80)
     icon.BorderSizePixel = 0
     Roundify(icon, 5)
