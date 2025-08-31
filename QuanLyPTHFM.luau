@@ -61,7 +61,7 @@ local current = LoadSetting("AutoFarm", false)
 
 local hrp
 local currentMob = nil
-local AutoFarmConnection1, AutoFarmConnection2
+local AutoFarmConnection1, AutoFarmConnection2, AutoFarmConnection3
 
 local function setupCharacter(character)
     hrp = character:WaitForChild("HumanoidRootPart")
@@ -140,7 +140,7 @@ Tab:AddToggle("Left", "Auto Farm", current, function(v)
             end
         end)
 
-        RunService.RenderStepped:Connect(function()
+        AutoFarmConnection3 = RunService.RenderStepped:Connect(function()
             if selectedToolName and player.Character and player.Character.Parent then
                 local backpack = player:WaitForChild("Backpack")
                 local tool = backpack:FindFirstChild(selectedToolName)
@@ -150,8 +150,10 @@ Tab:AddToggle("Left", "Auto Farm", current, function(v)
             end
         end)
     else
-        if AutoFarmConnection1 then AutoFarmConnection1:Disconnect() end
-        if AutoFarmConnection2 then AutoFarmConnection2:Disconnect() end
+        if AutoFarmConnection1 then AutoFarmConnection1:Disconnect() AutoFarmConnection1 = nil end
+        if AutoFarmConnection2 then AutoFarmConnection2:Disconnect() AutoFarmConnection2 = nil end
+        if AutoFarmConnection3 then AutoFarmConnection3:Disconnect() AutoFarmConnection3 = nil end
+        currentMob = nil
     end
 end)
 
