@@ -262,7 +262,7 @@ function tab:AddToggle(side, text, default, callback)
     icon.AnchorPoint = Vector2.new(0.5, 0.5)
     icon.Position = UDim2.new(0.5, 0, 0.5, 0)
     icon.Size = UDim2.new(0, 14, 0, 14)
-    icon.BackgroundColor3 = default and Color3.fromRGB(255,0,0) or Color3.fromRGB(80, 80, 80)
+    icon.BackgroundColor3 = default and Color3.fromRGB(255,165,0) or Color3.fromRGB(80, 80, 80)
     icon.BorderSizePixel = 0
     Roundify(icon, 5)
 
@@ -270,7 +270,7 @@ function tab:AddToggle(side, text, default, callback)
 
     Toggle.MouseButton1Click:Connect(function()
         state = not state
-        icon.BackgroundColor3 = state and Color3.fromRGB(255,0,0) or Color3.fromRGB(80, 80, 80)
+        icon.BackgroundColor3 = state and Color3.fromRGB(255,165,0) or Color3.fromRGB(80, 80, 80)
         callback(state)
     end)
 
