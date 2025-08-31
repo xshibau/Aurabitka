@@ -244,24 +244,21 @@ function tab:AddToggle(side, text, default, callback)
     label.TextColor3 = Color3.fromRGB(255, 255, 255)
     label.TextXAlignment = Enum.TextXAlignment.Left
 
-    local icon = Instance.new("Frame", Toggle)
-    icon.AnchorPoint = Vector2.new(1, 0.5)
-    icon.Position = UDim2.new(1, -20, 0.5, 0)
-    icon.Size = UDim2.new(0, 22, 0, 22)
-    icon.BackgroundColor3 = default and Color3.fromRGB(100, 149, 237) or Color3.fromRGB(80, 80, 80)
-    icon.BorderSizePixel = 0
-    icon.ZIndex = 2
-    Roundify(icon, 300)
+    local iconBorder = Instance.new("Frame", Toggle)
+    iconBorder.AnchorPoint = Vector2.new(1, 0.5)
+    iconBorder.Position = UDim2.new(1, -10, 0.5, 0)
+    iconBorder.Size = UDim2.new(0, 22, 0, 22)
+    iconBorder.BackgroundColor3 = Color3.fromRGB(255,0,0)
+    iconBorder.BorderSizePixel = 0
+    Roundify(iconBorder, 100)
 
-    local tick = Instance.new("TextLabel", icon)
-    tick.Size = UDim2.new(1, 0, 1, 0)
-    tick.BackgroundTransparency = 1
-    tick.Text = "✔️"
-    tick.Font = Enum.Font.GothamBold
-    tick.TextSize = 14
-    tick.TextColor3 = Color3.fromRGB(255, 255, 255)
-    tick.TextTransparency = default and 0 or 1
-    tick.ZIndex = 3
+    local icon = Instance.new("Frame", iconBorder)
+    icon.AnchorPoint = Vector2.new(0.5, 0.5)
+    icon.Position = UDim2.new(0.5, 0, 0.5, 0)
+    icon.Size = UDim2.new(0, 19, 0, 19)
+    icon.BackgroundColor3 = default and Color3.fromRGB(255,165,0) or Color3.fromRGB(80, 80, 80)
+    icon.BorderSizePixel = 0
+    Roundify(icon, 100)
 
     local state = default or false
 
