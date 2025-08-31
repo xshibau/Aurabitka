@@ -191,7 +191,7 @@ local function makeScroll(posX, widthScale)
         Size = UDim2.new(widthScale, -10, 0, 298),
         Position = posX,
         BackgroundColor3 = Color3.fromRGB(30, 30, 30),
-        BackgroundTransparency = 0,
+        BackgroundTransparency = 1,
         BorderSizePixel = 0,
         ScrollBarThickness = 0,
         AutomaticCanvasSize = Enum.AutomaticSize.Y,
@@ -222,6 +222,8 @@ local RightScroll = makeScroll(UDim2.new(0.5, 5, 0, 5), 0.5)
             obj.Parent = parent
         end
 function tab:AddToggle(side, text, default, callback)
+    local TweenService = game:GetService("TweenService")
+
     local Toggle = Create("TextButton", {
         BackgroundColor3 = Color3.fromRGB(45, 45, 45),
         Text = "",
@@ -255,11 +257,11 @@ function tab:AddToggle(side, text, default, callback)
     local icon = Instance.new("Frame", iconBorder)
     icon.AnchorPoint = Vector2.new(0.5, 0.5)
     icon.Position = UDim2.new(0.5, 0, 0.5, 0)
-    icon.Size = UDim2.new(0, 19, 0, 19)
+    icon.Size = default and UDim2.new(0, 19, 0, 19) or UDim2.new(0, 0, 0, 0)
     icon.BackgroundColor3 = default and Color3.fromRGB(255,165,0) or Color3.fromRGB(80, 80, 80)
     icon.BorderSizePixel = 0
     Roundify(icon, 100)
-            
+
     local tick = Instance.new("TextLabel", icon)
     tick.Size = UDim2.new(1, 0, 1, 0)
     tick.BackgroundTransparency = 1
@@ -269,18 +271,28 @@ function tab:AddToggle(side, text, default, callback)
     tick.TextColor3 = Color3.fromRGB(255, 255, 255)
     tick.TextTransparency = default and 0 or 1
     tick.ZIndex = 3
-            
+
     local state = default or false
 
     Toggle.MouseButton1Click:Connect(function()
         state = not state
-        icon.BackgroundColor3 = state and Color3.fromRGB(100, 149, 237) or Color3.fromRGB(80, 80, 80)
-        tick.TextTransparency = state and 0 or 1
+
+        local goalSize
+        if state then
+            goalSize = UDim2.new(0, 19, 0, 19)
+            tick.TextTransparency = 0
+        else
+            goalSize = UDim2.new(0, 0, 0, 0)
+            tick.TextTransparency = 1
+        end
+
+        TweenService:Create(icon, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = goalSize}):Play()
+
         callback(state)
     end)
 
     AddElement(side, Toggle)
-end
+        end
 function tab:AddTextLabel(side, text)
     local parent = (side == "Left") and LeftScroll or RightScroll
     local Label = Instance.new("TextLabel")
