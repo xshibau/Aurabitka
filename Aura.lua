@@ -70,7 +70,7 @@ if _G.NewUI == true then
             end
         end
     else
-        game:GetService("Players").LocalPlayer:Kick("คีย์ไม่ถูกต้อง")
+        game:GetService("Players").LocalPlayer:Kick("❌🔑 Invalid Key 🔑❌")
     end
 else
     if isPremiumKey(getgenv().Key) then
@@ -95,6 +95,6 @@ else
             end
         end
     else
-        game:GetService("Players").LocalPlayer:Kick("คีย์ไม่ถูกต้อง")
+        game:GetService("Players").LocalPlayer:Kick("❌🔑 Invalid Key 🔑❌")
     end
 end
