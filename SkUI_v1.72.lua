@@ -248,7 +248,7 @@ function tab:AddToggle(side, text, default, callback)
 
     local iconBorder = Instance.new("Frame", Toggle)
     iconBorder.AnchorPoint = Vector2.new(1, 0.5)
-    iconBorder.Position = UDim2.new(1, -20, 0.5, 0)
+    iconBorder.Position = UDim2.new(1, -27, 0.5, 0)
     iconBorder.Size = UDim2.new(0, 24, 0, 24)
     iconBorder.BackgroundColor3 = Color3.fromRGB(80,80,80)
     iconBorder.BorderSizePixel = 0
