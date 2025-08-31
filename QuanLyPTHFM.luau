@@ -159,9 +159,9 @@ end)
 
 
 Tab:AddTextLabel("Left", "Misc Farm")
-
 local current = LoadSetting("AutoFarmFast", false)
-local AutoFarmConnection1, AutoFarmConnection2
+local AutoFarmConnection1, AutoFarmConnection2, AutoFarmConnection3
+local BackpackConnection1, BackpackConnection2
 local RunService = game:GetService("RunService")
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
@@ -246,35 +246,23 @@ Tab:AddToggle("Left", "Auto Farm Fast", current, function(v)
             end
         end)
 
-        if player.Character then
-            local function equipFirstTool(character)
+        AutoFarmConnection3 = RunService.RenderStepped:Connect(function()
+            if player.Character and player.Character.Parent then
                 local backpack = player:WaitForChild("Backpack")
-                local function equip()
-                    local tool = nil
-                    for _, item in ipairs(backpack:GetChildren()) do
-                        if item:IsA("Tool") then
-                            tool = item
-                            break
-                        end
-                    end
-                    if tool then
-                        tool.Parent = character
-                    end
-                end
-                backpack.ChildAdded:Connect(equip)
-                backpack.ChildRemoved:Connect(equip)
-                while character.Parent and SaveSetting("Auto Farm", true) do
-                    equip()
-                    wait(0.1)
+                local tool = backpack:FindFirstChildWhichIsA("Tool")
+                if tool then
+                    tool.Parent = player.Character
                 end
             end
-            equipFirstTool(player.Character)
-        end
+        end)
     else
-        if AutoFarmConnection1 then AutoFarmConnection1:Disconnect() end
-        if AutoFarmConnection2 then AutoFarmConnection2:Disconnect() end
+        if AutoFarmConnection1 then AutoFarmConnection1:Disconnect() AutoFarmConnection1 = nil end
+        if AutoFarmConnection2 then AutoFarmConnection2:Disconnect() AutoFarmConnection2 = nil end
+        if AutoFarmConnection3 then AutoFarmConnection3:Disconnect() AutoFarmConnection3 = nil end
+        currentMob = nil
     end
 end)
+
 Tab:RealLine("Left")
 
 Tab:AddTextLabel("Left", "Local")
