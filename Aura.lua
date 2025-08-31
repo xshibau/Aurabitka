@@ -35,7 +35,7 @@ if type(getgenv().Key) ~= "string" or getBlacklistReason(getgenv().Key) then
     return  
 end  
 
-if type(_G.Language) == "string" and _G.Language == "Thai" then
+if type(_G.Language) == "string" and _G.Language == "Viet" then
     local ScriptsThai = {
        [7018190066] = "https://raw.githubusercontent.com/ziugpro/Tool-Hub/refs/heads/main/Quanly-DeadRailsThai.lua",
     }
