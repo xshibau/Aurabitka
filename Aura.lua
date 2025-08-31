@@ -1,5 +1,6 @@
 local PremiumKeys = {
 --{ Premium Củ }--
+"AURA-K7V3E-G2OTY-PVI-VBNEB-N7K3Z",
 "AURA-VCSZS-DBVYU-WKP-RNXZ9-I2DT4",
 --( Premium Mới }--
 "AURA-YFLCE-W28FW-CUR-IG89V-84WRI", -- 30/9 hết hạn
