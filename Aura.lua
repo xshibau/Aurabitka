@@ -33,7 +33,7 @@ local user = "xshibau/"
 local repo = "Aurabitka/"
 local branch = "refs/heads/main/"
 local filePart = {
-    ["00000000"] = {"script/", "00000000", ".lua"},
+    ["7939389895"] = {"Mad_Road", ".lua"},
     ["11111111"] = {"script/", "11111111", ".lua"}
 }
 
