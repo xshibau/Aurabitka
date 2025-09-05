@@ -29,7 +29,7 @@ end
   
 if isPremiumKey(getgenv().Key) then  
 local Scripts = {
-   [7939389895] = "https://raw.githubusercontent.com/xshibau/Aurabitka/refs/heads/main/Mad_Road.lua",
+   [7939389895] = "https://raw.githubusercontent.com/xshibau/Aurabitka/refs/heads/main/QuanLyMad_Road.lua",
 }
 local url = Scripts[game.PlaceId] or Scripts[game.GameId]
 if url then
