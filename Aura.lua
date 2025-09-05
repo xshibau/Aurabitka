@@ -21,30 +21,21 @@ local function getBlacklistReason(key)
     return BlacklistKeys[key]  
 end  
   
-if not aurahub.key or getBlacklistReason(aurahub.key) then  
-    local reason = getBlacklistReason(aurahub.key) or "Key bị chặn"  
+if not getgenv().Key or getBlacklistReason(getgenv().Key) then  
+    local reason = getBlacklistReason(getgenv().Key) or "Key bị chặn"  
     game:GetService("Players").LocalPlayer:Kick(reason)  
     return  
 end  
   
-if isPremiumKey(aurahub.key) then  
-local base = "https://raw.github.io/"
-local user = "xshibau/"
-local repo = "Aurabitka/"
-local branch = "refs/heads/main/"
-local filePart = {
-    ["7939389895"] = {"Mad_Road", ".lua"},
-    ["11111111"] = {"script/", "11111111", ".lua"}
+if isPremiumKey(getgenv().Key) then  
+local Scripts = {
+   [7939389895] = "https://raw.githubusercontent.com/xshibau/Aurabitka/refs/heads/main/Mad_Road.lua",
 }
+local url = Scripts[game.PlaceId] or Scripts[game.GameId]
+if url then
+    loadstring(game:HttpGetAsync(url))()
+    end
 
-local function LoadScript(gameId)
-    local parts = filePart[gameId]
-    if not parts then return end
-    local url = base .. user .. repo .. branch .. table.concat(parts)
-    loadstring(game:HttpGet(url))()
-end
-
-LoadScript(tostring(game.GameId))
 else  
     game:GetService("Players").LocalPlayer:Kick("Invalid Key")  
 end
