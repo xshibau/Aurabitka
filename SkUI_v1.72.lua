@@ -73,8 +73,8 @@ function SkUI:CreateWindow(title)
 
     local Holder = Create("Frame", {
          Name = "Holder",
-         Size = UDim2.new(0, 550, 0, 380),
-         Position = UDim2.new(0.5, -275, 0, -60),
+         Size = UDim2.new(0, 550, 0, 390),
+         Position = UDim2.new(0.5, -275, 0, -70),
          BackgroundColor3 = Color3.fromRGB(22, 22, 22),
          BorderSizePixel = 0,
          Visible = true,
@@ -188,7 +188,7 @@ local topMask = Create("Frame", {
 })
 local function makeScroll(posX, widthScale)
     local scroll = Create("ScrollingFrame", {
-        Size = UDim2.new(widthScale, -10, 0, 298),
+        Size = UDim2.new(widthScale, -10, 0, 308),
         Position = posX,
         BackgroundColor3 = Color3.fromRGB(30, 30, 30),
         BackgroundTransparency = 1,
