@@ -312,6 +312,37 @@ function tab:AddTextLabel(side, text)
     Label.Position = UDim2.new(0.5, 0, 0, 0)
     Label.Parent = parent
 end
+function tab:AddTitle(side, text)
+    local parent = (side == "Left") and LeftScroll or RightScroll
+    local Label = Instance.new("TextLabel")
+    Label.Size = UDim2.new(1, 0, 0, 30)
+    Label.BackgroundTransparency = 0
+    Title.BackgroundColor3 = Color3.fromRGB(50,50,50)
+    Label.Text = text
+    Label.Font = Enum.Font.Gotham
+    Label.TextSize = 16
+    Label.TextColor3 = Color3.fromRGB(200, 200, 200)
+    Label.TextXAlignment = Enum.TextXAlignment.Center
+    Label.TextYAlignment = Enum.TextYAlignment.Center
+    Label.AnchorPoint = Vector2.new(0.5, 0)
+    Label.Position = UDim2.new(0.5, 0, 0, 0)
+    Label.Parent = parent
+end
+function tab:AddPage(side, text)
+    local parent = (side == "Left") and LeftScroll or RightScroll
+    local Label = Instance.new("TextLabel")
+    Label.Size = UDim2.new(1, 0, 0, 30)
+    Label.BackgroundTransparency = 1
+    Label.Text = text
+    Label.Font = Enum.Font.Gotham
+    Label.TextSize = 17
+    Label.TextColor3 = Color3.fromRGB(200, 200, 200)
+    Label.TextXAlignment = Enum.TextXAlignment.Center
+    Label.TextYAlignment = Enum.TextYAlignment.Center
+    Label.AnchorPoint = Vector2.new(0.5, 0)
+    Label.Position = UDim2.new(0.5, 0, 0, 0)
+    Label.Parent = parent
+end
 function tab:AddNiceTextLabel(side, text)
     local parent = (side == "Left") and LeftScroll or RightScroll
     local Label = Instance.new("TextLabel")
