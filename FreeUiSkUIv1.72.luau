@@ -51,7 +51,7 @@ function SkUI:CreateWindow(title)
     local Title = Create("TextLabel", {
         Size = UDim2.new(1, 0, 1, 0),
         BackgroundTransparency = 1,
-        Text = "SkUI v1.72 - Create Ui By Ziugpro",
+        Text = title or "SkUI v1.72 - Create Ui By Ziugpro",
         TextColor3 = Color3.fromRGB(255, 255, 255),
         Font = Enum.Font.GothamBold,
         TextSize = 16,
