@@ -355,7 +355,7 @@ Section:NewButton({
     end,
 })
 
-Section:NewInput({
+Section:NewTextbox({
     Title = "Redeem Key",
     Default = "",
     Callback = function(inputKey)
@@ -374,4 +374,5 @@ Section:NewInput({
             })
         end
     end,
+
 })
