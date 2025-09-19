@@ -1,37 +1,3 @@
-local PremiumKeys = {  
-"RH7CX-XMNS7-YTXEE-D16PO-HFU9O", -- 30/9 hết hạn
-"76UPD-M3FOC-NP1KN-3ULEN-0ZZ2T", -- 30/9 hết hạn
-"LGZWR-U6HTL-6Q08K-AI766-8U2W7", -- 30/9 hết hạn
-"QC2V6-BKOYC-VH1M4-F1EWJ-7KNRI", -- 30/9 hết hạn
-"6VQAR-H3PQT-HZK1H-HC59H-RBX3W", -- 30/9 hết hạn
-}  
-  
-local BlacklistKeys = {  
-    ["abc123"] = "Hành vi gian lận bị phát hiện",  
-    ["badkey456"] = "Vi phạm điều khoản sử dụng",  
-    ["xyz789"] = "Key đã bị thu hồi do lạm dụng"  
-}  
-  
-local function isPremiumKey(key)  
-    for _, v in ipairs(PremiumKeys) do  
-        if v == key then  
-            return true  
-        end  
-    end  
-    return false  
-end  
-  
-local function getBlacklistReason(key)  
-    return BlacklistKeys[key]  
-end  
-  
-if not script_key or getBlacklistReason(script_key) then  
-    local reason = getBlacklistReason(script_key) or "Key bị chặn"  
-    game:GetService("Players").LocalPlayer:Kick(reason)  
-    return  
-end  
-  
-if isPremiumKey(script_key) then  
 local Players = game:GetService("Players")
 local Player = Players.LocalPlayer
 local PlayerGui = Player:WaitForChild("PlayerGui")
@@ -203,6 +169,3 @@ if player.Character then
 end
 player.CharacterAdded:Connect(equipFirstTool)
     end)
-else  
-    game:GetService("Players").LocalPlayer:Kick("Invalid Key")  
-end
