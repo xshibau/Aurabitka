@@ -1,83 +1,10 @@
-local PremiumKeys = {
-"AURA-KT78C-1PDAE-OGG-6PTMY-HRAOY",
-"AURA-8WY0K-6R9AN-9R6-P2ZWT-PQWPY",
-"AURA-YZTTJ-UAICZ-CN8-OPWGO-9VB4Z",
-"AURA-KXC4M-3F40Z-HPD-E4VVP-JFICY",
-"AURA-A07KO-CK2YZ-WSQ-7U16O-KHY94",
-}
-local BlacklistKeys = {  
-    ["HFmFnVAv3n0Lu8sOynboDODYLVN0kCXy"] = "KEY IS BLACKLIST - KEY ĐÃ BỊ THÊM VÀO DANH SÁCH ĐEN",
-    ["f5flrAeJ5Lpp7IdcXcDb4vNBdDXq1oLa"] = "KEY IS BLACKLIST - KEY ĐÃ BỊ THÊM VÀO DANH SÁCH ĐEN",
-    ["CGFXmMNWQBMLkIIacfmAEg5IFFoZAtvt"] = "KEY IS BLACKLIST - KEY ĐÃ BỊ THÊM VÀO DANH SÁCH ĐEN",
-    ["NOuYvf9BnR4Mnwm6XFBqK8AKVMx7X4NF"] = "KEY IS BLACKLIST - KEY ĐÃ BỊ THÊM VÀO DANH SÁCH ĐEN",
-    ["y8W9q6WoCIGsacMdsAondrHs1e370Nom"] = "KEY IS BLACKLIST - KEY ĐÃ BỊ THÊM VÀO DANH SÁCH ĐEN",
-}  
-
-local function isPremiumKey(key)  
-    if type(key) ~= "string" then return false end
-    for _, v in ipairs(PremiumKeys) do  
-        if v == key then return true end  
-    end  
-    return false  
-end  
-
-local function getBlacklistReason(key)  
-    if type(key) ~= "string" then return nil end
-    return BlacklistKeys[key]  
-end
-
-if type(getgenv().Key) ~= "string" or getBlacklistReason(getgenv().Key) then  
-    local reason = getBlacklistReason(getgenv().Key) or "กรุณาเพิ่มคีย์"  
-    game:GetService("Players").LocalPlayer:Kick(reason)  
-    return  
-end  
-
-if type(_G.Language) == "string" and _G.Language == "Thai" then
-    local ScriptsThai = {
-       [7018190066] = "https://raw.githubusercontent.com/ziugpro/Tool-Hub/refs/heads/main/Quanly-DeadRailsThai.lua",
-    }
-    local url = ScriptsThai[game.PlaceId] or ScriptsThai[game.GameId]
-    if url then
-        local success, err = pcall(function()
-            loadstring(game:HttpGetAsync(url))()
-        end)
-        if not success then
-            print("[Luarmor] Failed to load script: Connection timed out.")
-            print("[Luarmor] Error: Invalid authentication key. Script execution halted.")
-            print("[Luarmor] Unable to connect to API. Please check your internet connection.")    
-        end
-        return
-    end
-end
-
-if _G.NewUI == true then
-    if isPremiumKey(getgenv().Key) then
-        local ScriptsNewUI = {
-        [7326934954] = "https://raw.githubusercontent.com/ziugpro/Tool-Hub/refs/heads/main/Quanly99NightNewUi.lua",
-        }
-        local url = ScriptsNewUI[game.PlaceId] or ScriptsNewUI[game.GameId]
-        if url then
-            local success, err = pcall(function()
-                loadstring(game:HttpGetAsync(url))()
-            end)
-            if not success then
-                print("[Luarmor] Failed to load NewUI script: Connection timed out.")
-                print("[Luarmor] Error: Invalid authentication key. Script execution halted.")
-                print("[Luarmor] Unable to connect to API. Please check your internet connection.")  
-            end
-        end
-    else
-        game:GetService("Players").LocalPlayer:Kick("คีย์ไม่ถูกต้อง")
-    end
-else
-    if isPremiumKey(getgenv().Key) then
-        local ScriptsPremium = {
-           [7326934954] = "https://raw.githubusercontent.com/xshibau/Aurabitka/refs/heads/main/Quanly99Night.lua",
-           [7709344486] = "https://raw.githubusercontent.com/ziugpro/Tool-Hub/refs/heads/main/QuanlySaB.lua",
-           [7851663243] = "https://raw.githubusercontent.com/ziugpro/Tool-Hub/refs/heads/main/QuanlyStealaMeme.lua",
-           [7750955984] = "https://raw.githubusercontent.com/ziugpro/Tool-Hub/refs/heads/main/QuanlyHuntyZombie.lua",
-           [7018190066] = "https://raw.githubusercontent.com/ziugpro/Tool-Hub/refs/heads/main/Quanly-DeadRails.lua",
-           [7939389895] = "https://raw.githubusercontent.com/xshibau/Aurabitka/refs/heads/main/QuanlyMadRoad.lua",
+local ScriptsPremium = {
+ [7326934954] = "https://raw.githubusercontent.com/xshibau/Aurabitka/refs/heads/main/Quanly99Night.lua",
+ [7709344486] = "https://raw.githubusercontent.com/ziugpro/Tool-Hub/refs/heads/main/QuanlySaB.lua",
+ [7851663243] = "https://raw.githubusercontent.com/ziugpro/Tool-Hub/refs/heads/main/QuanlyStealaMeme.lua",
+ [7750955984] = "https://raw.githubusercontent.com/ziugpro/Tool-Hub/refs/heads/main/QuanlyHuntyZombie.lua",
+ [7018190066] = "https://raw.githubusercontent.com/ziugpro/Tool-Hub/refs/heads/main/Quanly-DeadRails.lua",
+ [7939389895] = "https://raw.githubusercontent.com/xshibau/Aurabitka/refs/heads/main/QuanlyMadRoad.lua",
         }
         local url = ScriptsPremium[game.PlaceId] or ScriptsPremium[game.GameId]
         if url then
@@ -90,7 +17,3 @@ else
                 print("[Luarmor] Unable to connect to API. Please check your internet connection.")  
             end
         end
-    else
-        game:GetService("Players").LocalPlayer:Kick("คีย์ไม่ถูกต้อง")
-    end
-end
