@@ -537,4 +537,33 @@ Esp:NewToggle({
                     local frame = Instance.new("Frame")
                     frame.Size = UDim2.new(1,0,0,5)
                     frame.Position = UDim2.new(0,0,1,0)
-                    frame.BackgroundColor3 = Color3.new(0,1
+                    frame.BackgroundColor3 = Color3.new(0,1,0)
+                    frame.BorderSizePixel = 0
+                    frame.Parent = billboard
+
+                    local textLabel = Instance.new("TextLabel")
+                    textLabel.Text = mob.Name
+                    textLabel.Size = UDim2.new(1,0,1,0)
+                    textLabel.BackgroundTransparency = 1
+                    textLabel.TextColor3 = Color3.new(1,0,0)
+                    textLabel.TextScaled = true
+                    textLabel.Parent = billboard
+
+                    game:GetService("RunService").RenderStepped:Connect(function()
+                        if humanoid.Health > 0 then
+                            frame.Size = UDim2.new(humanoid.Health/humanoid.MaxHealth,0,0,5)
+                        else
+                            billboard:Destroy()
+                        end
+                    end)
+                end
+            end
+        else
+            for _, gui in pairs(game.CoreGui:GetChildren()) do
+                if gui:IsA("BillboardGui") then
+                    gui:Destroy()
+                end
+            end
+        end
+    end,
+})
