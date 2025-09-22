@@ -44,17 +44,34 @@ task.spawn(function()
 end)
 local NothingLibrary = loadstring(game:HttpGetAsync('https://raw.githubusercontent.com/3345-c-a-t-s-u-s/NOTHING/main/source.lua'))();
 local Windows = NothingLibrary.new({
-	Title = "Aura Hub",
+	Title = "Aura Hub Beta",
 	Description = "[Premium]",
 	Keybind = Enum.KeyCode.LeftControl,
 	Logo = 'rbxthumb://type=Asset&id=131484641795167&w=420&h=420'
 })
-
+local Webhook = Windows:NewTab({
+	Title = "Webhook",
+	Description = "Webhook Discord",
+	Icon = "rbxassetid://7733960981"
+})
 local TabFrame = Windows:NewTab({
 	Title = "Main",
 	Description = "Main Play",
 	Icon = "rbxassetid://7733960981"
 })
+--[[ Webhook ]]--
+local StartWebhook = Webhook:NewSection({
+	Title = "Webhook",
+	Icon = "rbxassetid://7743869054",
+	Position = "Left"
+})
+local SettingsWebhook = Webhook:NewSection({
+	Title = "Settings",
+	Icon = "rbxassetid://7743869054",
+	Position = "Left"
+})
+
+--[[ Main Play ]]--
 local Main = TabFrame:NewSection({
 	Title = "Main",
 	Icon = "rbxassetid://7743869054",
@@ -627,3 +644,38 @@ Section:NewToggle({
         end
     end,
 })
+
+
+
+--[[ Webhook ]]--
+StartWebhook:NewTextbox({
+	Title = "Url",
+	Default = "",
+	Callback = function(tr)
+	end,
+})
+StartWebhook:NewToggle({
+	Title = "Start Webhook",
+	Default = false,
+	Callback = function(tr)
+	end,
+})
+SettingsWebhook:NewToggle({
+	Title = "When 100 Night",
+	Default = false,
+	Callback = function(tr)
+	end,
+})
+SettingsWebhook:NewToggle({
+	Title = "When Your Die",
+	Default = false,
+	Callback = function(tr)
+	end,
+})
+SettingsWebhook:NewToggle({
+	Title = "Send Webhook For All",
+	Default = true,
+	Callback = function(tr)
+	end,
+})
+
