@@ -80,7 +80,11 @@ local Esp = TabFrame:NewSection({
 	Icon = "rbxassetid://7743869054",
 	Position = "Left"
 })
-
+local Section = TabFrame:NewSection({
+	Title = "Kill",
+	Icon = "rbxassetid://7743869054",
+	Position = "Right"
+})
 Main:NewTitle('Tree')
 Main:NewToggle({
     Title = "Auto Cut Tree",
@@ -564,6 +568,62 @@ Esp:NewToggle({
                     gui:Destroy()
                 end
             end
+        end
+    end,
+})
+
+Section:NewToggle({
+    Title = "Kill Aura",
+    Default = false,
+    Callback = function(state)
+        if state then
+            getgenv().KillAura = true
+            task.spawn(function()
+                while getgenv().KillAura do
+                    task.wait(1)
+                    for _, mob in pairs(workspace:GetChildren()) do
+                        if mob:FindFirstChild("Humanoid") and mob:FindFirstChild("HumanoidRootPart") then
+                            local hrp = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+                            if hrp and (mob.HumanoidRootPart.Position - hrp.Position).Magnitude < 10 then
+                                mob.Humanoid:TakeDamage(20)
+                            end
+                        end
+                    end
+                end
+            end)
+        else
+            getgenv().KillAura = false
+        end
+    end,
+})
+Section:NewToggle({
+    Title = "Kill Aura (Testing)",
+    Default = false,
+    Callback = function(state)
+        if state then
+            getgenv().KillAuraTest = true
+            local player = game.Players.LocalPlayer
+            task.spawn(function()
+                while getgenv().KillAuraTest do
+                    task.wait(0.05)
+                    local char = player.Character
+                    local hrp = char and char:FindFirstChild("HumanoidRootPart")
+                    if not hrp then continue end
+                    for _, mob in pairs(workspace:GetChildren()) do
+                        if not getgenv().KillAura then break end
+                        local humanoid = mob:FindFirstChildWhichIsA("Humanoid")
+                        local mhrp = mob:FindFirstChild("HumanoidRootPart")
+                        if humanoid and mhrp and (mhrp.Position - hrp.Position).Magnitude <= 12 then
+                            pcall(function() humanoid.Health = 0 end)
+                            pcall(function() humanoid:Destroy() end)
+                            pcall(function() mob:Destroy() end)
+                            pcall(function() for _, v in pairs(mob:GetDescendants()) do if v:IsA("BasePart") then v:BreakJoints() end end end)
+                        end
+                    end
+                end
+            end)
+        else
+            getgenv().KillAuraTest = false
         end
     end,
 })
