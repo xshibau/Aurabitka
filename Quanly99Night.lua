@@ -16,7 +16,7 @@ game.StarterGui:SetCore("SendNotification", {
 })
 repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
 getgenv().Image = "rbxthumb://type=Asset&id=106019376492019&w=420&h=420"
-getgenv().ToggleUI = "LeftControl"
+getgenv().ToggleUI = "RightControl"
 
 task.spawn(function()
     if not getgenv().LoadedMobileUI then
@@ -42,109 +42,72 @@ task.spawn(function()
         end)
     end
 end)
-local NothingLibrary = loadstring(game:HttpGetAsync('https://raw.githubusercontent.com/3345-c-a-t-s-u-s/NOTHING/main/source.lua'))();
-local Windows = NothingLibrary.new({
-	Title = "Aura Hub Beta",
-	Description = "[Premium]",
-	Keybind = Enum.KeyCode.LeftControl,
-	Logo = 'rbxthumb://type=Asset&id=131484641795167&w=420&h=420'
-})
-local Webhook = Windows:NewTab({
-	Title = "Webhook",
-	Description = "Webhook Discord",
-	Icon = "rbxassetid://7733960981"
-})
-local TabFrame = Windows:NewTab({
-	Title = "Main",
-	Description = "Main Play",
-	Icon = "rbxassetid://7733960981"
-})
---[[ Webhook ]]--
-local StartWebhook = Webhook:NewSection({
-	Title = "Webhook",
-	Icon = "rbxassetid://7743869054",
-	Position = "Left"
-})
-local SettingsWebhook = Webhook:NewSection({
-	Title = "Settings",
-	Icon = "rbxassetid://7743869054",
-	Position = "Left"
+local Compkiller = loadstring(game:HttpGet("https://raw.githubusercontent.com/4lpaca-pin/CompKiller/refs/heads/main/src/source.luau"))();
+
+local Notifier = Compkiller.newNotify();
+
+Compkiller:Loader("rbxthumb://type=Asset&id=131484641795167&w=420&h=420", 2.5).yield();
+
+local Window = Compkiller.new({
+	Name = "Aura Hub [Beta]",
+	Keybind = "RightControl",
+	Logo = "rbxthumb://type=Asset&id=131484641795167&w=420&h=420",
+	Scale = Compkiller.Scale.Mobile,
+	TextSize = 15,
+});
+
+local Main = Window:DrawTab({
+	Name = "Main",
+	Icon = "house",
+	EnableScrolling = true
 })
 
---[[ Main Play ]]--
-local Main = TabFrame:NewSection({
-	Title = "Main",
-	Icon = "rbxassetid://7743869054",
-	Position = "Left"
+local Section = Main:DrawSection({
+	Name = "Main",
+	Position = 'left'	
 })
-local Cooked = TabFrame:NewSection({
-	Title = "Cooked",
-	Icon = "rbxassetid://7743869054",
-	Position = "Right"
+local Player = Main:DrawSection({
+	Name = "Esp & Player",
+	Position = 'Left'	
 })
-local Fire = TabFrame:NewSection({
-	Title = "Camp",
-	Icon = "rbxassetid://7743869054",
-	Position = "Left"
+local Class = Main:DrawSection({
+	Name = "Class",
+	Position = 'Left'	
 })
-local Visual = TabFrame:NewSection({
-	Title = "Visual",
-	Icon = "rbxassetid://7743869054",
-	Position = "Right"
+
+local Camp = Main:DrawSection({
+	Name = "Camp",
+	Position = 'Right'	
 })
-local Esp = TabFrame:NewSection({
-	Title = "Esp",
-	Icon = "rbxassetid://7743869054",
-	Position = "Left"
+local FlyUp = Main:DrawSection({
+	Name = "Enabled",
+	Position = 'Right'	
 })
-local Section = TabFrame:NewSection({
-	Title = "Kill",
-	Icon = "rbxassetid://7743869054",
-	Position = "Right"
+local KillAura = Main:DrawSection({
+	Name = "Kill Aura",
+	Position = 'Right'	
 })
-Main:NewTitle('Tree')
-Main:NewToggle({
-    Title = "Auto Cut Tree",
-    Default = false,
-    Callback = function(v)
-        _G.AutoChopTP = v
-        if v then
-            local hrp = player.Character and player.Character:FindFirstChild("HumanoidRootPart")
-            local originalPos = hrp and hrp.CFrame
-            task.spawn(function()
-                while _G.AutoChopTP do
-                    task.wait(0.3)
-                    local trees = {}
-                    for _, tree in pairs(workspace:GetDescendants()) do
-                        if tree:IsA("Model") and tree.Name == "Small Tree" and tree.PrimaryPart then
-                            table.insert(trees, tree)
-                        end
-                    end
-                    for _, tree in ipairs(trees) do
-                        if not _G.AutoChopTP then break end
-                        if hrp and tree.PrimaryPart then
-                            hrp.CFrame = tree.PrimaryPart.CFrame + Vector3.new(0,0,-3)
-                            UIS.InputBegan:Fire({UserInputType=Enum.UserInputType.MouseButton1, Position=tree.PrimaryPart.Position}, false)
-                            task.wait(0.1)
-                            UIS.InputEnded:Fire({UserInputType=Enum.UserInputType.MouseButton1, Position=tree.PrimaryPart.Position}, false)
-                            task.wait(0.5)
-                        end
-                    end
-                end
-                if hrp and originalPos then
-                    hrp.CFrame = originalPos
-                end
-            end)
-        else
-            _G.AutoChopTP = false
-        end
-    end,
+
+
+
+
+Section:AddToggle({
+	Name = "Auto Chop Tree",
+	Flag = "AutoChopTree",
+	Default = false,
+	Callback = function(Value)
+   _G.AutoChopTP = false
+   end,
 })
-Main:NewTitle('Chest')
-Main:NewToggle({
-    Title = "Auto Open Chest",
-    Default = false,
-    Callback = function(value)
+Section:AddParagraph({
+	Title = "Chest",
+	Content = "หน้าอก"
+})
+Section:AddToggle({
+	Name = "Auto Open Chest",
+	Flag = "AutoChestNearby",
+	Default = false,
+	Callback = function(Value)
         local Players = game:GetService("Players")
         local player = Players.LocalPlayer
         local character = player.Character or player.CharacterAdded:Wait()
@@ -189,14 +152,21 @@ Main:NewToggle({
         else
             _G.AutoChestNearby.running = false
         end
-    end,
+   end,
 })
 
-Cooked:NewToggle({
-    Title = "Auto Cooked (Teleport)",
-    Default = false,
-    Callback = function(value)
-        if value then
+
+--[[ Camp ]]--
+Camp:AddParagraph({
+	Title = "Cooked",
+	Content = "ปรุงสุกแล้ว"
+})
+Camp:AddToggle({
+	Name = "Auto Cooked",
+	Flag = "AutoMorsel",
+	Default = false,
+	Callback = function(Value)
+        if Value then
             _G.AutoMorsel = true
             local hrp = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
             local originalPos = hrp and hrp.CFrame
@@ -221,38 +191,18 @@ Cooked:NewToggle({
         else
             _G.AutoMorsel = false
         end
-    end,
+   end,
 })
-
-Cooked:NewToggle({
-    Title = "Auto Cooked (Bring)",
-    Default = false,
-    Callback = function(value)
-        if value then
-            _G.BringMorsels = true
-            task.spawn(function()
-                while _G.BringMorsels do
-                    task.wait()
-                    for _, m in pairs(workspace:GetDescendants()) do
-                        if not _G.BringMorsels then break end
-                        if m:IsA("Model") and m.Name == "Morsel" and m.PrimaryPart then
-                            m:SetPrimaryPartCFrame(CFrame.new(-0.5468149185180664, 7.632332801818848, 0.11174965649843216))
-                            task.wait(0.2)
-                        end
-                    end
-                end
-            end)
-        else
-            _G.BringMorsels = false
-        end
-    end,
+Camp:AddParagraph({
+	Title = "Fire",
+	Content = "กองไฟ"
 })
-
-Fire:NewToggle({
-    Title = "Auto Fire (Teleport)",
-    Default = false,
-    Callback = function(value)
-        if value then
+Camp:AddToggle({
+	Name = "Auto Fire",
+	Flag = "AutoLog",
+	Default = false,
+	Callback = function(Value)
+       if Value then
             _G.AutoLog = true
             local hrp = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
             local originalPos = hrp and hrp.CFrame
@@ -277,14 +227,14 @@ Fire:NewToggle({
         else
             _G.AutoLog = false
         end
-    end,
+   end,
 })
-
-Fire:NewToggle({
-    Title = "Auto Fire (Teleport - Coal)",
-    Default = false,
-    Callback = function(value)
-        if value then
+Camp:AddToggle({
+	Name = "Auto Fire (Coal)",
+	Flag = "AutoCoal",
+	Default = false,
+	Callback = function(Value)
+        if Value then
             _G.AutoCoal = true
             local player = game.Players.LocalPlayer
             local hrp = player.Character and player.Character:FindFirstChild("HumanoidRootPart")
@@ -310,33 +260,10 @@ Fire:NewToggle({
         else
             _G.AutoCoal = false
         end
-    end,
+   end,
 })
 
-Fire:NewToggle({
-    Title = "Auto Fire (Bring)",
-    Default = false,
-    Callback = function(value)
-        if value then
-            _G.BringLogs = true
-            task.spawn(function()
-                while _G.BringLogs do
-                    task.wait()
-                    for _, m in pairs(workspace:GetDescendants()) do
-                        if not _G.BringLogs then break end
-                        if m:IsA("Model") and m.Name == "Log" and m.PrimaryPart then
-                            m:SetPrimaryPartCFrame(CFrame.new(-0.5468149185180664, 7.632332801818848, 0.11174965649843216))
-                            task.wait(0.2)
-                        end
-                    end
-                end
-            end)
-        else
-            _G.BringLogs = false
-        end
-    end,
-})
-
+--[[ Night ]]--
 local RunService = game:GetService("RunService")
 local Lighting = game:GetService("Lighting")
 local player = game.Players.LocalPlayer
@@ -345,19 +272,19 @@ local flyUpLoop = false
 local flyUpNightLoop = false
 local connAllTime
 local connNightOnly
-
-Visual:NewToggle({
-    Title = "Fly Up (All Time)",
-    Default = false,
-    Callback = function(value)
+FlyUp:AddToggle({
+	Name = "Fly Up All Time",
+	Flag = "FlyUpAllTime",
+	Default = false,
+	Callback = function(Value)
         local character = player.Character
         if not character then return end
         local hrp = character:FindFirstChild("HumanoidRootPart")
         local humanoid = character:FindFirstChildOfClass("Humanoid")
         if not hrp or not humanoid then return end
 
-        flyUpLoop = value
-        humanoid.PlatformStand = value
+        flyUpLoop = Value
+        humanoid.PlatformStand = Value
 
         if value then
             local ray = Ray.new(hrp.Position, Vector3.new(0, -1000, 0))
@@ -371,20 +298,20 @@ Visual:NewToggle({
         else
             if connAllTime then connAllTime:Disconnect() end
         end
-    end,
+   end,
 })
-
-Visual:NewToggle({
-    Title = "Fly Up (Night Only)",
-    Default = false,
-    Callback = function(value)
+FlyUp:AddToggle({
+	Name = "Fly Up Only Night",
+	Flag = "FlyUpOnlyNight",
+	Default = false,
+	Callback = function(Value)
         local character = player.Character
         if not character then return end
         local hrp = character:FindFirstChild("HumanoidRootPart")
         local humanoid = character:FindFirstChildOfClass("Humanoid")
         if not hrp or not humanoid then return end
 
-        flyUpNightLoop = value
+        flyUpNightLoop = Value
 
         if value then
             local currentTime = Lighting.ClockTime
@@ -402,7 +329,6 @@ Visual:NewToggle({
                     end
                 end)
             else
-                -- tắt toggle nếu bật ngoài giờ đêm
                 value = false
                 flyUpNightLoop = false
                 if connNightOnly then connNightOnly:Disconnect() end
@@ -412,62 +338,15 @@ Visual:NewToggle({
             if connNightOnly then connNightOnly:Disconnect() end
             humanoid.PlatformStand = false
         end
-    end,
+   end,
 })
-
-Visual:NewButton({
-	Title = "Through Wall ",
-	Callback = function()
-        local Players = game:GetService("Players")
-        local Workspace = game:GetService("Workspace")
-        local RunService = game:GetService("RunService")
-
-        local LocalPlayer = Players.LocalPlayer
-        if not LocalPlayer then return end
-
-        local Character = LocalPlayer.Character
-        if not Character then
-            Character = LocalPlayer.CharacterAdded:Wait()
-        end
-
-        local RootPart = Character:FindFirstChild("HumanoidRootPart")
-        if not RootPart then return end
-
-        local CurrentPosition = RootPart.Position
-        local CurrentCFrame = RootPart.CFrame
-        local FacingDirection = CurrentCFrame.LookVector
-
-        local DashMagnitude = 30
-        local DashOffset = Vector3.new(0, 1.25, 0)
-        local DashVector = FacingDirection * DashMagnitude
-        local Destination = CurrentPosition + DashVector + DashOffset
-
-        local BodyPosition = Instance.new("BodyPosition")
-        BodyPosition.MaxForce = Vector3.new(1e9, 1e9, 1e9)
-        BodyPosition.P = 1e5
-        BodyPosition.D = 2000
-        BodyPosition.Position = Destination
-        BodyPosition.Parent = RootPart
-
-        local DashDuration = 0.2
-        local Connection = nil
-        local StartTime = tick()
-
-        Connection = RunService.RenderStepped:Connect(function()
-            if tick() - StartTime >= DashDuration then
-                BodyPosition:Destroy()
-                if Connection then
-                    Connection:Disconnect()
-                end
-            end
-        end)
-	end,
-})
-Visual:NewToggle({
-    Title = "Speed Boost",
-    Default = false,
-    Callback = function(Value)
-        _G.Speed100 = Value
+--[[ Players ]]--
+Player:AddToggle({
+	Name = "Speed Boost",
+	Flag = "SpeedBoost",
+	Default = false,
+	Callback = function(Value)
+   _G.Speed100 = Value
 
         local player = game:GetService("Players").LocalPlayer
         if not player then return end
@@ -481,14 +360,70 @@ Visual:NewToggle({
         else
             humanoid.WalkSpeed = 16
         end
-    end,
+   end,
 })
+Players:AddParagraph({
+	Title = "Esp",
+	Content = "เอสพี"
+})
+Player:AddToggle({
+	Name = "Esp Mob",
+	Flag = "EspMob",
+	Default = false,
+	Callback = function(Value)
+   if Value then
+            for i, mob in pairs(workspace:GetDescendants()) do
+                if mob:IsA("Model") and mob:FindFirstChild("Humanoid") and mob:FindFirstChild("HumanoidRootPart") then
+                    local hrp = mob.HumanoidRootPart
+                    local humanoid = mob.Humanoid
 
-Esp:NewToggle({
-    Title = "ESP Player",
-    Default = false,
-    Callback = function(Value)
-        if Value then
+                    local billboard = Instance.new("BillboardGui")
+                    billboard.Adornee = hrp
+                    billboard.AlwaysOnTop = true
+                    billboard.Size = UDim2.new(0,120,0,50)
+                    billboard.MaxDistance = math.huge
+                    billboard.StudsOffset = Vector3.new(0,2,0)
+                    billboard.Parent = game.CoreGui
+
+                    local frame = Instance.new("Frame")
+                    frame.Size = UDim2.new(1,0,0,5)
+                    frame.Position = UDim2.new(0,0,1,0)
+                    frame.BackgroundColor3 = Color3.new(0,1,0)
+                    frame.BorderSizePixel = 0
+                    frame.Parent = billboard
+
+                    local textLabel = Instance.new("TextLabel")
+                    textLabel.Text = mob.Name
+                    textLabel.Size = UDim2.new(1,0,1,0)
+                    textLabel.BackgroundTransparency = 1
+                    textLabel.TextColor3 = Color3.new(1,0,0)
+                    textLabel.TextScaled = true
+                    textLabel.Parent = billboard
+
+                    game:GetService("RunService").RenderStepped:Connect(function()
+                        if humanoid.Health > 0 then
+                            frame.Size = UDim2.new(humanoid.Health/humanoid.MaxHealth,0,0,5)
+                        else
+                            billboard:Destroy()
+                        end
+                    end)
+                end
+            end
+        else
+            for _, gui in pairs(game.CoreGui:GetChildren()) do
+                if gui:IsA("BillboardGui") then
+                    gui:Destroy()
+                end
+            end
+        end
+   end,
+})
+Player:AddToggle({
+	Name = "Esp Player",
+	Flag = "EspPlayer",
+	Default = false,
+	Callback = function(Value)
+   if Value then
             for i, player in pairs(game.Players:GetPlayers()) do
                 if player ~= game.Players.LocalPlayer and player.Character then
                     local head = player.Character:FindFirstChild("Head")
@@ -534,148 +469,77 @@ Esp:NewToggle({
                 end
             end
         end
-    end,
+   end,
+})
+--[[ Kill Aura ]]--
+KillAura:AddParagraph({
+	Title = "Kill",
+	Content = "ฆ่าออร่า"
+})
+KillAura:AddToggle({
+	Name = "Kill Aura (Mob)",
+	Flag = "Toggle",
+	Default = false,
+	Callback = function(Value)
+   end,
+})
+KillAura:AddToggle({
+	Name = "Kill Aura (All)",
+	Flag = "Toggle",
+	Default = false,
+	Callback = function(Value)
+   end,
 })
 
-Esp:NewToggle({
-    Title = "ESP Mob",
-    Default = false,
-    Callback = function(Value)
-        if Value then
-            for i, mob in pairs(workspace:GetDescendants()) do
-                if mob:IsA("Model") and mob:FindFirstChild("Humanoid") and mob:FindFirstChild("HumanoidRootPart") then
-                    local hrp = mob.HumanoidRootPart
-                    local humanoid = mob.Humanoid
-
-                    local billboard = Instance.new("BillboardGui")
-                    billboard.Adornee = hrp
-                    billboard.AlwaysOnTop = true
-                    billboard.Size = UDim2.new(0,120,0,50)
-                    billboard.MaxDistance = math.huge
-                    billboard.StudsOffset = Vector3.new(0,2,0)
-                    billboard.Parent = game.CoreGui
-
-                    local frame = Instance.new("Frame")
-                    frame.Size = UDim2.new(1,0,0,5)
-                    frame.Position = UDim2.new(0,0,1,0)
-                    frame.BackgroundColor3 = Color3.new(0,1,0)
-                    frame.BorderSizePixel = 0
-                    frame.Parent = billboard
-
-                    local textLabel = Instance.new("TextLabel")
-                    textLabel.Text = mob.Name
-                    textLabel.Size = UDim2.new(1,0,1,0)
-                    textLabel.BackgroundTransparency = 1
-                    textLabel.TextColor3 = Color3.new(1,0,0)
-                    textLabel.TextScaled = true
-                    textLabel.Parent = billboard
-
-                    game:GetService("RunService").RenderStepped:Connect(function()
-                        if humanoid.Health > 0 then
-                            frame.Size = UDim2.new(humanoid.Health/humanoid.MaxHealth,0,0,5)
-                        else
-                            billboard:Destroy()
-                        end
-                    end)
-                end
-            end
-        else
-            for _, gui in pairs(game.CoreGui:GetChildren()) do
-                if gui:IsA("BillboardGui") then
-                    gui:Destroy()
-                end
-            end
-        end
-    end,
-})
-
-Section:NewToggle({
-    Title = "Kill Aura",
-    Default = false,
-    Callback = function(state)
-        if state then
-            getgenv().KillAura = true
-            task.spawn(function()
-                while getgenv().KillAura do
-                    task.wait(1)
-                    for _, mob in pairs(workspace:GetChildren()) do
-                        if mob:FindFirstChild("Humanoid") and mob:FindFirstChild("HumanoidRootPart") then
-                            local hrp = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-                            if hrp and (mob.HumanoidRootPart.Position - hrp.Position).Magnitude < 10 then
-                                mob.Humanoid:TakeDamage(20)
-                            end
-                        end
-                    end
-                end
-            end)
-        else
-            getgenv().KillAura = false
-        end
-    end,
-})
-Section:NewToggle({
-    Title = "Kill Aura (Testing)",
-    Default = false,
-    Callback = function(state)
-        if state then
-            getgenv().KillAuraTest = true
-            local player = game.Players.LocalPlayer
-            task.spawn(function()
-                while getgenv().KillAuraTest do
-                    task.wait(0.05)
-                    local char = player.Character
-                    local hrp = char and char:FindFirstChild("HumanoidRootPart")
-                    if not hrp then continue end
-                    for _, mob in pairs(workspace:GetChildren()) do
-                        if not getgenv().KillAura then break end
-                        local humanoid = mob:FindFirstChildWhichIsA("Humanoid")
-                        local mhrp = mob:FindFirstChild("HumanoidRootPart")
-                        if humanoid and mhrp and (mhrp.Position - hrp.Position).Magnitude <= 12 then
-                            pcall(function() humanoid.Health = 0 end)
-                            pcall(function() humanoid:Destroy() end)
-                            pcall(function() mob:Destroy() end)
-                            pcall(function() for _, v in pairs(mob:GetDescendants()) do if v:IsA("BasePart") then v:BreakJoints() end end end)
-                        end
-                    end
-                end
-            end)
-        else
-            getgenv().KillAuraTest = false
-        end
-    end,
-})
-
-
-
---[[ Webhook ]]--
-StartWebhook:NewTextbox({
-	Title = "Url",
+--[[ Class Auto Buy ]]--
+Class:AddDropdown({
+	Name = "Select Class",
 	Default = "",
-	Callback = function(tr)
-	end,
+	Values = {"All"},
+	Callback = print
 })
-StartWebhook:NewToggle({
-	Title = "Start Webhook",
+Class:AddToggle({
+	Name = "Auto Buy",
+	Flag = "Toggle",
 	Default = false,
-	Callback = function(tr)
-	end,
-})
-SettingsWebhook:NewToggle({
-	Title = "When 100 Night",
-	Default = false,
-	Callback = function(tr)
-	end,
-})
-SettingsWebhook:NewToggle({
-	Title = "When Your Die",
-	Default = false,
-	Callback = function(tr)
-	end,
-})
-SettingsWebhook:NewToggle({
-	Title = "Send Webhook For All",
-	Default = true,
-	Callback = function(tr)
-	end,
+	Callback = function(Value)
+   end,
 })
 
+--[[ Tree ]]--
+
+spawn(function()
+	while true do
+		task.wait(0.1)
+		_G.AutoChopTP = Section.Flags.AutoChopTree
+
+		if _G.AutoChopTP then
+			local player = game.Players.LocalPlayer
+			local UIS = game:GetService("UserInputService")
+			local hrp = player.Character and player.Character:FindFirstChild("HumanoidRootPart")
+			local originalPos = hrp and hrp.CFrame
+
+			local trees = {}
+			for _, tree in pairs(workspace:GetDescendants()) do
+				if tree:IsA("Model") and tree.Name == "Small Tree" and tree.PrimaryPart then
+					table.insert(trees, tree)
+				end
+			end
+
+			for _, tree in ipairs(trees) do
+				if not _G.AutoChopTP then break end
+				if hrp and tree.PrimaryPart then
+					hrp.CFrame = tree.PrimaryPart.CFrame + Vector3.new(0,0,-3)
+					UIS.InputBegan:Fire({UserInputType=Enum.UserInputType.MouseButton1, Position=tree.PrimaryPart.Position}, false)
+					task.wait(0.1)
+					UIS.InputEnded:Fire({UserInputType=Enum.UserInputType.MouseButton1, Position=tree.PrimaryPart.Position}, false)
+					task.wait(0.5)
+				end
+			end
+
+			if hrp and originalPos then
+				hrp.CFrame = originalPos
+			end
+		end
+	end
+end)
