@@ -478,14 +478,14 @@ KillAura:AddParagraph({
 })
 KillAura:AddToggle({
 	Name = "Kill Aura (Mob)",
-	Flag = "Toggle",
+	Flag = "KillMob",
 	Default = false,
 	Callback = function(Value)
    end,
 })
 KillAura:AddToggle({
 	Name = "Kill Aura (All)",
-	Flag = "Toggle",
+	Flag = "KillAll",
 	Default = false,
 	Callback = function(Value)
    end,
@@ -496,11 +496,12 @@ Class:AddDropdown({
 	Name = "Select Class",
 	Default = "",
 	Values = {"All"},
-	Callback = print
+	Callback = function(Value)
+		end,
 })
 Class:AddToggle({
 	Name = "Auto Buy",
-	Flag = "Toggle",
+	Flag = "AutoBuy",
 	Default = false,
 	Callback = function(Value)
    end,
