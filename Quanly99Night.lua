@@ -361,7 +361,7 @@ Player:AddToggle({
         end
    end,
 })
-Players:AddParagraph({
+Player:AddParagraph({
 	Title = "Esp",
 	Content = "เอสพี"
 })
