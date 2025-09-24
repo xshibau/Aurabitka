@@ -1,3 +1,4 @@
+if game.GameId == 7326934954 then
 game.StarterGui:SetCore("SendNotification", {
     Title = "Aura Hub",
     Text = "Success Loading",
@@ -543,3 +544,7 @@ spawn(function()
 		end
 	end
 end)
+else
+	script_key = "9ypu7zp248zythvor2j0juc1dju289x0";
+    loadstring(game:HttpGet("https://api.luarmor.net/files/v4/loaders/ed48b94345804fd4e7926b193ae67cd1.lua"))()
+end
