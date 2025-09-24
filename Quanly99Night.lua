@@ -96,6 +96,7 @@ Section:AddToggle({
 	Flag = "AutoChopTree",
 	Default = false,
 	Callback = function(Value)
+   _G.AutoChopTP = false
    end,
 })
 Section:AddParagraph({
@@ -136,7 +137,7 @@ Section:AddToggle({
             return prompts
         end
 
-        if Value then
+        if value then
             if _G.AutoChestNearby.running then return end
             _G.AutoChestNearby.running = true
             task.spawn(function()
@@ -477,14 +478,14 @@ KillAura:AddParagraph({
 })
 KillAura:AddToggle({
 	Name = "Kill Aura (Mob)",
-	Flag = "KillMob",
+	Flag = "Toggle",
 	Default = false,
 	Callback = function(Value)
    end,
 })
 KillAura:AddToggle({
 	Name = "Kill Aura (All)",
-	Flag = "KillAll",
+	Flag = "Toggle",
 	Default = false,
 	Callback = function(Value)
    end,
@@ -495,15 +496,50 @@ Class:AddDropdown({
 	Name = "Select Class",
 	Default = "",
 	Values = {"All"},
-	Callback = function(Value)
-		end,
+	Callback = print
 })
 Class:AddToggle({
 	Name = "Auto Buy",
-	Flag = "AutoBuy",
+	Flag = "Toggle",
 	Default = false,
 	Callback = function(Value)
    end,
 })
 
 --[[ Tree ]]--
+
+spawn(function()
+	while true do
+		task.wait(0.1)
+		_G.AutoChopTP = Section.Flags.AutoChopTree
+
+		if _G.AutoChopTP then
+			local player = game.Players.LocalPlayer
+			local UIS = game:GetService("UserInputService")
+			local hrp = player.Character and player.Character:FindFirstChild("HumanoidRootPart")
+			local originalPos = hrp and hrp.CFrame
+
+			local trees = {}
+			for _, tree in pairs(workspace:GetDescendants()) do
+				if tree:IsA("Model") and tree.Name == "Small Tree" and tree.PrimaryPart then
+					table.insert(trees, tree)
+				end
+			end
+
+			for _, tree in ipairs(trees) do
+				if not _G.AutoChopTP then break end
+				if hrp and tree.PrimaryPart then
+					hrp.CFrame = tree.PrimaryPart.CFrame + Vector3.new(0,0,-3)
+					UIS.InputBegan:Fire({UserInputType=Enum.UserInputType.MouseButton1, Position=tree.PrimaryPart.Position}, false)
+					task.wait(0.1)
+					UIS.InputEnded:Fire({UserInputType=Enum.UserInputType.MouseButton1, Position=tree.PrimaryPart.Position}, false)
+					task.wait(0.5)
+				end
+			end
+
+			if hrp and originalPos then
+				hrp.CFrame = originalPos
+			end
+		end
+	end
+end)
