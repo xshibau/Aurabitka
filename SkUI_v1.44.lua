@@ -30,7 +30,7 @@ task.spawn(function()
         ImageButton.Parent = OpenUI
         ImageButton.BackgroundColor3 = Color3.fromRGB(105, 105, 105)
         ImageButton.BackgroundTransparency = 0.8
-        ImageButton.Position = UDim2.new(0, 20, 0, 25)
+        ImageButton.Position = UDim2.new(0.5, -20, 0, 0)
         ImageButton.Size = UDim2.new(0, 50, 0, 50)
         ImageButton.Image = getgenv().Image
         ImageButton.Draggable = true
@@ -73,7 +73,7 @@ function SkUI:CreateWindow(title)
 
     local Holder = Create("Frame", {
          Name = "Holder",
-         Size = UDim2.new(0, 600, 0, 390),
+         Size = UDim2.new(0, 610, 0, 290),
          Position = UDim2.new(0.5, -275, 0, -70),
          BackgroundColor3 = Color3.fromRGB(22, 22, 22),
          BorderSizePixel = 0,
@@ -138,7 +138,7 @@ function ui:Create(buttonWidth, tabname)
     buttonWidth = buttonWidth or 105
 
     local Button = Create("TextButton", {
-        Size = UDim2.new(0, buttonWidth, 0.6, 0),
+        Size = UDim2.new(0, buttonWidth, 0, 30),
         BackgroundColor3 = Color3.fromRGB(70, 70, 70),
         Text = tabname,
         Font = Enum.Font.Gotham,
@@ -188,7 +188,7 @@ local topMask = Create("Frame", {
 })
 local function makeScroll(posX, widthScale)
     local scroll = Create("ScrollingFrame", {
-        Size = UDim2.new(widthScale, -10, 0, 308),
+        Size = UDim2.new(widthScale, -10, 1, 0),
         Position = posX,
         BackgroundColor3 = Color3.fromRGB(30, 30, 30),
         BackgroundTransparency = 1,
