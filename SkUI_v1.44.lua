@@ -73,8 +73,8 @@ function SkUI:CreateWindow(title)
 
     local Holder = Create("Frame", {
          Name = "Holder",
-         Size = UDim2.new(0, 626, 0, 300),
-         Position = UDim2.new(0.5, -275, 0, -20),
+         Size = UDim2.new(0, 625, 0, 300),
+         Position = UDim2.new(0.5, -290, 0, -20),
          BackgroundColor3 = Color3.fromRGB(22, 22, 22),
          BorderSizePixel = 0,
          Visible = true,
