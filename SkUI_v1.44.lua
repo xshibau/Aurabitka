@@ -102,9 +102,10 @@ function SkUI:CreateWindow(title)
         Parent = Header
     })
     local Logo = Create("ImageLabel", {
-        Size = UDim2.new(0, 25, 0, 25),
+        Size = UDim2.new(0, 50, 0, 50),
         BackgroundTransparency = 1,
         BorderSizePixel = 0,
+        Position = UDim2.new(0, 0, 0, 35),
         Image = "rbxthumb://type=Asset&id=131484641795167&w=420&h=420",
         Parent = Holder
     })
@@ -118,8 +119,8 @@ function SkUI:CreateWindow(title)
     })
 
     local TabsScroll = Create("ScrollingFrame", {
-        Size = UDim2.new(0, 600, 0, 35),
-        Position = UDim2.new(0, 25, 0, 0),
+        Size = UDim2.new(0, 574, 0, 35),
+        Position = UDim2.new(0, 50, 0, 0),
         BackgroundColor3 = Color3.fromRGB(25, 25, 25),
         BorderSizePixel = 0,
         ScrollBarThickness = 0,
