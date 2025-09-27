@@ -138,7 +138,7 @@ function ui:Create(buttonWidth, tabname)
     buttonWidth = buttonWidth or 105
 
     local Button = Create("TextButton", {
-        Size = UDim2.new(0, buttonWidth, 1, 0),
+        Size = UDim2.new(0, buttonWidth, 0.6, 0),
         BackgroundColor3 = Color3.fromRGB(70, 70, 70),
         Text = tabname,
         Font = Enum.Font.Gotham,
@@ -217,7 +217,7 @@ local LeftScroll = makeScroll(UDim2.new(0, 5, 0, 5), 0.5)
 local RightScroll = makeScroll(UDim2.new(0.5, 5, 0, 5), 0.5)
 
     local function AddElement(side, obj)
-            obj.Size = UDim2.new(1, 0, 0, 44)
+            obj.Size = UDim2.new(1, 0, 0, 40)
             local parent = (side == "Left") and LeftScroll or RightScroll
             obj.Parent = parent
         end
