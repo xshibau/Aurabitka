@@ -73,7 +73,7 @@ function SkUI:CreateWindow()
 
     local Holder = Create("Frame", {
          Name = "Holder",
-         Size = UDim2.new(0, 515, 0, 390),
+         Size = UDim2.new(0, 545, 0, 390),
          Position = UDim2.new(0.5, -275, 0, -70),
          BackgroundColor3 = Color3.fromRGB(22, 22, 22),
          BorderSizePixel = 0,
@@ -109,10 +109,11 @@ function SkUI:CreateWindow()
     })
 
     local TabsScroll = Create("ScrollingFrame", {
-        Size = UDim2.new(0, 465, 0, 0),
+        Size = UDim2.new(1, 0, 0, 0),
         Position = UDim2.new(0, 50, 0, 0),
         BackgroundColor3 = Color3.fromRGB(25, 25, 25),
         BorderSizePixel = 0,
+        Zindex= 99999,
         ScrollBarThickness = 0,
         CanvasSize = UDim2.new(0, 0, 0, 0),
         AutomaticCanvasSize = Enum.AutomaticSize.X,
