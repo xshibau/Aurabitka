@@ -62,7 +62,7 @@ local function Roundify(obj, rad)
     corner.Parent = obj
 end
 
-function SkUI:CreateWindow(title)
+function SkUI:CreateWindow()
     local ui = setmetatable({}, SkUI)
 
     local Screen = Create("ScreenGui", {
@@ -73,8 +73,8 @@ function SkUI:CreateWindow(title)
 
     local Holder = Create("Frame", {
          Name = "Holder",
-         Size = UDim2.new(0, 625, 0, 300),
-         Position = UDim2.new(0.5, -290, 0, -20),
+         Size = UDim2.new(0, 515, 0, 390),
+         Position = UDim2.new(0.5, -275, 0, -70),
          BackgroundColor3 = Color3.fromRGB(22, 22, 22),
          BorderSizePixel = 0,
          Visible = true,
@@ -91,35 +91,25 @@ function SkUI:CreateWindow(title)
         BorderSizePixel = 0,
         Parent = Holder
     })
-
-    local Title = Create("TextLabel", {
-        Size = UDim2.new(1, 0, 1, 0),
-        BackgroundTransparency = 1,
-        Text = title or "SkUI",
-        TextColor3 = Color3.fromRGB(255, 255, 255),
-        Font = Enum.Font.GothamBold,
-        TextSize = 16,
-        Parent = Header
-    })
     local Logo = Create("ImageLabel", {
         Size = UDim2.new(0, 50, 0, 50),
         BackgroundTransparency = 1,
         BorderSizePixel = 0,
-        Position = UDim2.new(0, 0, 0, 35),
+        Position = UDim2.new(0, 0, 0, 0),
         Image = "rbxthumb://type=Asset&id=131484641795167&w=420&h=420",
         Parent = Holder
     })
 
     local TabsBackground = Create("Frame", {
         Size = UDim2.new(1, 0, 0, 35),
-        Position = UDim2.new(0, 0, 0, 35),
+        Position = UDim2.new(0, 0, 0, 0),
         BackgroundTransparency = 1,
         BorderSizePixel = 0,
         Parent = Holder
     })
 
     local TabsScroll = Create("ScrollingFrame", {
-        Size = UDim2.new(0, 574, 0, 35),
+        Size = UDim2.new(0, 465, 0, 0),
         Position = UDim2.new(0, 50, 0, 0),
         BackgroundColor3 = Color3.fromRGB(25, 25, 25),
         BorderSizePixel = 0,
