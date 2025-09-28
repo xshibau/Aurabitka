@@ -162,72 +162,122 @@ Camp:AddParagraph({
 	Content = "ปรุงสุกแล้ว"
 })
 Camp:AddToggle({
-	Name = "Auto Cooked",
-	Flag = "AutoMorsel",
-	Default = false,
-	Callback = function(Value)
-        if Value then
-            _G.AutoMorsel = true
-            local hrp = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-            local originalPos = hrp and hrp.CFrame
-            task.spawn(function()
-                while _G.AutoMorsel do
-                    task.wait()
-                    for _, m in pairs(workspace:GetDescendants()) do
-                        if not _G.AutoMorsel then break end
-                        if m:IsA("Model") and m.Name == "Morsel" and m.PrimaryPart then
-                            if hrp then
-                                hrp.CFrame = m.PrimaryPart.CFrame
-                                m:SetPrimaryPartCFrame(CFrame.new(0.5406733155250549, 12.499372482299805, -0.718663215637207))
-                                task.wait(0.2)
-                            end
+    Name = "Auto Cooked",
+    Flag = "AutoMorsel",
+    Default = false,
+    Callback = function(Value)
+        _G.AutoMorsel = Value
+        if not Value then return end
+
+        task.spawn(function()
+            local player = game.Players.LocalPlayer
+            local cookPos = CFrame.new(0.5406733,12.499372,-0.7186632)
+            local originalPos = nil
+
+            while _G.AutoMorsel do
+                task.wait(0.1)
+
+                local characterNow = player.Character or player.CharacterAdded:Wait()
+                local humanoidRootPartNow = nil
+                if characterNow then
+                    humanoidRootPartNow = characterNow:FindFirstChild("HumanoidRootPart")
+                end
+                if humanoidRootPartNow and not originalPos then
+                    originalPos = humanoidRootPartNow.CFrame
+                end
+                if not humanoidRootPartNow then
+                    continue
+                end
+
+                local nearestMorsel = nil
+                local nearestDistance = nil
+                for _, possibleMorsel in pairs(workspace:GetDescendants()) do
+                    if possibleMorsel:IsA("Model") and possibleMorsel.Name == "Morsel" and possibleMorsel.PrimaryPart then
+                        local dist = (possibleMorsel.PrimaryPart.Position - humanoidRootPartNow.Position).Magnitude
+                        if nearestDistance == nil or dist < nearestDistance then
+                            nearestDistance = dist
+                            nearestMorsel = possibleMorsel
                         end
                     end
                 end
-                if hrp and originalPos then
-                    hrp.CFrame = originalPos
+
+                if nearestMorsel then
+                    humanoidRootPartNow.CFrame = nearestMorsel.PrimaryPart.CFrame
+                    nearestMorsel:SetPrimaryPartCFrame(cookPos)
+                    task.wait(0.15)
                 end
-            end)
-        else
-            _G.AutoMorsel = false
-        end
-   end,
+            end
+
+            local finalCharacter = player.Character
+            if finalCharacter then
+                local finalHRP = finalCharacter:FindFirstChild("HumanoidRootPart")
+                if finalHRP and originalPos then
+                    finalHRP.CFrame = originalPos
+                end
+            end
+        end)
+    end
 })
 Camp:AddParagraph({
 	Title = "Fire",
 	Content = "กองไฟ"
 })
 Camp:AddToggle({
-	Name = "Auto Fire",
-	Flag = "AutoLog",
-	Default = false,
-	Callback = function(Value)
-       if Value then
-            _G.AutoLog = true
-            local hrp = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-            local originalPos = hrp and hrp.CFrame
-            task.spawn(function()
-                while _G.AutoLog do
-                    task.wait()
-                    for _, m in pairs(workspace:GetDescendants()) do
-                        if not _G.AutoLog then break end
-                        if m:IsA("Model") and m.Name == "Log" and m.PrimaryPart then
-                            if hrp then
-                                hrp.CFrame = m.PrimaryPart.CFrame
-                                m:SetPrimaryPartCFrame(CFrame.new(0.5406733155250549, 12.499372482299805, -0.718663215637207))
-                                task.wait(0.2)
-                            end
+    Name = "Auto Fire",
+    Flag = "AutoLog",
+    Default = false,
+    Callback = function(Value)
+        _G.AutoLog = Value
+        if not Value then return end
+
+        task.spawn(function()
+            local player = game.Players.LocalPlayer
+            local cookPos = CFrame.new(0.5406733,12.499372,-0.7186632)
+            local originalPos = nil
+
+            while _G.AutoLog do
+                task.wait(0.1)
+
+                local characterNow = player.Character or player.CharacterAdded:Wait()
+                local humanoidRootPartNow = nil
+                if characterNow then
+                    humanoidRootPartNow = characterNow:FindFirstChild("HumanoidRootPart")
+                end
+                if humanoidRootPartNow and not originalPos then
+                    originalPos = humanoidRootPartNow.CFrame
+                end
+                if not humanoidRootPartNow then
+                    continue
+                end
+
+                local nearestLog = nil
+                local nearestDistance = nil
+                for _, possibleLog in pairs(workspace:GetDescendants()) do
+                    if possibleLog:IsA("Model") and possibleLog.Name == "Log" and possibleLog.PrimaryPart then
+                        local dist = (possibleLog.PrimaryPart.Position - humanoidRootPartNow.Position).Magnitude
+                        if nearestDistance == nil or dist < nearestDistance then
+                            nearestDistance = dist
+                            nearestLog = possibleLog
                         end
                     end
                 end
-                if hrp and originalPos then
-                    hrp.CFrame = originalPos
+
+                if nearestLog then
+                    humanoidRootPartNow.CFrame = nearestLog.PrimaryPart.CFrame
+                    nearestLog:SetPrimaryPartCFrame(cookPos)
+                    task.wait(0.15)
                 end
-            end)
-        else
-            _G.AutoLog = false
-        end
-   end,
+            end
+
+            local finalCharacter = player.Character
+            if finalCharacter then
+                local finalHRP = finalCharacter:FindFirstChild("HumanoidRootPart")
+                if finalHRP and originalPos then
+                    finalHRP.CFrame = originalPos
+                end
+            end
+        end)
+    end
 })
 Camp:AddToggle({
 	Name = "Auto Fire (Coal)",
