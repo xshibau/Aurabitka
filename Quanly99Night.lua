@@ -280,8 +280,8 @@ Camp:AddToggle({
     end
 })
 Camp:AddToggle({
-    Name = "Auto Fire (Bring)",
-    Flag = "AutoLogBring",
+    Name = "Auto Fire",
+    Flag = "AutoLog",
     Default = false,
     Callback = function(Value)
         _G.AutoLogBring = Value
@@ -290,21 +290,18 @@ Camp:AddToggle({
 
         task.spawn(function()
             local player = game.Players.LocalPlayer
-            local modelNames = {"Log","Fuel","Small Tree", "Mousel", "Coal"}
+            local cookPos = CFrame.new(0.5406733,12.499372,-0.7186632)
+            local modelNames = {"Log","Coal","Fuel", "Mousel"}
 
             while _G.AutoLogBring do
                 task.wait(0.1)
-
-                local characterNow = player.Character or player.CharacterAdded:Wait()
-                local humanoidRootPartNow = characterNow and characterNow:FindFirstChild("HumanoidRootPart")
-                if not humanoidRootPartNow then continue end
 
                 local nearestModel = nil
                 local nearestDistance = nil
                 for _, possibleModel in pairs(workspace:GetDescendants()) do
                     if possibleModel:IsA("Model") and possibleModel.PrimaryPart and table.find(modelNames, possibleModel.Name) then
                         if not _G.broughtModelsPermanent[possibleModel] then
-                            local dist = (possibleModel.PrimaryPart.Position - humanoidRootPartNow.Position).Magnitude
+                            local dist = (possibleModel.PrimaryPart.Position - cookPos.Position).Magnitude
                             if nearestDistance == nil or dist < nearestDistance then
                                 nearestDistance = dist
                                 nearestModel = possibleModel
@@ -314,7 +311,7 @@ Camp:AddToggle({
                 end
 
                 if nearestModel then
-                    nearestModel:SetPrimaryPartCFrame(humanoidRootPartNow.CFrame + Vector3.new(0,0,5))
+                    nearestModel:SetPrimaryPartCFrame(cookPos)
                     _G.broughtModelsPermanent[nearestModel] = true
                     task.wait(0.15)
                 end
