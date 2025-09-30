@@ -11,5 +11,5 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/xshibau/Aurabitka/ref
 elseif game.GameId == 7939389895 then
  loadstring(game:HttpGet("https://raw.githubusercontent.com/xshibau/Aurabitka/refs/heads/main/QuanlyMadRoad.lua"))()
 else
- game.Players.LocalPlayer:Kick("[Aura Hub]:            Load Failed - Script Not Support")
+ game.Players.LocalPlayer:Kick("[Aura Hub]: Load Failed - Script Not Support")
 end
