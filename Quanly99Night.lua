@@ -280,8 +280,8 @@ Camp:AddToggle({
     end
 })
 Camp:AddToggle({
-    Name = "Auto Fire",
-    Flag = "AutoLog",
+    Name = "Auto Fire (Bring)",
+    Flag = "AutoLogBring",
     Default = false,
     Callback = function(Value)
         _G.AutoLogBring = Value
@@ -289,31 +289,20 @@ Camp:AddToggle({
         if not Value then return end
 
         task.spawn(function()
-            local player = game.Players.LocalPlayer
             local cookPos = CFrame.new(0.5406733,12.499372,-0.7186632)
-            local modelNames = {"Log","Coal","Fuel", "Mousel"}
+            local modelNames = {"Log","Rock","Crate"}
 
             while _G.AutoLogBring do
                 task.wait(0.1)
 
-                local nearestModel = nil
-                local nearestDistance = nil
                 for _, possibleModel in pairs(workspace:GetDescendants()) do
                     if possibleModel:IsA("Model") and possibleModel.PrimaryPart and table.find(modelNames, possibleModel.Name) then
                         if not _G.broughtModelsPermanent[possibleModel] then
-                            local dist = (possibleModel.PrimaryPart.Position - cookPos.Position).Magnitude
-                            if nearestDistance == nil or dist < nearestDistance then
-                                nearestDistance = dist
-                                nearestModel = possibleModel
-                            end
+                            possibleModel:SetPrimaryPartCFrame(cookPos)
+                            _G.broughtModelsPermanent[possibleModel] = true
+                            task.wait(0.15)
                         end
                     end
-                end
-
-                if nearestModel then
-                    nearestModel:SetPrimaryPartCFrame(cookPos)
-                    _G.broughtModelsPermanent[nearestModel] = true
-                    task.wait(0.15)
                 end
             end
         end)
