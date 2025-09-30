@@ -8,7 +8,7 @@ elseif game.GameId == 7851663243 then
   loadstring(game:HttpGet("https://raw.githubusercontent.com/ziugpro/Tool-Hub/refs/heads/main/QuanlyStealaMeme.lua"))()
 elseif game.GameId == 7018190066 then
 loadstring(game:HttpGet("https://raw.githubusercontent.com/xshibau/Aurabitka/refs/heads/main/Quanly-DeadRails.lua"))()
-elseif game.GameId == 7939389895 
+elseif game.GameId == 7939389895 then
  loadstring(game:HttpGet("https://raw.githubusercontent.com/xshibau/Aurabitka/refs/heads/main/QuanlyMadRoad.lua"))()
 else
  game.Players.LocalPlayer:Kick("[Aura Hub]:            Load Failed - Script Not Support")
