@@ -290,7 +290,7 @@ Camp:AddToggle({
 
         task.spawn(function()
             local cookPos = CFrame.new(0.5406733,12.499372,-0.7186632)
-            local modelNames = {"Log","Rock","Crate"}
+            local modelNames = {"Log","Fuel","Coal"}
 
             while _G.AutoLogBring do
                 task.wait(0.1)
