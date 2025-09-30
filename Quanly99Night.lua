@@ -204,7 +204,7 @@ Camp:AddToggle({
                 if nearestMorsel then
                     humanoidRootPartNow.CFrame = nearestMorsel.PrimaryPart.CFrame
                     nearestMorsel:SetPrimaryPartCFrame(cookPos)
-                    task.wait(0.15)
+                    task.wait(1)
                 end
             end
 
@@ -280,37 +280,47 @@ Camp:AddToggle({
     end
 })
 Camp:AddToggle({
-	Name = "Auto Fire (Coal)",
-	Flag = "AutoCoal",
-	Default = false,
-	Callback = function(Value)
-        if Value then
-            _G.AutoCoal = true
+    Name = "Auto Fire (Bring)",
+    Flag = "AutoLogBring",
+    Default = false,
+    Callback = function(Value)
+        _G.AutoLogBring = Value
+        if not _G.broughtModelsPermanent then _G.broughtModelsPermanent = {} end
+        if not Value then return end
+
+        task.spawn(function()
             local player = game.Players.LocalPlayer
-            local hrp = player.Character and player.Character:FindFirstChild("HumanoidRootPart")
-            local originalPos = hrp and hrp.CFrame
-            task.spawn(function()
-                while _G.AutoCoal do
-                    task.wait()
-                    for _, m in pairs(workspace:GetDescendants()) do
-                        if not _G.AutoCoal then break end
-                        if m:IsA("Model") and m.Name == "Coal" and m.PrimaryPart then
-                            if hrp then
-                                hrp.CFrame = m.PrimaryPart.CFrame
-                                m:SetPrimaryPartCFrame(CFrame.new(0.5406733155250549, 12.499372482299805, -0.718663215637207))
-                                task.wait(0.2)
+            local modelNames = {"Log","Fuel","Small Tree", "Mousel", "Coal"}
+
+            while _G.AutoLogBring do
+                task.wait(0.1)
+
+                local characterNow = player.Character or player.CharacterAdded:Wait()
+                local humanoidRootPartNow = characterNow and characterNow:FindFirstChild("HumanoidRootPart")
+                if not humanoidRootPartNow then continue end
+
+                local nearestModel = nil
+                local nearestDistance = nil
+                for _, possibleModel in pairs(workspace:GetDescendants()) do
+                    if possibleModel:IsA("Model") and possibleModel.PrimaryPart and table.find(modelNames, possibleModel.Name) then
+                        if not _G.broughtModelsPermanent[possibleModel] then
+                            local dist = (possibleModel.PrimaryPart.Position - humanoidRootPartNow.Position).Magnitude
+                            if nearestDistance == nil or dist < nearestDistance then
+                                nearestDistance = dist
+                                nearestModel = possibleModel
                             end
                         end
                     end
                 end
-                if hrp and originalPos then
-                    hrp.CFrame = originalPos
+
+                if nearestModel then
+                    nearestModel:SetPrimaryPartCFrame(humanoidRootPartNow.CFrame + Vector3.new(0,0,5))
+                    _G.broughtModelsPermanent[nearestModel] = true
+                    task.wait(0.15)
                 end
-            end)
-        else
-            _G.AutoCoal = false
-        end
-   end,
+            end
+        end)
+    end
 })
 
 --[[ Night ]]--
