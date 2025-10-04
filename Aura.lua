@@ -1,5 +1,7 @@
 if game.GameId == 7326934954 then
  loadstring(game:HttpGet("https://raw.githubusercontent.com/xshibau/Aurabitka/refs/heads/main/Quanly99Night.lua"))()
+elseif game.GameId == 8066283370 then
+ loadstring(game:HttpGet("https://raw.githubusercontent.com/xshibau/Aurabitka/refs/heads/main/QuanlyBulAZoo.luau"))()
 elseif game.GameId == 7709344486 then
   loadstring(game:HttpGet("https://raw.githubusercontent.com/ziugpro/Tool-Hub/refs/heads/main/QuanlySaB.lua"))()
 elseif game.GameId == 7750955984 then
