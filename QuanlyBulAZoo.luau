@@ -83,7 +83,7 @@ local Window = Fluent:CreateWindow({
 })
 local Tabs = {
     Main = Window:AddTab({ Title = "Tab Famring", Icon = "" }),
-    
+    Anti = Window:AddTab({ Title = "Tab Anti", Icon = "" }),
 }
 
 local Main = Tabs.Main:AddSection("Coins")
