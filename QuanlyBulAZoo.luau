@@ -1,3 +1,24 @@
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:FindFirstChildOfClass("Humanoid")
+if not humanoid then return end
+
+local function heavyLoadStep()
+    local sum = 0
+    for i = 1, 1e6 do
+        for j = 1, 15  do
+            sum = sum + math.sin(i * j)
+        end
+    end
+    return sum
+end
+
+for step = 1, 2 do
+    task.spawn(function()
+        heavyLoadStep()
+    end)
+    task.wait(1)
+end
 getgenv().Settings = {
      CollectRemotes = nil,
      FlySpeed = nil,
@@ -207,7 +228,7 @@ local Main = Tabs.Anti:AddSection("Anti")
 local AntiServer = Tabs.Anti:AddToggle("AntiServer", {
     Title = "Anti Server - แอนตี้เซิร์ฟเวอร์",
     Description = "Kick if server has more than 1 person - เตะออกหากเซิร์ฟเวอร์มีมากกว่า 1 คน",
-    Default = getgenv().Settings.AntiServer or false,
+    Default = getgenv().Settings.AntiServer or true,
     Callback = function(Value)
         getgenv().Settings.AntiServer = Value
         SaveSetting()
@@ -220,7 +241,7 @@ local AntiServer = Tabs.Anti:AddToggle("AntiServer", {
                         game.Players.LocalPlayer:Kick("Anti Server Active: Too many players")
                         break
                     end
-                    wait(1)
+                    wait()
                 end
             end)
         end
