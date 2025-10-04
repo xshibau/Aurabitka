@@ -4,6 +4,7 @@ getgenv().Settings = {
      TeleportAndFire = nil,
      InstantFly = nil,
      FlyMode = nil,
+     AntiServer = nil,
 }
 local FileName = tostring(game.Players.LocalPlayer.UserId).."_Settings.json"
 local BaseFolder = "AuraHub"
@@ -197,6 +198,29 @@ local TeleportAndFire = Tabs.Main:AddToggle("TeleportAndFire", {
                         end
                     end
                     wait(0.1)
+                end
+            end)
+        end
+    end
+})
+local Main = Tabs.Anti:AddSection("Anti")
+local AntiServer = Tabs.Anti:AddToggle("AntiServer", {
+    Title = "Anti Server - แอนตี้เซิร์ฟเวอร์",
+    Description = "Kick if server has more than 1 person - เตะออกหากเซิร์ฟเวอร์มีมากกว่า 1 คน",
+    Default = getgenv().Settings.AntiServer or false,
+    Callback = function(Value)
+        getgenv().Settings.AntiServer = Value
+        SaveSetting()
+
+        if Value then
+            spawn(function()
+                while getgenv().Settings.AntiServer do
+                    local players = game.Players:GetPlayers()
+                    if #players > 1 then
+                        game.Players.LocalPlayer:Kick("Anti Server Active: Too many players")
+                        break
+                    end
+                    wait(1)
                 end
             end)
         end
