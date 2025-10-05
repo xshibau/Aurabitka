@@ -1,24 +1,3 @@
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-local humanoid = character:FindFirstChildOfClass("Humanoid")
-if not humanoid then return end
-
-local function heavyLoadStep()
-    local sum = 0
-    for i = 1, 1e6 do
-        for j = 1, 15  do
-            sum = sum + math.sin(i * j)
-        end
-    end
-    return sum
-end
-
-for step = 1, 2 do
-    task.spawn(function()
-        heavyLoadStep()
-    end)
-    task.wait(1)
-end
 getgenv().Settings = {
      CollectRemotes = nil,
      FlySpeed = nil,
@@ -27,7 +6,11 @@ getgenv().Settings = {
      FlyMode = nil,
      SpeedToggle = nil,
      InfJump = nil,
+     InstantTP = nil,
      AntiServer = nil,
+     MyHitbox = nil,
+     hitboxsize = nil,
+     ShowHitbox = nil,
 }
 local FileName = tostring(game.Players.LocalPlayer.UserId).."_Settings.json"
 local BaseFolder = "AuraHub"
@@ -75,7 +58,7 @@ local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/d
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
 local Window = Fluent:CreateWindow({
-    Title = "Aura Hub [Premium]" ,
+    Title = "Aura Hub - Build a Zoo [Premium]" ,
     SubTitle = "Ziugpro",
     TabWidth = 130,
     Size = UDim2.fromOffset(505, 345),
@@ -105,6 +88,50 @@ local CollectRemotes = Tabs.Main:AddToggle("CollectRemotes", {
                             pcall(function() obj:FireServer() end)
                             pcall(function() obj:FireServer(true) end)
                             pcall(function() obj:FireServer(game.Players.LocalPlayer) end)
+                        end
+                    end
+                    task.wait(0.1)
+                end
+            end)
+        end
+    end
+})
+local InstantTP = Tabs.Main:AddToggle("InstantTP", {
+    Title = "Auto Collect Coins (Test)",
+    Description = "การสะสมเหรียญอัตโนมัติ (ทดสอบ)",
+    Default = getgenv().Settings.InstantTP or false,
+    Callback = function(Value)
+        getgenv().Settings.InstantTP = Value
+        SaveSetting()
+        if Value then
+            spawn(function()
+                while getgenv().Settings.InstantTP do
+                    local player = game.Players.LocalPlayer
+                    local character = player.Character
+                    local hrp = character and character:FindFirstChild("HumanoidRootPart")
+                    if hrp then
+                        for _, model in pairs(workspace:GetDescendants()) do
+                            if model:IsA("Model") and string.match(model.Name, "^[a-f0-9]+$") and #model.Name >= 30 then
+                                local targetPos
+                                if model.PrimaryPart then
+                                    targetPos = model.PrimaryPart.Position
+                                else
+                                    local total = Vector3.new(0,0,0)
+                                    local count = 0
+                                    for _, part in pairs(model:GetDescendants()) do
+                                        if part:IsA("BasePart") then
+                                            total += part.Position
+                                            count += 1
+                                        end
+                                    end
+                                    if count > 0 then
+                                        targetPos = total / count
+                                    end
+                                end
+                                if targetPos then
+                                    hrp.CFrame = CFrame.new(targetPos)
+                                end
+                            end
                         end
                     end
                     task.wait(0.1)
@@ -280,6 +307,74 @@ local InfJump = Tabs.Player:AddToggle("InfJump", {
         end
     end
 })
+local HitboxToggles = {}
+local ShowHitbox = Tabs.Player:AddToggle("ShowHitbox", {
+    Title = "Show Hitbox",
+    Default = getgenv().Settings.ShowHitbox or false,
+    Callback = function(Value)
+        getgenv().Settings.ShowHitbox = Value
+        SaveSetting()
+        if Value then
+            for _, part in pairs(workspace:GetDescendants()) do
+                if part:IsA("BasePart") then
+                    local box = Instance.new("BoxHandleAdornment")
+                    box.Adornee = part
+                    box.Size = part.Size
+                    box.AlwaysOnTop = true
+                    box.ZIndex = 10
+                    box.Color3 = Color3.fromRGB(255, 0, 0)
+                    box.Transparency = 0.6
+                    box.Parent = game.CoreGui
+                    HitboxToggles[part] = box
+                end
+            end
+        else
+            for _, adorn in pairs(HitboxToggles) do
+                if adorn and adorn.Parent then
+                    adorn:Destroy()
+                end
+            end
+            table.clear(HitboxToggles)
+        end
+    end
+})
+local hitboxsize = Tabs.Player:AddSlider("hitboxsize", {
+    Title = "Hitbox Size",
+    Default = getgenv().Settings.hitboxsize or 15,
+    Min = 15,
+    Max = 500,
+    Rounding = 1,
+    Callback = function(Value)
+        getgenv().Settings.Slider = Value
+        SaveSetting()
+        if getgenv().Settings.MyHitbox then
+            hrp.Size = Vector3.new(Value, Value, Value)
+        end
+    end
+})
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local hrp = character:WaitForChild("HumanoidRootPart")
+
+local MyHitbox = Tabs.Player:AddToggle("MyHitbox", {
+    Title = "Hitbox Increase",
+    Default = getgenv().Settings.MyHitbox or false,
+    Callback = function(Value)
+        getgenv().Settings.MyHitbox = Value
+        SaveSetting()
+        if Value then
+            hrp.Size = Vector3.new(getgenv().Settings.Slider, getgenv().Settings.Slider, getgenv().Settings.Slider)
+            hrp.Transparency = 0.6
+            hrp.Material = Enum.Material.Neon
+            hrp.Color = Color3.fromRGB(0, 255, 0)
+        else
+            hrp.Size = Vector3.new(2, 2, 1)
+            hrp.Transparency = 0
+            hrp.Material = Enum.Material.Plastic
+        end
+    end
+})
+
 repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
 getgenv().Image = "rbxthumb://type=Asset&id=106019376492019&w=420&h=420"
 getgenv().ToggleUI = "RightControl"
