@@ -167,85 +167,82 @@ function DarkraiX:Window(text,gamenme,logo,keybind)
 	BindButton.TextColor3 = Color3.fromRGB(173, 216, 230)
 	BindButton.TextSize = 13.000
 
-	local Tab = Instance.new("Frame")
-	Tab.Name = "Tab"
-	Tab.Parent = Main
-	Tab.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-	Tab.Position = UDim2.new(0, 5, 0, 130)
-	Tab.Size = UDim2.new(0, 200, 0, 265)
+    local Tab = Instance.new("Frame")
+Tab.Name = "Tab"
+Tab.Parent = Main
+Tab.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+Tab.Position = UDim2.new(0, 5, 0, 30)
+Tab.Size = UDim2.new(0, 200, 0, 265)
 
-	local TCNR = Instance.new("UICorner")
-	TCNR.Name = "TCNR"
-	TCNR.Parent = Tab
+local TCNR = Instance.new("UICorner")
+TCNR.Name = "TCNR"
+TCNR.Parent = Tab
 
-    local Image = Instance.new("ImageLabel")
-	Image.Name = "Image"
-	Image.Parent = Top
-	Image.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Image.BackgroundTransparency = 1.000
-	Image.Position = UDim2.new(0, 20, 0, 20)
-	Image.Size = UDim2.new(0, 100, 0, 100)
-	Image.Image = "rbxthumb://type=Asset&id=131484641795167&w=420&h=420"
+local Image = Instance.new("ImageLabel")
+Image.Name = "Image"
+Image.Parent = Top
+Image.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Image.BackgroundTransparency = 1.000
+Image.Position = UDim2.new(0, 20, 0, 20)
+Image.Size = UDim2.new(0, 100, 0, 100)
+Image.Image = "rbxthumb://type=Asset&id=131484641795167&w=420&h=420"
 
-	local ScrollTab = Instance.new("ScrollingFrame")
-	ScrollTab.Name = "ScrollTab"
-	ScrollTab.Parent = Tab
-	ScrollTab.Active = true
-	ScrollTab.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	ScrollTab.BackgroundTransparency = 1.000
-	ScrollTab.Size = UDim2.new(0, 200, 0, 265)
-	ScrollTab.CanvasSize = UDim2.new(0, 0, 0, 0)
-	ScrollTab.ScrollBarThickness = 0
+local ScrollTab = Instance.new("ScrollingFrame")
+ScrollTab.Name = "ScrollTab"
+ScrollTab.Parent = Tab
+ScrollTab.Active = true
+ScrollTab.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ScrollTab.BackgroundTransparency = 1.000
+ScrollTab.Size = UDim2.new(0, 200, 0, 265)
+ScrollTab.CanvasSize = UDim2.new(0, 0, 0, 0)
+ScrollTab.ScrollBarThickness = 0
 
-	local PLL = Instance.new("UIListLayout")
-	PLL.Name = "PLL"
-	PLL.Parent = ScrollTab
-	PLL.SortOrder = Enum.SortOrder.LayoutOrder
-	PLL.Padding = UDim.new(0, 15)
+local PLL = Instance.new("UIListLayout")
+PLL.Name = "PLL"
+PLL.Parent = ScrollTab
+PLL.SortOrder = Enum.SortOrder.LayoutOrder
+PLL.Padding = UDim.new(0, 15)
 
-	local PPD = Instance.new("UIPadding")
-	PPD.Name = "PPD"
-	PPD.Parent = ScrollTab
-	PPD.PaddingLeft = UDim.new(0, 10)
-	PPD.PaddingTop = UDim.new(0, 10)
+local PPD = Instance.new("UIPadding")
+PPD.Name = "PPD"
+PPD.Parent = ScrollTab
+PPD.PaddingLeft = UDim.new(0, 10)
+PPD.PaddingTop = UDim.new(0, 10)
 
-	local Page = Instance.new("Frame")
-	Page.Name = "Page"
-	Page.Parent = Main
-	Page.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-	Page.Position = UDim2.new(0.245426834, 0, 0.075000003, 0)
-	Page.Size = UDim2.new(0, 330, 0, 300)
+local Page = Instance.new("Frame")
+Page.Name = "Page"
+Page.Parent = Main
+Page.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+Page.Position = UDim2.new(0, 215, 0, 30)
+Page.Size = UDim2.new(0, 300, 0, 300)
 
-	local PCNR = Instance.new("UICorner")
-	PCNR.Name = "PCNR"
-	PCNR.Parent = Page
+local PCNR = Instance.new("UICorner")
+PCNR.Name = "PCNR"
+PCNR.Parent = Page
 
-	local MainPage = Instance.new("Frame")
-	MainPage.Name = "MainPage"
-    MainPage.Postion = UDim2.new(0, 40, 0, 0)
-	MainPage.Parent = Page
-	MainPage.ClipsDescendants = true
-	MainPage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	MainPage.BackgroundTransparency = 1.000
-	MainPage.Size = UDim2.new(0, 350, 0, 300)
+local MainPage = Instance.new("Frame")
+MainPage.Name = "MainPage"
+MainPage.Parent = Page
+MainPage.ClipsDescendants = true
+MainPage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+MainPage.BackgroundTransparency = 1.000
+MainPage.Size = UDim2.new(0, 300, 0, 300)
 
-	local PageList = Instance.new("Folder")
-	PageList.Name = "PageList"
-	PageList.Parent = MainPage
+local PageList = Instance.new("Folder")
+PageList.Name = "PageList"
+PageList.Parent = MainPage
 
-	local UIPageLayout = Instance.new("UIPageLayout")
-
-	UIPageLayout.Parent = PageList
-	UIPageLayout.SortOrder = Enum.SortOrder.LayoutOrder
-	UIPageLayout.EasingDirection = Enum.EasingDirection.InOut
-	UIPageLayout.EasingStyle = Enum.EasingStyle.Quad
-	UIPageLayout.FillDirection = Enum.FillDirection.Vertical
-	UIPageLayout.Padding = UDim.new(0, 15)
-	UIPageLayout.TweenTime = 0.400
-	UIPageLayout.GamepadInputEnabled = false
-	UIPageLayout.ScrollWheelInputEnabled = false
-	UIPageLayout.TouchInputEnabled = false
-	
+local UIPageLayout = Instance.new("UIPageLayout")
+UIPageLayout.Parent = PageList
+UIPageLayout.SortOrder = Enum.SortOrder.LayoutOrder
+UIPageLayout.EasingDirection = Enum.EasingDirection.InOut
+UIPageLayout.EasingStyle = Enum.EasingStyle.Quad
+UIPageLayout.FillDirection = Enum.FillDirection.Vertical
+UIPageLayout.Padding = UDim.new(0, 15)
+UIPageLayout.TweenTime = 0.400
+UIPageLayout.GamepadInputEnabled = false
+UIPageLayout.ScrollWheelInputEnabled = false
+UIPageLayout.TouchInputEnabled = false
 	MakeDraggable(Top,Main)
 
 	UserInputService.InputBegan:Connect(function(input)
@@ -284,7 +281,7 @@ function DarkraiX:Window(text,gamenme,logo,keybind)
 		MainFramePage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 		MainFramePage.BackgroundTransparency = 1.000
 		MainFramePage.BorderSizePixel = 0
-		MainFramePage.Size = UDim2.new(0, 335, 0, 385)
+		MainFramePage.Size = UDim2.new(0, 335, 0, 375)
 		MainFramePage.CanvasSize = UDim2.new(0, 0, 0, 0)
 		MainFramePage.ScrollBarThickness = 0
 		
