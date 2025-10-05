@@ -138,25 +138,25 @@ function DarkraiX:Window(text,gamenme,logo,keybind)
 	Name.Text = hubname
 	Name.TextColor3 = Color3.fromRGB(147,112,219)
 	Name.TextSize = 17
+	
+    local Tab = Instance.new("Frame", Main)
+	Tab.BackgroundColor3 = Color3.fromRGB(35,35,35)
+	Tab.Position = UDim2.new(0,5,0,130)
+	Tab.Size = UDim2.new(0,200,0,265)
 
-	local Logo = Instance.new("ImageLabel")
+	local Imgae = Instance.new("ImageLabel")
 	Image.Name = "Image"
 	Image.Parent = Tab
 	Image.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	Image.BackgroundTransparency = 1.000
-	Image.Position = UDim2.new(0, 10, 0, 1)
+	Image.Position = UDim2.new(0, 0, 0, 0)
 	Image.Size = UDim2.new(0, 100, 0, 100)
 	Image.Image = "rbxthumb://type=Asset&id=131484641795167&w=420&h=420"
-	
-	local Tab = Instance.new("Frame", Main)
-	Tab.BackgroundColor3 = Color3.fromRGB(35,35,35)
-	Tab.Position = UDim2.new(0,5,0,80)
-	Tab.Size = UDim2.new(0,200,0,315)
 
 	local ScrollTab = Instance.new("ScrollingFrame", Tab)
 	ScrollTab.Active = true
 	ScrollTab.BackgroundTransparency = 1
-	ScrollTab.Size = UDim2.new(0,200,0,365)
+	ScrollTab.Size = UDim2.new(0,200,0,265)
 	ScrollTab.ScrollBarThickness = 0
 
 	local PLL = Instance.new("UIListLayout", ScrollTab)
