@@ -1,4 +1,31 @@
+repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
+getgenv().Image = "rbxthumb://type=Asset&id=106019376492019&w=420&h=420"
+getgenv().ToggleUI = "RightControl"
 
+task.spawn(function()
+    if not getgenv().LoadedMobileUI then
+        getgenv().LoadedMobileUI = true
+        local OpenUI = Instance.new("ScreenGui")
+        local ImageButton = Instance.new("ImageButton")
+        local UICorner = Instance.new("UICorner")
+        OpenUI.Name = "OpenUI"
+        OpenUI.Parent = game:GetService("CoreGui")
+        OpenUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+        ImageButton.Parent = OpenUI
+        ImageButton.BackgroundColor3 = Color3.fromRGB(105, 105, 105)
+        ImageButton.BackgroundTransparency = 0.8
+        ImageButton.Position = UDim2.new(0, 20, 0, 25)
+        ImageButton.Size = UDim2.new(0, 50, 0, 50)
+        ImageButton.Image = getgenv().Image
+        ImageButton.Draggable = true
+        ImageButton.Transparency = 1
+        UICorner.CornerRadius = UDim.new(0,13)
+        UICorner.Parent = ImageButton
+        ImageButton.MouseButton1Click:Connect(function()
+            game:GetService("VirtualInputManager"):SendKeyEvent(true, getgenv().ToggleUI, false, game)
+        end)
+    end
+end)
 -- Darkrai UI chỉnh sửa theo yêu cầu của Kiệt (UI 500x400, tab 200)
 local PlaceName = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId)
 
@@ -112,10 +139,19 @@ function DarkraiX:Window(text,gamenme,logo,keybind)
 	Name.TextColor3 = Color3.fromRGB(147,112,219)
 	Name.TextSize = 17
 
+	local Logo = Instance.new("ImageLabel")
+	Image.Name = "Image"
+	Image.Parent = Tab
+	Image.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Image.BackgroundTransparency = 1.000
+	Image.Position = UDim2.new(0, 10, 0, 1)
+	Image.Size = UDim2.new(0, 100, 0, 100)
+	Image.Image = "rbxthumb://type=Asset&id=131484641795167&w=420&h=420"
+	
 	local Tab = Instance.new("Frame", Main)
 	Tab.BackgroundColor3 = Color3.fromRGB(35,35,35)
-	Tab.Position = UDim2.new(0,5,0,30)
-	Tab.Size = UDim2.new(0,200,0,365)
+	Tab.Position = UDim2.new(0,5,0,80)
+	Tab.Size = UDim2.new(0,200,0,315)
 
 	local ScrollTab = Instance.new("ScrollingFrame", Tab)
 	ScrollTab.Active = true
