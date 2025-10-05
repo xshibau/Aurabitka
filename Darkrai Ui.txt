@@ -284,7 +284,7 @@ function DarkraiX:Window(text,gamenme,logo,keybind)
 		MainFramePage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 		MainFramePage.BackgroundTransparency = 1.000
 		MainFramePage.BorderSizePixel = 0
-		MainFramePage.Size = UDim2.new(0, 335, 0, 300)
+		MainFramePage.Size = UDim2.new(0, 335, 0, 385)
 		MainFramePage.CanvasSize = UDim2.new(0, 0, 0, 0)
 		MainFramePage.ScrollBarThickness = 0
 		
