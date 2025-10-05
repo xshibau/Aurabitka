@@ -275,7 +275,7 @@ local SpeedToggle = Tabs.Player:AddToggle("SpeedToggle", {
         local humanoid = character:WaitForChild("Humanoid")
 
         if Value then
-            humanoid.WalkSpeed = 100
+            humanoid.WalkSpeed = 500
         else
             humanoid.WalkSpeed = 16
         end
