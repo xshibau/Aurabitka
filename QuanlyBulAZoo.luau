@@ -25,6 +25,8 @@ getgenv().Settings = {
      TeleportAndFire = nil,
      InstantFly = nil,
      FlyMode = nil,
+     SpeedToggle = nil,
+     InfJump = nil,
      AntiServer = nil,
 }
 local FileName = tostring(game.Players.LocalPlayer.UserId).."_Settings.json"
@@ -82,6 +84,7 @@ local Window = Fluent:CreateWindow({
     MinimizeKey = Enum.KeyCode.RightControl
 })
 local Tabs = {
+    Player = Window:AddTab({ Title = "Tab Players", Icon = "" }),
     Main = Window:AddTab({ Title = "Tab Famring", Icon = "" }),
     Anti = Window:AddTab({ Title = "Tab Anti", Icon = "" }),
 }
@@ -94,18 +97,17 @@ local CollectRemotes = Tabs.Main:AddToggle("CollectRemotes", {
     Callback = function(Value)
         getgenv().Settings.CollectRemotes = Value
         SaveSetting()
-
         if Value then
             spawn(function()
                 while getgenv().Settings.CollectRemotes do
-                    for _, obj in pairs(workspace:GetDescendants()) do
-                        if obj:IsA("RemoteEvent") and obj.Name == "CollectHL" then
-                            pcall(function()
-                                obj:FireServer()
-                            end)
+                    for _, obj in pairs(game:GetDescendants()) do
+                        if obj:IsA("RemoteEvent") and string.lower(obj.Name) == "collecthl" then
+                            pcall(function() obj:FireServer() end)
+                            pcall(function() obj:FireServer(true) end)
+                            pcall(function() obj:FireServer(game.Players.LocalPlayer) end)
                         end
                     end
-                    wait(0.1)
+                    task.wait(0.1)
                 end
             end)
         end
@@ -136,50 +138,35 @@ local InstantFly = Tabs.Main:AddToggle("InstantFly", {
     Callback = function(Value)
         getgenv().Settings.InstantFly = Value
         SaveSetting()
-
         if Value then
             spawn(function()
                 while getgenv().Settings.InstantFly do
                     local player = game.Players.LocalPlayer
                     local character = player.Character
-                    local targetModel = workspace:FindFirstChild("ENV")
-                    if character and character:FindFirstChild("HumanoidRootPart") and targetModel then
-                        local targetPosition
-                        if targetModel.PrimaryPart then
-                            targetPosition = targetModel.PrimaryPart.Position
-                        else
-                            local cframeSum = Vector3.new(0,0,0)
-                            local count = 0
-                            for _, part in pairs(targetModel:GetDescendants()) do
-                                if part:IsA("BasePart") then
-                                    cframeSum = cframeSum + part.Position
-                                    count = count + 1
+                    local hrp = character and character:FindFirstChild("HumanoidRootPart")
+                    if hrp then
+                        for _, obj in pairs(game:GetDescendants()) do
+                            if obj:IsA("BasePart") and string.lower(obj.Name) == "belt" then
+                                local targetPosition = obj.Position
+                                local distance = (targetPosition - hrp.Position).Magnitude
+                                local speed = getgenv().Settings.FlySpeed or 50
+                                local time = distance / speed
+                                local tweenInfo = TweenInfo.new(time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out)
+                                local tween = TweenService:Create(hrp, tweenInfo, {CFrame = CFrame.new(targetPosition)})
+                                tween:Play()
+                                tween.Completed:Wait()
+
+                                for _, prompt in pairs(workspace:GetDescendants()) do
+                                    if prompt:IsA("ProximityPrompt") and (prompt.Parent:IsA("BasePart") and (prompt.Parent.Position - hrp.Position).Magnitude <= prompt.MaxActivationDistance) then
+                                        pcall(function()
+                                            fireproximityprompt(prompt)
+                                        end)
+                                    end
                                 end
-                            end
-                            if count > 0 then
-                                targetPosition = cframeSum / count
-                            else
-                                targetPosition = character.HumanoidRootPart.Position
-                            end
-                        end
-
-                        local currentPos = character.HumanoidRootPart.Position
-                        local distance = (targetPosition - currentPos).Magnitude
-                        local speed = getgenv().Settings.FlySpeed or 50
-                        local time = distance / speed
-
-                        local tweenInfo = TweenInfo.new(time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out)
-                        local tween = TweenService:Create(character.HumanoidRootPart, tweenInfo, {CFrame = CFrame.new(targetPosition)})
-                        tween:Play()
-                        tween.Completed:Wait()
-
-                        for _, prompt in pairs(workspace:GetDescendants()) do
-                            if prompt:IsA("ProximityPrompt") and (prompt.Parent.Position - character.HumanoidRootPart.Position).Magnitude <= prompt.MaxActivationDistance then
-                                fireproximityprompt(prompt)
                             end
                         end
                     end
-                    wait(0.1)
+                    task.wait(0.1)
                 end
             end)
         end
@@ -244,6 +231,52 @@ local AntiServer = Tabs.Anti:AddToggle("AntiServer", {
                     wait()
                 end
             end)
+        end
+    end
+})
+
+local SpeedToggle = Tabs.Player:AddToggle("SpeedToggle", {
+    Title = "Speed Boost",
+    Description = "เพิ่มความเร็ว",
+    Default = getgenv().Settings.SpeedToggle or false,
+    Callback = function(Value)
+        getgenv().Settings.SpeedToggle = Value
+        SaveSetting()
+
+        local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+        local humanoid = character:WaitForChild("Humanoid")
+
+        if Value then
+            humanoid.WalkSpeed = 100
+        else
+            humanoid.WalkSpeed = 16
+        end
+    end
+})
+local UserInputService = game:GetService("UserInputService")
+
+local InfJump = Tabs.Player:AddToggle("InfJump", {
+    Title = "Infinite Jump",
+    Description = "กระโดดไม่สิ้นสุด",
+    Default = getgenv().Settings.InfJump or false,
+    Callback = function(Value)
+        getgenv().Settings.InfJump = Value
+        SaveSetting()
+
+        if Value then
+            getgenv().InfJumpConnection = UserInputService.JumpRequest:Connect(function()
+                local player = game.Players.LocalPlayer
+                local character = player.Character
+                if character and character:FindFirstChildOfClass("Humanoid") then
+                    character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
+                end
+            end)
+        else
+            if getgenv().InfJumpConnection then
+                getgenv().InfJumpConnection:Disconnect()
+                getgenv().InfJumpConnection = nil
+            end
         end
     end
 })
