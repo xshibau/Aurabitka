@@ -79,18 +79,20 @@ end
 end
 
 function DarkraiX:Window(text,gamenme,logo,keybind)
-	local hubname = text
-	local gamename = gamenme
+    local hubname = text
+    local gamename = gamenme
 	local uihide = false
 	local abc = false
 	local logo = logo or 0
 	local currentpage = ""
 	local keybind = keybind or Enum.KeyCode.RightControl
 	local yoo = string.gsub(tostring(keybind),"Enum.KeyCode.","")
-	if gamename == "" then gamename = "" end
-
-	local Darkrai = Instance.new("ScreenGui")
-	Darkrai.Name = "Darkrai"
+	if gamename == "" then 
+	    gamename = ""
+    end
+	
+	local Darkrai = Instance.new("ScreenGui") -- guess i am using hubname wrong
+	Darkrai.Name = "Darkrai" -- wait
 	Darkrai.Parent = game.CoreGui
 	Darkrai.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
@@ -99,83 +101,164 @@ function DarkraiX:Window(text,gamenme,logo,keybind)
 	Main.Parent = Darkrai
 	Main.ClipsDescendants = true
 	Main.AnchorPoint = Vector2.new(0.5,0.5)
-	Main.BackgroundColor3 = Color3.fromRGB(45,45,45)
-	Main.Position = UDim2.new(0.5,0,0.5,0)
-	Main.Size = UDim2.new(0,0,0,0)
-	Main:TweenSize(UDim2.new(0,500,0,400),"Out","Quad",0.4,true)
+	Main.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+	Main.Position = UDim2.new(0.5, 0, 0.5, 0)
+	Main.Size = UDim2.new(0, 0, 0, 0)
+	
+	Main:TweenSize(UDim2.new(0, 656, 0, 300),"Out","Quad",0.4,true)
 
-	local MCNR = Instance.new("UICorner", Main)
+	local MCNR = Instance.new("UICorner")
+	MCNR.Name = "MCNR"
+	MCNR.Parent = Main
 
-	local Top = Instance.new("Frame", Main)
+	local Top = Instance.new("Frame")
 	Top.Name = "Top"
-	Top.BackgroundColor3 = Color3.fromRGB(35,35,35)
-	Top.Size = UDim2.new(0,500,0,27)
+	Top.Parent = Main
+	Top.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+	Top.Size = UDim2.new(0, 656, 0, 27)
 
-	local TCNR = Instance.new("UICorner", Top)
+	local TCNR = Instance.new("UICorner")
+	TCNR.Name = "TCNR"
+	TCNR.Parent = Top
 
-	local Logo = Instance.new("ImageLabel", Top)
-	Logo.BackgroundTransparency = 1
-	Logo.Position = UDim2.new(0,10,0,1)
-	Logo.Size = UDim2.new(0,25,0,25)
+   local Logo = Instance.new("ImageLabel")
+	Logo.Name = "Logo"
+	Logo.Parent = Top
+	Logo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Logo.BackgroundTransparency = 1.000
+	Logo.Position = UDim2.new(0, 10, 0, 1)
+	Logo.Size = UDim2.new(0, 25, 0, 25)
 	Logo.Image = ""
 
-	local Name = Instance.new("TextLabel", Top)
-	Name.BackgroundTransparency = 1
-	Name.Position = UDim2.new(0.06,0,0,0)
-	Name.Size = UDim2.new(0,61,0,27)
+	local Name = Instance.new("TextLabel")
+	Name.Name = "Name"
+	Name.Parent = Top
+	Name.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Name.BackgroundTransparency = 1.000
+	Name.Position = UDim2.new(0.0609756112, 0, 0, 0)
+	Name.Size = UDim2.new(0, 61, 0, 27)
 	Name.Font = Enum.Font.GothamSemibold
 	Name.Text = hubname
 	Name.TextColor3 = Color3.fromRGB(147,112,219)
-	Name.TextSize = 17
-	
-    local Tab = Instance.new("Frame", Main)
-	Tab.BackgroundColor3 = Color3.fromRGB(35,35,35)
-	Tab.Position = UDim2.new(0,5,0,130)
-	Tab.Size = UDim2.new(0,200,0,265)
+	Name.TextSize = 17.000
 
-	
-	local ScrollTab = Instance.new("ScrollingFrame", Tab)
+	local Hub = Instance.new("TextLabel")
+	Hub.Name = "Hub"
+	Hub.Parent = Top
+	Hub.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Hub.BackgroundTransparency = 1.000
+	Hub.Position = UDim2.new(0, 110, 0, 0)
+	Hub.Size = UDim2.new(0, 81, 0, 27)
+	Hub.Font = Enum.Font.GothamSemibold
+	Hub.Text = ""
+	Hub.TextColor3 = Color3.fromRGB(147,112,219)
+	Hub.TextSize = 17.000
+	Hub.TextXAlignment = Enum.TextXAlignment.Left
+
+	local BindButton = Instance.new("TextButton")
+	BindButton.Name = "BindButton"
+	BindButton.Parent = Top
+	BindButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	BindButton.BackgroundTransparency = 1.000
+	BindButton.Position = UDim2.new(0.847561002, 0, 0, -5)
+	BindButton.Size = UDim2.new(0, 100, 0, 27)
+	BindButton.Font = Enum.Font.GothamSemibold
+	BindButton.Text = ""
+	BindButton.TextColor3 = Color3.fromRGB(173, 216, 230)
+	BindButton.TextSize = 13.000
+
+	local Tab = Instance.new("Frame")
+	Tab.Name = "Tab"
+	Tab.Parent = Main
+	Tab.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+	Tab.Position = UDim2.new(0, 5, 0, 130)
+	Tab.Size = UDim2.new(0, 200, 0, 265)
+
+	local TCNR = Instance.new("UICorner")
+	TCNR.Name = "TCNR"
+	TCNR.Parent = Tab
+
+   local Image = Instance.new("ImageLabel")
+	Image.Name = "Image"
+	Image.Parent = Tab
+	Image.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Image.BackgroundTransparency = 1.000
+	Image.Position = UDim2.new(0, 10, 0, 0)
+	Image.Size = UDim2.new(0, 100, 0, 100)
+	Image.Image = "rbxthumb://type=Asset&id=131484641795167&w=420&h=420"
+
+	local ScrollTab = Instance.new("ScrollingFrame")
+	ScrollTab.Name = "ScrollTab"
+	ScrollTab.Parent = Tab
 	ScrollTab.Active = true
-	ScrollTab.BackgroundTransparency = 1
-	ScrollTab.Size = UDim2.new(0,200,0,265)
+	ScrollTab.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	ScrollTab.BackgroundTransparency = 1.000
+	ScrollTab.Size = UDim2.new(0, 200, 0, 265)
+	ScrollTab.CanvasSize = UDim2.new(0, 0, 0, 0)
 	ScrollTab.ScrollBarThickness = 0
 
-	local PLL = Instance.new("UIListLayout", ScrollTab)
+	local PLL = Instance.new("UIListLayout")
+	PLL.Name = "PLL"
+	PLL.Parent = ScrollTab
 	PLL.SortOrder = Enum.SortOrder.LayoutOrder
-	PLL.Padding = UDim.new(0,15)
-	local PPD = Instance.new("UIPadding", ScrollTab)
-	PPD.PaddingLeft = UDim.new(0,10)
-	PPD.PaddingTop = UDim.new(0,10)
+	PLL.Padding = UDim.new(0, 15)
 
-	local Page = Instance.new("Frame", Main)
-	Page.BackgroundColor3 = Color3.fromRGB(35,35,35)
-	Page.Position = UDim2.new(0,210,0,30)
-	Page.Size = UDim2.new(0,285,0,360)
+	local PPD = Instance.new("UIPadding")
+	PPD.Name = "PPD"
+	PPD.Parent = ScrollTab
+	PPD.PaddingLeft = UDim.new(0, 10)
+	PPD.PaddingTop = UDim.new(0, 10)
 
-	local PCNR = Instance.new("UICorner", Page)
-	local MainPage = Instance.new("Frame", Page)
-	MainPage.BackgroundTransparency = 1
-	MainPage.Size = UDim2.new(0,285,0,360)
+	local Page = Instance.new("Frame")
+	Page.Name = "Page"
+	Page.Parent = Main
+	Page.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+	Page.Position = UDim2.new(0.245426834, 0, 0.075000003, 0)
+	Page.Size = UDim2.new(0, 300, 0, 300)
 
-	local PageList = Instance.new("Folder", MainPage)
-	local UIPageLayout = Instance.new("UIPageLayout", PageList)
+	local PCNR = Instance.new("UICorner")
+	PCNR.Name = "PCNR"
+	PCNR.Parent = Page
+
+	local MainPage = Instance.new("Frame")
+	MainPage.Name = "MainPage"
+	MainPage.Parent = Page
+	MainPage.ClipsDescendants = true
+	MainPage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	MainPage.BackgroundTransparency = 1.000
+	MainPage.Size = UDim2.new(0, 490, 0, 300)
+
+	local PageList = Instance.new("Folder")
+	PageList.Name = "PageList"
+	PageList.Parent = MainPage
+
+	local UIPageLayout = Instance.new("UIPageLayout")
+
+	UIPageLayout.Parent = PageList
 	UIPageLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	UIPageLayout.EasingDirection = Enum.EasingDirection.InOut
 	UIPageLayout.EasingStyle = Enum.EasingStyle.Quad
-	UIPageLayout.TweenTime = 0.4
-
+	UIPageLayout.FillDirection = Enum.FillDirection.Vertical
+	UIPageLayout.Padding = UDim.new(0, 15)
+	UIPageLayout.TweenTime = 0.400
+	UIPageLayout.GamepadInputEnabled = false
+	UIPageLayout.ScrollWheelInputEnabled = false
+	UIPageLayout.TouchInputEnabled = false
+	
 	MakeDraggable(Top,Main)
 
 	UserInputService.InputBegan:Connect(function(input)
 		if input.KeyCode == Enum.KeyCode[yoo] then
-			uihide = not uihide
-			if uihide then
-				Main:TweenSize(UDim2.new(0,0,0,0),"In","Quad",0.4,true)
+			if uihide == false then
+				uihide = true
+				Main:TweenSize(UDim2.new(0, 0, 0, 0),"In","Quad",0.4,true)
 			else
-				Main:TweenSize(UDim2.new(0,500,0,400),"Out","Quad",0.4,true)
+				uihide = false
+				Main:TweenSize(UDim2.new(0, 500, 0, 300),"Out","Quad",0.4,true)
 			end
 		end
 	end)
-end
+
 	
 	local uitab = {}
 	
