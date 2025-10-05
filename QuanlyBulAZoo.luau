@@ -242,7 +242,7 @@ local Main = Tabs.Anti:AddSection("Anti")
 local AntiServer = Tabs.Anti:AddToggle("AntiServer", {
     Title = "Anti Server - แอนตี้เซิร์ฟเวอร์",
     Description = "Kick if server has more than 1 person - เตะออกหากเซิร์ฟเวอร์มีมากกว่า 1 คน",
-    Default = getgenv().Settings.AntiServer or true,
+    Default = getgenv().Settings.AntiServer or false,
     Callback = function(Value)
         getgenv().Settings.AntiServer = Value
         SaveSetting()
