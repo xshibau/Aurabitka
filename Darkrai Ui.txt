@@ -183,7 +183,7 @@ function DarkraiX:Window(text,gamenme,logo,keybind)
 	Image.Parent = Top
 	Image.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	Image.BackgroundTransparency = 1.000
-	Image.Position = UDim2.new(0, 20, 0, 0)
+	Image.Position = UDim2.new(0, 20, 0, 20)
 	Image.Size = UDim2.new(0, 100, 0, 100)
 	Image.Image = "rbxthumb://type=Asset&id=131484641795167&w=420&h=420"
 
@@ -214,7 +214,7 @@ function DarkraiX:Window(text,gamenme,logo,keybind)
 	Page.Parent = Main
 	Page.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
 	Page.Position = UDim2.new(0.245426834, 0, 0.075000003, 0)
-	Page.Size = UDim2.new(0, 300, 0, 300)
+	Page.Size = UDim2.new(0, 330, 0, 300)
 
 	local PCNR = Instance.new("UICorner")
 	PCNR.Name = "PCNR"
@@ -222,11 +222,12 @@ function DarkraiX:Window(text,gamenme,logo,keybind)
 
 	local MainPage = Instance.new("Frame")
 	MainPage.Name = "MainPage"
+    MainPage.Postion = UDim2.new(0, 40, 0, 0)
 	MainPage.Parent = Page
 	MainPage.ClipsDescendants = true
 	MainPage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	MainPage.BackgroundTransparency = 1.000
-	MainPage.Size = UDim2.new(0, 300, 0, 300)
+	MainPage.Size = UDim2.new(0, 350, 0, 300)
 
 	local PageList = Instance.new("Folder")
 	PageList.Name = "PageList"
@@ -291,7 +292,7 @@ function DarkraiX:Window(text,gamenme,logo,keybind)
 		local UIListLayout = Instance.new("UIListLayout")
 		
 		UIPadding.Parent = MainFramePage
-		UIPadding.PaddingLeft = UDim.new(0, 60)
+		UIPadding.PaddingLeft = UDim.new(0, 10)
 		UIPadding.PaddingTop = UDim.new(0, 10)
 
 		UIListLayout.Padding = UDim.new(0,15)
