@@ -183,7 +183,7 @@ Image.Name = "Image"
 Image.Parent = Top
 Image.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Image.BackgroundTransparency = 1.000
-Image.Position = UDim2.new(0, 10, 0, 50)
+Image.Position = UDim2.new(0, 10, 0, 20)
 Image.Size = UDim2.new(0, 150, 0, 100)
 Image.Image = "rbxthumb://type=Asset&id=131484641795167&w=420&h=420"
 
