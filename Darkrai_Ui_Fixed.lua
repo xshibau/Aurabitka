@@ -184,7 +184,7 @@ Image.Parent = Top
 Image.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Image.BackgroundTransparency = 1.000
 Image.Position = UDim2.new(0, 20, 0, 20)
-Image.Size = UDim2.new(0, 100, 0, 100)
+Image.Size = UDim2.new(0, 200, 0, 200)
 Image.Image = "rbxthumb://type=Asset&id=131484641795167&w=420&h=420"
 
 local ScrollTab = Instance.new("ScrollingFrame")
@@ -285,7 +285,7 @@ MainFramePage.Active = true
 MainFramePage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 MainFramePage.BackgroundTransparency = 1.000
 MainFramePage.BorderSizePixel = 0
-MainFramePage.Size = UDim2.new(0, 370, 0, 375)
+MainFramePage.Size = UDim2.new(0, 400, 0, 375)
 MainFramePage.CanvasSize = UDim2.new(0, 0, 0, 0)
 MainFramePage.ScrollBarThickness = 0
 
@@ -359,7 +359,7 @@ end)
 			Button.Name = "Button"
 			Button.Parent = MainFramePage
 			Button.BackgroundColor3 = _G.Color
-			Button.Size = UDim2.new(0, 278, 0, 31)
+			Button.Size = UDim2.new(0, 280, 0, 31)
 			
 			UICorner.CornerRadius = UDim.new(0, 5)
 			UICorner.Parent = Button
@@ -368,7 +368,7 @@ end)
 			TextBtn.Parent = Button
 			TextBtn.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
 			TextBtn.Position = UDim2.new(0, 1, 0, 1)
-			TextBtn.Size = UDim2.new(0, 278, 0, 29)
+			TextBtn.Size = UDim2.new(0, 280, 0, 29)
 			TextBtn.AutoButtonColor = false
 			TextBtn.Font = Enum.Font.GothamSemibold
 			TextBtn.Text = text
@@ -384,7 +384,7 @@ end)
 			Black.BackgroundTransparency = 1.000
 			Black.BorderSizePixel = 0
 			Black.Position = UDim2.new(0, 1, 0, 1)
-			Black.Size = UDim2.new(0, 278, 0, 29)
+			Black.Size = UDim2.new(0, 280, 0, 29)
 			
 			UICorner_3.CornerRadius = UDim.new(0, 5)
 			UICorner_3.Parent = Black
@@ -429,7 +429,7 @@ function main:Toggle(text, config, callback)
     Toggle.Name = "Toggle"
     Toggle.Parent = MainFramePage
     Toggle.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-    Toggle.Size = UDim2.new(0, 278, 0, 31)
+    Toggle.Size = UDim2.new(0, 280, 0, 31)
 
     UICorner.CornerRadius = UDim.new(0, 5)
     UICorner.Parent = Toggle
@@ -438,7 +438,7 @@ function main:Toggle(text, config, callback)
     Button.Parent = Toggle
     Button.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
     Button.Position = UDim2.new(0, 1, 0, 1)
-    Button.Size = UDim2.new(0, 278, 0, 29)
+    Button.Size = UDim2.new(0, 280, 0, 29)
     Button.AutoButtonColor = false
     Button.Font = Enum.Font.SourceSans
     Button.Text = ""
@@ -453,7 +453,7 @@ function main:Toggle(text, config, callback)
     Label.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     Label.BackgroundTransparency = 1.000
     Label.Position = UDim2.new(0, 1, 0, 1)
-    Label.Size = UDim2.new(0, 278, 0, 29)
+    Label.Size = UDim2.new(0, 280, 0, 29)
     Label.Font = Enum.Font.GothamSemibold
     Label.Text = text
     Label.TextColor3 = Color3.fromRGB(225, 225, 225)
@@ -462,7 +462,7 @@ function main:Toggle(text, config, callback)
     ToggleImage.Name = "ToggleImage"
     ToggleImage.Parent = Toggle
     ToggleImage.BackgroundColor3 = Color3.fromRGB(225, 225, 225)
-    ToggleImage.Position = UDim2.new(0, 215, 0, 5)
+    ToggleImage.Position = UDim2.new(0, 225, 0, 5)
     ToggleImage.Size = UDim2.new(0, 45, 0, 20)
 
     UICorner_3.CornerRadius = UDim.new(0, 10)
@@ -527,7 +527,7 @@ end
 			Dropdown.Parent = MainFramePage
 			Dropdown.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
 			Dropdown.ClipsDescendants = true
-			Dropdown.Size = UDim2.new(0, 278, 0, 31)
+			Dropdown.Size = UDim2.new(0, 280, 0, 31)
 			
 			UICorner.CornerRadius = UDim.new(0, 5)
 			UICorner.Parent = Dropdown
@@ -536,7 +536,7 @@ end
 			DropTitle.Parent = Dropdown
 			DropTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 			DropTitle.BackgroundTransparency = 1.000
-			DropTitle.Size = UDim2.new(0, 278, 0, 31)
+			DropTitle.Size = UDim2.new(0, 280, 0, 31)
 			DropTitle.Font = Enum.Font.GothamSemibold
 			DropTitle.Text = text.. " : "
 			DropTitle.TextColor3 = Color3.fromRGB(225, 225, 225)
@@ -549,7 +549,7 @@ end
 			DropScroll.BackgroundTransparency = 1.000
 			DropScroll.BorderSizePixel = 0
 			DropScroll.Position = UDim2.new(0, 0, 0, 31)
-			DropScroll.Size = UDim2.new(0, 278, 0, 100)
+			DropScroll.Size = UDim2.new(0, 280, 0, 100)
 			DropScroll.CanvasSize = UDim2.new(0, 0, 0, 0)
 			DropScroll.ScrollBarThickness = 3
 			
@@ -574,7 +574,7 @@ end
 			DropButton.Parent = Dropdown
 			DropButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 			DropButton.BackgroundTransparency = 1.000
-			DropButton.Size = UDim2.new(0, 300, 0, 31)
+			DropButton.Size = UDim2.new(0, 280, 0, 31)
 			DropButton.Font = Enum.Font.SourceSans
 			DropButton.Text = ""
 			DropButton.TextColor3 = Color3.fromRGB(0, 0, 0)
@@ -587,7 +587,7 @@ end
 				Item.Parent = DropScroll
 				Item.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				Item.BackgroundTransparency = 1.000
-				Item.Size = UDim2.new(0, 460, 0, 26)
+				Item.Size = UDim2.new(0, 280, 0, 26)
 				Item.Font = Enum.Font.GothamSemibold
 				Item.Text = tostring(v)
 				Item.TextColor3 = Color3.fromRGB(225, 225, 225)
@@ -728,7 +728,7 @@ end
 			Slider.Parent = MainFramePage
 			Slider.BackgroundColor3 = _G.Color
 			Slider.BackgroundTransparency = 0
-			Slider.Size = UDim2.new(0, 278, 0, 55)
+			Slider.Size = UDim2.new(0, 280, 0, 55)
 
 			slidercorner.CornerRadius = UDim.new(0, 5)
 			slidercorner.Name = "slidercorner"
@@ -738,7 +738,7 @@ end
 			sliderr.Parent = Slider
 			sliderr.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
 			sliderr.Position = UDim2.new(0, 1, 0, 1)
-			sliderr.Size = UDim2.new(0, 278 , 0, 49)
+			sliderr.Size = UDim2.new(0, 280 , 0, 49)
 
 			sliderrcorner.CornerRadius = UDim.new(0, 5)
 			sliderrcorner.Name = "sliderrcorner"
@@ -761,14 +761,14 @@ end
 			HAHA.Parent = sliderr
 			HAHA.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 			HAHA.BackgroundTransparency = 1.000
-			HAHA.Size = UDim2.new(0, 218, 0, 29)
+			HAHA.Size = UDim2.new(0, 280, 0, 29)
 
 			AHEHE.Name = "AHEHE"
 			AHEHE.Parent = sliderr
 			AHEHE.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 			AHEHE.BackgroundTransparency = 1.000
 			AHEHE.Position = UDim2.new(0, 10, 0, 35)
-			AHEHE.Size = UDim2.new(0, 218, 0, 5)
+			AHEHE.Size = UDim2.new(0, 280, 0, 5)
 			AHEHE.Font = Enum.Font.SourceSans
 			AHEHE.Text = ""
 			AHEHE.TextColor3 = Color3.fromRGB(0, 0, 0)
