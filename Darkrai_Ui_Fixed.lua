@@ -171,7 +171,7 @@ local Tab = Instance.new("Frame")
 Tab.Name = "Tab"
 Tab.Parent = Main
 Tab.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-Tab.Position = UDim2.new(0, 5, 0, 130)
+Tab.Position = UDim2.new(0, 5, 0, 170)
 Tab.Size = UDim2.new(0, 200, 0, 300)
 
 local TCNR = Instance.new("UICorner")
@@ -183,8 +183,8 @@ Image.Name = "Image"
 Image.Parent = Top
 Image.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Image.BackgroundTransparency = 1.000
-Image.Position = UDim2.new(0, 10, 0, 20)
-Image.Size = UDim2.new(0, 150, 0, 100)
+Image.Position = UDim2.new(0, 30, 0, 30)
+Image.Size = UDim2.new(0, 150, 0, 150)
 Image.Image = "rbxthumb://type=Asset&id=131484641795167&w=420&h=420"
 
 local ScrollTab = Instance.new("ScrollingFrame")
