@@ -359,7 +359,7 @@ end)
 			Button.Name = "Button"
 			Button.Parent = MainFramePage
 			Button.BackgroundColor3 = _G.Color
-			Button.Size = UDim2.new(0, 300, 0, 31)
+			Button.Size = UDim2.new(0, 285, 0, 31)
 			
 			UICorner.CornerRadius = UDim.new(0, 5)
 			UICorner.Parent = Button
@@ -368,7 +368,7 @@ end)
 			TextBtn.Parent = Button
 			TextBtn.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
 			TextBtn.Position = UDim2.new(0, 1, 0, 1)
-			TextBtn.Size = UDim2.new(0, 300, 0, 29)
+			TextBtn.Size = UDim2.new(0, 285, 0, 29)
 			TextBtn.AutoButtonColor = false
 			TextBtn.Font = Enum.Font.GothamSemibold
 			TextBtn.Text = text
@@ -384,7 +384,7 @@ end)
 			Black.BackgroundTransparency = 1.000
 			Black.BorderSizePixel = 0
 			Black.Position = UDim2.new(0, 1, 0, 1)
-			Black.Size = UDim2.new(0, 300, 0, 29)
+			Black.Size = UDim2.new(0, 285, 0, 29)
 			
 			UICorner_3.CornerRadius = UDim.new(0, 5)
 			UICorner_3.Parent = Black
@@ -429,7 +429,7 @@ function main:Toggle(text, config, callback)
     Toggle.Name = "Toggle"
     Toggle.Parent = MainFramePage
     Toggle.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-    Toggle.Size = UDim2.new(0, 300, 0, 31)
+    Toggle.Size = UDim2.new(0, 285, 0, 31)
 
     UICorner.CornerRadius = UDim.new(0, 5)
     UICorner.Parent = Toggle
@@ -438,7 +438,7 @@ function main:Toggle(text, config, callback)
     Button.Parent = Toggle
     Button.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
     Button.Position = UDim2.new(0, 1, 0, 1)
-    Button.Size = UDim2.new(0, 300, 0, 29)
+    Button.Size = UDim2.new(0, 285, 0, 29)
     Button.AutoButtonColor = false
     Button.Font = Enum.Font.SourceSans
     Button.Text = ""
@@ -453,7 +453,7 @@ function main:Toggle(text, config, callback)
     Label.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     Label.BackgroundTransparency = 1.000
     Label.Position = UDim2.new(0, 1, 0, 1)
-    Label.Size = UDim2.new(0, 300, 0, 29)
+    Label.Size = UDim2.new(0, 285, 0, 29)
     Label.Font = Enum.Font.GothamSemibold
     Label.Text = text
     Label.TextColor3 = Color3.fromRGB(225, 225, 225)
@@ -527,7 +527,7 @@ end
 			Dropdown.Parent = MainFramePage
 			Dropdown.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
 			Dropdown.ClipsDescendants = true
-			Dropdown.Size = UDim2.new(0, 300, 0, 31)
+			Dropdown.Size = UDim2.new(0, 285, 0, 31)
 			
 			UICorner.CornerRadius = UDim.new(0, 5)
 			UICorner.Parent = Dropdown
@@ -536,7 +536,7 @@ end
 			DropTitle.Parent = Dropdown
 			DropTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 			DropTitle.BackgroundTransparency = 1.000
-			DropTitle.Size = UDim2.new(0, 300, 0, 31)
+			DropTitle.Size = UDim2.new(0, 285, 0, 31)
 			DropTitle.Font = Enum.Font.GothamSemibold
 			DropTitle.Text = text.. " : "
 			DropTitle.TextColor3 = Color3.fromRGB(225, 225, 225)
@@ -549,7 +549,7 @@ end
 			DropScroll.BackgroundTransparency = 1.000
 			DropScroll.BorderSizePixel = 0
 			DropScroll.Position = UDim2.new(0, 0, 0, 31)
-			DropScroll.Size = UDim2.new(0, 300, 0, 100)
+			DropScroll.Size = UDim2.new(0, 285, 0, 100)
 			DropScroll.CanvasSize = UDim2.new(0, 0, 0, 0)
 			DropScroll.ScrollBarThickness = 3
 			
@@ -652,7 +652,7 @@ end
 				Item.Parent = DropScroll
 				Item.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				Item.BackgroundTransparency = 1.000
-				Item.Size = UDim2.new(0, 270, 0, 26)
+				Item.Size = UDim2.new(0, 285, 0, 26)
 				Item.Font = Enum.Font.GothamSemibold
 				Item.Text = tostring(t)
 				Item.TextColor3 = Color3.fromRGB(225, 225, 225)
@@ -690,7 +690,7 @@ end
 			function dropfunc:Clear()
 				DropTitle.Text = tostring(text).." : "
 				isdropping = false
-				Dropdown:TweenSize(UDim2.new(0,270,0,31),"Out","Quad",0.3,true)
+				Dropdown:TweenSize(UDim2.new(0, 285, 0, 31),"Out","Quad",0.3,true)
 				TweenService:Create(
 					DropImage,
 					TweenInfo.new(0.3,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
@@ -728,7 +728,7 @@ end
 			Slider.Parent = MainFramePage
 			Slider.BackgroundColor3 = _G.Color
 			Slider.BackgroundTransparency = 0
-			Slider.Size = UDim2.new(0, 300, 0, 51)
+			Slider.Size = UDim2.new(0, 285, 0, 51)
 
 			slidercorner.CornerRadius = UDim.new(0, 5)
 			slidercorner.Name = "slidercorner"
@@ -738,7 +738,7 @@ end
 			sliderr.Parent = Slider
 			sliderr.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
 			sliderr.Position = UDim2.new(0, 1, 0, 1)
-			sliderr.Size = UDim2.new(0, 300 , 0, 49)
+			sliderr.Size = UDim2.new(0, 285 , 0, 49)
 
 			sliderrcorner.CornerRadius = UDim.new(0, 5)
 			sliderrcorner.Name = "sliderrcorner"
@@ -806,7 +806,7 @@ end
 			slidervalue.Parent = sliderr
 			slidervalue.BackgroundColor3 = _G.Color
 			slidervalue.BackgroundTransparency = 0
-			slidervalue.Position = UDim2.new(0, 395, 0, 5)
+			slidervalue.Position = UDim2.new(0, 219, 0, 5)
 			slidervalue.Size = UDim2.new(0, 65, 0, 18)
 
 			valuecorner.CornerRadius = UDim.new(0, 5)
@@ -897,7 +897,7 @@ end
 			Textbox.Parent = MainFramePage
 			Textbox.BackgroundColor3 = _G.Color
 			Textbox.BackgroundTransparency = 0
-			Textbox.Size = UDim2.new(0, 300, 0, 31)
+			Textbox.Size = UDim2.new(0, 285, 0, 31)
 
 			TextboxCorner.CornerRadius = UDim.new(0, 5)
 			TextboxCorner.Name = "TextboxCorner"
@@ -907,7 +907,7 @@ end
 			Textboxx.Parent = Textbox
 			Textboxx.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
 			Textboxx.Position = UDim2.new(0, 1, 0, 1)
-			Textboxx.Size = UDim2.new(0, 300, 0, 29)
+			Textboxx.Size = UDim2.new(0, 285, 0, 29)
 
 			TextboxxCorner.CornerRadius = UDim.new(0, 5)
 			TextboxxCorner.Name = "TextboxxCorner"
