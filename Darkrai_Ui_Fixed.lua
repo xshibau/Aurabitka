@@ -259,93 +259,95 @@ UIPageLayout.TouchInputEnabled = false
 
 	
 	local uitab = {}
-	
-	function uitab:Tab(text)
+    function uitab:Tab(text)
     local TabButton = Instance.new("TextButton")
-TabButton.Parent = ScrollTab
-TabButton.Name = text.."Server"
-TabButton.Text = text
-TabButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-TabButton.BorderColor3 = Color3.fromRGB(147,112,219)
-TabButton.BorderSizePixel = 0
-TabButton.Size = UDim2.new(0, 175, 0, 40)
-TabButton.Font = Enum.Font.GothamBold
-TabButton.TextColor3 = Color3.fromRGB(225, 225, 225)
-TabButton.TextSize = 15.000
-TabButton.TextTransparency = 0
-TabButton.TextWrapped = true
-TabButton.TextYAlignment = Enum.TextYAlignment.Center
-TabButton.TextXAlignment = Enum.TextXAlignment.Center
-TabButton.LineHeight = 1.0
+    TabButton.Parent = ScrollTab
+    TabButton.Name = text.."Server"
+    TabButton.Text = text
+    TabButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+    TabButton.BorderColor3 = Color3.fromRGB(147,112,219)
+    TabButton.BorderSizePixel = 0
+    TabButton.Size = UDim2.new(0, 175, 0, 40)
+    TabButton.Font = Enum.Font.GothamBold
+    TabButton.TextColor3 = Color3.fromRGB(225, 225, 225)
+    TabButton.TextSize = 15.000
+    TabButton.TextTransparency = 0
+    TabButton.TextWrapped = true
+    TabButton.TextTruncate = Enum.TextTruncate.None
+    TabButton.TextYAlignment = Enum.TextYAlignment.Center
+    TabButton.TextXAlignment = Enum.TextXAlignment.Left
+    TabButton.LineHeight = 1.0
 
-local MainFramePage = Instance.new("ScrollingFrame")
-MainFramePage.Name = text.."_Page"
-MainFramePage.Parent = PageList
-MainFramePage.Active = true
-MainFramePage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-MainFramePage.BackgroundTransparency = 1.000
-MainFramePage.BorderSizePixel = 0
-MainFramePage.Size = UDim2.new(0, 400, 0, 375)
-MainFramePage.CanvasSize = UDim2.new(0, 0, 0, 0)
-MainFramePage.ScrollBarThickness = 0
+    local MainFramePage = Instance.new("ScrollingFrame")
+    MainFramePage.Name = text.."_Page"
+    MainFramePage.Parent = PageList
+    MainFramePage.Active = true
+    MainFramePage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    MainFramePage.BackgroundTransparency = 1.000
+    MainFramePage.BorderSizePixel = 0
+    MainFramePage.Size = UDim2.new(0, 400, 0, 375)
+    MainFramePage.CanvasSize = UDim2.new(0, 0, 0, 0)
+    MainFramePage.ScrollBarThickness = 0
 
-local UIPadding = Instance.new("UIPadding")
-local UIListLayout = Instance.new("UIListLayout")
-UIPadding.Parent = MainFramePage
-UIPadding.PaddingLeft = UDim.new(0, 10)
-UIPadding.PaddingTop = UDim.new(0, 10)
-UIListLayout.Padding = UDim.new(0,15)
-UIListLayout.Parent = MainFramePage
-UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+    local UIPadding = Instance.new("UIPadding")
+    local UIListLayout = Instance.new("UIListLayout")
+    UIPadding.Parent = MainFramePage
+    UIPadding.PaddingLeft = UDim.new(0, 10)
+    UIPadding.PaddingTop = UDim.new(0, 10)
+    UIListLayout.Padding = UDim.new(0,15)
+    UIListLayout.Parent = MainFramePage
+    UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 
-TabButton.MouseButton1Click:Connect(function()
-	for i,v in next, ScrollTab:GetChildren() do
-		if v:IsA("TextButton") then
-			TweenService:Create(
-				v,
-				TweenInfo.new(0.3,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
-				{TextTransparency = 0.5}
-			):Play()
-		end
-		TweenService:Create(
-			TabButton,
-			TweenInfo.new(0.3,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
-			{TextTransparency = 0}
-		):Play()
-	end
-	for i,v in next, PageList:GetChildren() do
-		currentpage = string.gsub(TabButton.Name,"Server","").."_Page"
-		if v.Name == currentpage then
-			UIPageLayout:JumpTo(v)
-		end
-	end
-end)
+    TabButton.MouseButton1Click:Connect(function()
+        for i,v in next, ScrollTab:GetChildren() do
+            if v:IsA("TextButton") then
+                TweenService:Create(
+                    v,
+                    TweenInfo.new(0.3,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
+                    {TextTransparency = 0.5}
+                ):Play()
+            end
+            TweenService:Create(
+                TabButton,
+                TweenInfo.new(0.3,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
+                {TextTransparency = 0}
+            ):Play()
+        end
+        for i,v in next, PageList:GetChildren() do
+            currentpage = string.gsub(TabButton.Name,"Server","").."_Page"
+            if v.Name == currentpage then
+                UIPageLayout:JumpTo(v)
+            end
+        end
+    end)
 
-if abc == false then
-	for i,v in next, ScrollTab:GetChildren() do
-		if v:IsA("TextButton") then
-			TweenService:Create(
-				v,
-				TweenInfo.new(0.3,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
-				{TextTransparency = 0.5}
-			):Play()
-		end
-		TweenService:Create(
-			TabButton,
-			TweenInfo.new(0.3,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
-			{TextTransparency = 0}
-		):Play()
-	end
-	UIPageLayout:JumpToIndex(1)
-	abc = true
-end
+    if abc == false then
+        for i,v in next, ScrollTab:GetChildren() do
+            if v:IsA("TextButton") then
+                TweenService:Create(
+                    v,
+                    TweenInfo.new(0.3,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
+                    {TextTransparency = 0.5}
+                ):Play()
+            end
+            TweenService:Create(
+                TabButton,
+                TweenInfo.new(0.3,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
+                {TextTransparency = 0}
+            ):Play()
+        end
+        UIPageLayout:JumpToIndex(1)
+        abc = true
+    end
 
-game:GetService("RunService").Stepped:Connect(function()
-	pcall(function()
-		MainFramePage.CanvasSize = UDim2.new(0,0,0,UIListLayout.AbsoluteContentSize.Y + 20)
-		ScrollTab.CanvasSize = UDim2.new(0,0,0,PLL.AbsoluteContentSize.Y + 20)
-	end)
-end)
+    game:GetService("RunService").Stepped:Connect(function()
+        pcall(function()
+            MainFramePage.CanvasSize = UDim2.new(0,0,0,UIListLayout.AbsoluteContentSize.Y + 20)
+            ScrollTab.CanvasSize = UDim2.new(0,0,0,PLL.AbsoluteContentSize.Y + 20)
+        end)
+    end)
+end	
+
 		
 		local main = {}
 		function main:Button(text,callback)
