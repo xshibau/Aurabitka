@@ -212,7 +212,7 @@ PPD.PaddingTop = UDim.new(0, 10)
 local Page = Instance.new("Frame")
 Page.Name = "Page"
 Page.Parent = Main
-Page.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+Page.BackgroundColor3 = Color3.fromRGB(0, 102, 204)
 Page.Position = UDim2.new(0, 215, 0, 30)
 Page.Size = UDim2.new(0, 350, 0, 380)
 
