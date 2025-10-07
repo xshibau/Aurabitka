@@ -1,5 +1,7 @@
 getgenv().Settings = {
      CollectRemotes = nil,
+     PetSelector= nil,
+     AutoUsePet = nil,
      FlySpeed = nil,
      TeleportAndFire = nil,
      InstantFly = nil,
@@ -74,7 +76,7 @@ local Tabs = {
     Anti = Window:AddTab({ Title = "Tab Anti", Icon = "" }),
 }
 
-local Main = Tabs.Main:AddSection("Coins")
+local Main = Tabs.Main:AddSection("Main")
 local CollectRemotes = Tabs.Main:AddToggle("CollectRemotes", {
     Title = "Auto Collect Coins",
     Description = "สะสมเหรียญอัตโนมัติ",
@@ -142,8 +144,6 @@ local InstantTP = Tabs.Main:AddToggle("InstantTP", {
         end
     end
 })
-
-local Main = Tabs.Main:AddSection("Egg Shop")
 local Input = Tabs.Main:AddInput("FlySpeed", {
     Title = "Speed Buy",
     Default = getgenv().Settings.FlySpeed or "50",
@@ -201,7 +201,6 @@ local InstantFly = Tabs.Main:AddToggle("InstantFly", {
         end
     end
 })
-local Main = Tabs.Main:AddSection("Shop")
 local TeleportAndFire = Tabs.Main:AddToggle("TeleportAndFire", {
     Title = "Auto Buy Food (Good)",
     Description = "ซื้ออาหารอัตโนมัติ (ดี)",
@@ -240,41 +239,44 @@ local TeleportAndFire = Tabs.Main:AddToggle("TeleportAndFire", {
         end
     end
 })
-local Main = Tabs.Main:AddSection("Main")
-local BaitSelector = Tabs.Main:AddDropdown("BaitSelector", {
+local PetSelector = Tabs.Main:AddDropdown("PetSelector", {
     Title = "Select Bait",
+    Description = "เลือกเหยื่อ",
     Values = (function()
-        local baits = {}
-        local playerChar = game.Players.LocalPlayer.Character
-        for _, item in ipairs(playerChar:GetChildren()) do
-            if item.Name == "FishingBait1" or item.Name == "FishingBait2" or item.Name == "FishingBait3" then
-                table.insert(baits, item.Name)
+        local pets = {}
+        local Petindex = game.Players.LocalPlayer:FindFirstChild("Petindex")
+        if Petindex then
+            for _, pet in ipairs(Petindex:GetChildren()) do
+                table.insert(pets, pet.Name)
             end
         end
-        return baits
+        return pets
     end)(),
     Multi = false,
     Default = 1,
-    Callback = function(selectedBait)
-        getgenv().Settings.BaitSelected = selectedBait
+    Callback = function(selectedPet)
+        getgenv().Settings.PetSelected = selectedPet
         SaveSetting()
     end
 })
 
-local AutoUseBait = Tabs.Main:AddToggle("AutoUseBait", {
+local AutoUsePet = Tabs.Main:AddToggle("AutoUsePet", {
     Title = "Auto Fishing",
-    Default = getgenv().Settings.AutoUseBait or false,
+    Description = "ตกปลาอัตโนมัติ",
+    Default = getgenv().Settings.AutoUsePet or false,
     Callback = function(isEnabled)
-        getgenv().Settings.AutoUseBait = isEnabled
+        getgenv().Settings.AutoUsePet = isEnabled
         SaveSetting()
 
         if isEnabled then
-            local playerChar = game.Players.LocalPlayer.Character
-            local bait = playerChar:FindFirstChild(getgenv().Settings.BaitSelected)
-            if bait then
-                bait.Parent = playerChar
+            local Petindex = game.Players.LocalPlayer:FindFirstChild("Petindex")
+            if Petindex then
+                local pet = Petindex:FindFirstChild(getgenv().Settings.PetSelected)
+                if pet then
+                    pet.Parent = game.Players.LocalPlayer.Character
+                end
             end
-            playerChar.HumanoidRootPart.CFrame = CFrame.new(Vector3.new(0, 10, 0))
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Vector3.new(0, 10, 0))
         end
     end
 })
