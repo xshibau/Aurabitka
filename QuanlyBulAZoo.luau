@@ -10,6 +10,8 @@ getgenv().Settings = {
      AntiServer = nil,
      MyHitbox = nil,
      hitboxsize = nil,
+     AutoUseBait = nil,
+     BaitSelector = nil,
      ShowHitbox = nil,
 }
 local FileName = tostring(game.Players.LocalPlayer.UserId).."_Settings.json"
@@ -235,6 +237,44 @@ local TeleportAndFire = Tabs.Main:AddToggle("TeleportAndFire", {
                     wait(0.1)
                 end
             end)
+        end
+    end
+})
+local Main = Tabs.Main:AddSection("Main")
+local BaitSelector = Tabs.Main:AddDropdown("BaitSelector", {
+    Title = "Select Bait",
+    Values = (function()
+        local baits = {}
+        local playerChar = game.Players.LocalPlayer.Character
+        for _, item in ipairs(playerChar:GetChildren()) do
+            if item.Name == "FishingBait1" or item.Name == "FishingBait2" or item.Name == "FishingBait3" then
+                table.insert(baits, item.Name)
+            end
+        end
+        return baits
+    end)(),
+    Multi = false,
+    Default = 1,
+    Callback = function(selectedBait)
+        getgenv().Settings.BaitSelected = selectedBait
+        SaveSetting()
+    end
+})
+
+local AutoUseBait = Tabs.Main:AddToggle("AutoUseBait", {
+    Title = "Auto Fishing",
+    Default = getgenv().Settings.AutoUseBait or false,
+    Callback = function(isEnabled)
+        getgenv().Settings.AutoUseBait = isEnabled
+        SaveSetting()
+
+        if isEnabled then
+            local playerChar = game.Players.LocalPlayer.Character
+            local bait = playerChar:FindFirstChild(getgenv().Settings.BaitSelected)
+            if bait then
+                bait.Parent = playerChar
+            end
+            playerChar.HumanoidRootPart.CFrame = CFrame.new(Vector3.new(0, 10, 0))
         end
     end
 })
