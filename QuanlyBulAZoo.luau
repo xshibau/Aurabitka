@@ -423,7 +423,7 @@ local MyHitbox = Tabs.Player:AddToggle("MyHitbox", {
 local Input = Tabs.Web:AddInput("UrlWebhook", {
         Title = "Url Webhooks",
         Description = "URL เว็บฮุก",
-        Default = getgenv().Settings.UrlWebhook = Value or "",
+        Default = getgenv().Settings.UrlWebhook or "",
         Placeholder = "",
         Numeric = false, 
         Finished = false, 
