@@ -14,6 +14,8 @@ getgenv().Settings = {
      hitboxsize = nil,
      AutoUseBait = nil,
      BaitSelector = nil,
+     UrlWebhook = nil,
+     Start Webhook = nil,
      ShowHitbox = nil,
 }
 local FileName = tostring(game.Players.LocalPlayer.UserId).."_Settings.json"
@@ -74,6 +76,7 @@ local Tabs = {
     Player = Window:AddTab({ Title = "Tab Players", Icon = "" }),
     Main = Window:AddTab({ Title = "Tab Famring", Icon = "" }),
     Anti = Window:AddTab({ Title = "Tab Anti", Icon = "" }),
+    Web = Window:AddTab({ Title = "Tab Webhooks", Icon = "" }),
 }
 
 local Main = Tabs.Main:AddSection("Main")
@@ -416,6 +419,28 @@ local MyHitbox = Tabs.Player:AddToggle("MyHitbox", {
         end
     end
 })
+
+local Input = Tabs.Web:AddInput("UrlWebhook", {
+        Title = "Url Webhooks",
+        Description = "URL เว็บฮุก",
+        Default = getgenv().Settings.UrlWebhook = Value or "",
+        Placeholder = "",
+        Numeric = false, 
+        Finished = false, 
+        Callback = function(Value)
+        getgenv().Settings.UrlWebhook = Value
+        SaveSetting()
+        end
+    })
+local Toggle = Tabs.Web:AddToggle("Startwebhook", {
+     Title = "Start Webhook",
+     Description = "เริ่มเว็บฮุก",
+     Default = getgenv().Settings.Startwebhook or false,
+     Callback = function(Value)
+     getgenv().Settings.Startwebhook = Value
+     SaveSetting()
+     end
+})   
 
 repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
 getgenv().Image = "rbxthumb://type=Asset&id=106019376492019&w=420&h=420"
