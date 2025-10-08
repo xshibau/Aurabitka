@@ -15,7 +15,7 @@ getgenv().Settings = {
      AutoUseBait = nil,
      BaitSelector = nil,
      UrlWebhook = nil,
-     Start Webhook = nil,
+     Startwebhook = nil,
      ShowHitbox = nil,
 }
 local FileName = tostring(game.Players.LocalPlayer.UserId).."_Settings.json"
