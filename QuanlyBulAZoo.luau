@@ -13,6 +13,8 @@ getgenv().Settings = {
      MyHitbox = nil,
      hitboxsize = nil,
      AutoUseBait = nil,
+     AutoHeach = nil,
+     ActivatePrompts = nil,
      BaitSelector = nil,
      UrlWebhook = nil,
      Startwebhook = nil,
@@ -79,7 +81,7 @@ local Tabs = {
     Web = Window:AddTab({ Title = "Tab Webhooks", Icon = "" }),
 }
 
-local Main = Tabs.Main:AddSection("Main")
+local Main = Tabs.Main:AddSection("Coins")
 local CollectRemotes = Tabs.Main:AddToggle("CollectRemotes", {
     Title = "Auto Collect Coins",
     Description = "สะสมเหรียญอัตโนมัติ",
@@ -147,6 +149,7 @@ local InstantTP = Tabs.Main:AddToggle("InstantTP", {
         end
     end
 })
+local Main = Tabs.Main:AddSection("Egg")
 local Input = Tabs.Main:AddInput("FlySpeed", {
     Title = "Speed Buy",
     Default = getgenv().Settings.FlySpeed or "50",
@@ -204,6 +207,72 @@ local InstantFly = Tabs.Main:AddToggle("InstantFly", {
         end
     end
 })
+
+Tabs.Main:AddToggle("ActivatePrompts", {
+    Title = "Auto Place Egg",
+    Default = getgenv().Settings.ActivatePrompts or false,
+    Callback = function(Value)
+        getgenv().Settings.ActivatePrompts = Value
+        SaveSetting()
+
+        local Players = game:GetService("Players")
+        local RunService = game:GetService("RunService")
+        local player = Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+        local rootPart = character:WaitForChild("HumanoidRootPart")
+
+        local connection
+        connection = RunService.RenderStepped:Connect(function()
+            if getgenv().Settings.ActivatePrompts then
+                for _, prompt in pairs(workspace:GetDescendants()) do
+                    if prompt:IsA("ProximityPrompt") then
+                        local distance = (prompt.Parent.Position - rootPart.Position).Magnitude
+                        if distance <= 50 then
+                            prompt:InputHoldBegin()
+                        end
+                    end
+                end
+            else
+                if connection then
+                    connection:Disconnect()
+                end
+            end
+        end)
+    end
+})
+Tabs.Main:AddToggle("AutoHeach", {
+    Title = "Auto Heach Egg",
+    Default = getgenv().Settings.AutoHeach or false,
+    Callback = function(Value)
+        getgenv().Settings.AutoHeach = Value
+        SaveSetting()
+
+        local Players = game:GetService("Players")
+        local RunService = game:GetService("RunService")
+        local player = Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+        local rootPart = character:WaitForChild("HumanoidRootPart")
+
+        local connection
+        connection = RunService.RenderStepped:Connect(function()
+            if getgenv().Settings.ActivatePrompts then
+                for _, prompt in pairs(workspace:GetDescendants()) do
+                    if prompt:IsA("ProximityPrompt") then
+                        local distance = (prompt.Parent.Position - rootPart.Position).Magnitude
+                        if distance <= 50 then
+                            prompt:InputHoldBegin()
+                        end
+                    end
+                end
+            else
+                if connection then
+                    connection:Disconnect()
+                end
+            end
+        end)
+    end
+})
+local Main = Tabs.Main:AddSection("Food")
 local TeleportAndFire = Tabs.Main:AddToggle("TeleportAndFire", {
     Title = "Auto Buy Food (Good)",
     Description = "ซื้ออาหารอัตโนมัติ (ดี)",
@@ -242,6 +311,7 @@ local TeleportAndFire = Tabs.Main:AddToggle("TeleportAndFire", {
         end
     end
 })
+local Main = Tabs.Main:AddSection("Fish")
 local PetSelector = Tabs.Main:AddDropdown("PetSelector", {
     Title = "Select Bait",
     Description = "เลือกเหยื่อ",
