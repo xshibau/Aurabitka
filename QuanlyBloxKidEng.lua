@@ -27,7 +27,6 @@ task.spawn(function()
     end
 end)
 
-
 local v14 = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))();
 local v15 = v14:CreateWindow({
     Title = "Aura Hub - Blox Fruit [Premium]",
@@ -8945,6 +8944,7 @@ local v200 = v16.Webhook:AddToggle("Toggle", {
      end
 }); 
 v16:SelectTab(4)
+
 
 
 
