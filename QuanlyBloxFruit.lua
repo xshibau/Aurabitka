@@ -9,7 +9,7 @@ local v15 = v14:CreateWindow({
     MinimizeKey = Enum.KeyCode.RightControl
 });
 local v16 = {
-    Status = v15:AddTab({
+    Home = v15:AddTab({
         Title = "Server-Info",
         Icon = "info"
     }),
@@ -8907,4 +8907,5 @@ spawn(function()
             end
         end
     end
+
 end);
