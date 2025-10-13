@@ -6166,7 +6166,7 @@ v92:OnChanged(function(v279)
     end
 end);
 v17.ToggleWhite:SetValue(false);
-local v93 = v16.Setting:AddSection("Kĩ Năng Thông Thạo");
+local v93 = v16.Setting:AddSection("Settings Mastery");
 local v94 = v16.Setting:AddToggle("ToggleZ", {
     Title = "Skill Z",
     Description = "",
@@ -8689,16 +8689,16 @@ spawn(function()
 end);
 local v168 = v16.Sea:AddSection("Prehistoric Island");
 local v169 = v16.Sea:AddParagraph({
-    Title = "Trạng Thái Đảo Dung Nham",
+    Title = "Status Prehistoric Island",
     Content = ""
 });
 spawn(function()
     pcall(function()
         while wait() do
             if ggame:GetService("Workspace").Map:FindFirstChild("PrehistoricIsland") then
-                v169:SetDesc("Đảo Dung Nham: ✅️");
+                v169:SetDesc("Prehistoric Island: ✅️");
             else
-                v169:SetDesc("Đảo Dung Nham: ❌️");
+                v169:SetDesc("Prehistoric Island: ❌️");
             end
         end
     end);
@@ -8942,6 +8942,7 @@ spawn(function()
     end
 end);
 v16:SelectTab(4)
+
 
 
 
