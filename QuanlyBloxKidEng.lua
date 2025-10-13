@@ -6090,32 +6090,35 @@ end);
 local v89 = require(game.ReplicatedStorage.Util.CameraShaker);
 v89:Stop();
 local v90 = v16.Setting:AddToggle("ToggleBringMob",{Title="Bring Mob",Default=true})
-v90:OnChanged(function(v)v277=v _G.BringMob=v end)
+v90:OnChanged(function(v) _G.BringMob=v end)
 v17.ToggleBringMob:SetValue(true)
+
 spawn(function()
     while task.wait() do
+        if not (_G.BringMob and bringmob) then continue end
         pcall(function()
-            if not (_G.BringMob and bringmob) then return end
-            for _,m in pairs(workspace.Enemies:GetChildren()) do
-                if m.Name==MonFarm and m:FindFirstChild("Humanoid") and m.Humanoid.Health>0 then
-                    local hrp=m:FindFirstChild("HumanoidRootPart")
-                    if hrp and (hrp.Position-FarmPos.Position).Magnitude<=999999999 then
-                        hrp.CFrame=FarmPos
-                        hrp.Size=Vector3.new(60,60,60)
-                        hrp.Transparency=1
-                        hrp.CanCollide=false
-                        m.Head.CanCollide=false
-                        m.Humanoid.JumpPower=0
-                        m.Humanoid.WalkSpeed=0
-                        if m.Humanoid:FindFirstChild("Animator") then
-                            m.Humanoid.Animator:Destroy()
+            local player = game.Players.LocalPlayer
+            local enemies = workspace.Enemies:GetChildren()
+            for i, mob in ipairs(enemies) do
+                if mob.Name == MonFarm and mob:FindFirstChild("Humanoid") and mob.Humanoid.Health > 0 then
+                    local hrp = mob:FindFirstChild("HumanoidRootPart")
+                    if hrp and (hrp.Position - FarmPos.Position).Magnitude <= 999999999 then
+                        hrp.CanCollide = false
+                        mob.Head.CanCollide = false
+                        hrp.Size = Vector3.new(60,60,60)
+                        hrp.Transparency = 1
+                        mob.Humanoid.JumpPower = 0
+                        mob.Humanoid.WalkSpeed = 0
+                        if mob.Humanoid:FindFirstChild("Animator") then
+                            mob.Humanoid.Animator:Destroy()
                         end
-                        m.Humanoid:ChangeState(11)
-                        m.Humanoid:ChangeState(14)
-                        sethiddenproperty(game.Players.LocalPlayer,"SimulationRadius",math.huge)
+                        hrp.CFrame = FarmPos * CFrame.new(math.random(-5,5),0,math.random(-5,5))
+                        mob.Humanoid:ChangeState(11)
+                        mob.Humanoid:ChangeState(14)
                     end
                 end
             end
+            sethiddenproperty(player,"SimulationRadius",math.huge)
         end)
     end
 end)
@@ -8942,6 +8945,7 @@ local v200 = v16.Webhook:AddToggle("Toggle", {
      end
 }); 
 v16:SelectTab(4)
+
 
 
 
