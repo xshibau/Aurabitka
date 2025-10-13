@@ -1,3 +1,33 @@
+repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
+getgenv().Image = "rbxthumb://type=Asset&id=106019376492019&w=420&h=420"
+getgenv().ToggleUI = "LeftControl"
+
+task.spawn(function()
+    if not getgenv().LoadedMobileUI then
+        getgenv().LoadedMobileUI = true
+        local OpenUI = Instance.new("ScreenGui")
+        local ImageButton = Instance.new("ImageButton")
+        local UICorner = Instance.new("UICorner")
+        OpenUI.Name = "OpenUI"
+        OpenUI.Parent = game:GetService("CoreGui")
+        OpenUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+        ImageButton.Parent = OpenUI
+        ImageButton.BackgroundColor3 = Color3.fromRGB(105, 105, 105)
+        ImageButton.BackgroundTransparency = 0.8
+        ImageButton.Position = UDim2.new(0, 20, 0, 25)
+        ImageButton.Size = UDim2.new(0, 50, 0, 50)
+        ImageButton.Image = getgenv().Image
+        ImageButton.Draggable = true
+        ImageButton.Transparency = 1
+        UICorner.CornerRadius = UDim.new(0,13)
+        UICorner.Parent = ImageButton
+        ImageButton.MouseButton1Click:Connect(function()
+            game:GetService("VirtualInputManager"):SendKeyEvent(true, getgenv().ToggleUI, false, game)
+        end)
+    end
+end)
+
+
 local v14 = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))();
 local v15 = v14:CreateWindow({
     Title = "Aura Hub - Blox Fruit [Premium]",
@@ -9,10 +39,6 @@ local v15 = v14:CreateWindow({
     MinimizeKey = Enum.KeyCode.RightControl
 });
 local v16 = {
-    Home = v15:AddTab({
-        Title = "Server-Info",
-        Icon = "info"
-    }),
     ITM = v15:AddTab({
         Title = "Item",
         Icon = "wrench"
@@ -2358,13 +2384,6 @@ end
 if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Respawn") then
     game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy();
 end
-v16.Home:AddButton({
-    Title = "Discord",
-    Description = "Giao Lưu",
-    Callback = function()
-        setclipboard("https://discord.gg/Banana Hubroblox");
-    end
-});
 _G.FastAttackStrix_Mode = "Super Fast Attack";
 spawn(function()
     while wait() do
@@ -8920,31 +8939,3 @@ spawn(function()
     end
 end);
 v16:SelectTab(4)
-repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
-getgenv().Image = "rbxthumb://type=Asset&id=106019376492019&w=420&h=420"
-getgenv().ToggleUI = "LeftControl"
-
-task.spawn(function()
-    if not getgenv().LoadedMobileUI then
-        getgenv().LoadedMobileUI = true
-        local OpenUI = Instance.new("ScreenGui")
-        local ImageButton = Instance.new("ImageButton")
-        local UICorner = Instance.new("UICorner")
-        OpenUI.Name = "OpenUI"
-        OpenUI.Parent = game:GetService("CoreGui")
-        OpenUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-        ImageButton.Parent = OpenUI
-        ImageButton.BackgroundColor3 = Color3.fromRGB(105, 105, 105)
-        ImageButton.BackgroundTransparency = 0.8
-        ImageButton.Position = UDim2.new(0, 20, 0, 25)
-        ImageButton.Size = UDim2.new(0, 50, 0, 50)
-        ImageButton.Image = getgenv().Image
-        ImageButton.Draggable = true
-        ImageButton.Transparency = 1
-        UICorner.CornerRadius = UDim.new(0,13)
-        UICorner.Parent = ImageButton
-        ImageButton.MouseButton1Click:Connect(function()
-            game:GetService("VirtualInputManager"):SendKeyEvent(true, getgenv().ToggleUI, false, game)
-        end)
-    end
-end)
