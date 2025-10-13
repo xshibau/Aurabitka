@@ -2503,7 +2503,7 @@ spawn(function()
     end
 end);
 local v50 = v16.Main:AddToggle("ToggleMobAura", {
-    Title = "Farm Mobi Near",
+    Title = "Farm Mob Near",
     Description = "",
     Default = false
 });
@@ -2549,7 +2549,7 @@ spawn(function()
     end
 end);
 local v51 = v16.Main:AddToggle("ToggleCastleRaid", {
-    Title = "Auto Castl Raid",
+    Title = "Auto Castle Raid",
     Description = "",
     Default = false
 });
@@ -6314,6 +6314,7 @@ spawn(function()
         end
     end
 end);
+local v56 = v16.GeneralPlayer:AddSection("Stats");
 local v107 = v16.GeneralPlayer:AddToggle("ToggleMelee", {
     Title = "Auto Stats Melee",
     Description = "",
@@ -6419,6 +6420,7 @@ spawn(function()
         end
     end
 end);
+local Main = v16.GeneralPlayer:AddSection("Combat");
 local v112 = {};
 for v308, v309 in pairs(game:GetService("Players"):GetChildren()) do
     table.insert(v112, v309.Name);
@@ -6867,7 +6869,7 @@ _G.PermanentFruit = "Dragon-Dragon";
 _G.AutoBuyFruitSniper = false;
 _G.AutoSwitchPermanentFruit = false;
 local v123 = v16.GeneralFruit:AddDropdown("DropdownFruit", {
-    Title = "Chọn Trái",
+    Title = "Select Fruits",
     Description = "",
     Values = Table_DevilFruitSniper,
     Multi = false,
@@ -6878,7 +6880,7 @@ v123:OnChanged(function(v337)
     _G.SelectFruit = v337;
 end);
 local v111 = v16.GeneralFruit:AddToggle("ToggleFruit", {
-    Title = "Mua Trái Chọn",
+    Title = "Auto Buy Fruits",
     Description = "",
     Default = false
 });
@@ -7938,7 +7940,7 @@ v16.Shop:AddButton({
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("KenTalk", "Buy");
     end
 });
-local v56 = v16.Shop:AddSection("Kiếm");
+local v56 = v16.Shop:AddSection("Sword");
 v16.Shop:AddButton({
     Title = "Cutlass",
     Description = "",
@@ -8009,7 +8011,7 @@ v16.Shop:AddButton({
         game.ReplicatedStorage.Remotes.CommF_:InvokeServer("ThunderGodTalk");
     end
 });
-local v56 = v16.Shop:AddSection("Võ");
+local v56 = v16.Shop:AddSection("Melee");
 v16.Shop:AddButton({
     Title = "Black Leg",
     Description = "",
@@ -8089,9 +8091,9 @@ v16.Shop:AddButton({
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySanguineArt");
     end
 });
-local v56 = v16.Shop:AddSection("Khác");
+local v56 = v16.Shop:AddSection("Misc Shop");
 v16.Shop:AddButton({
-    Title = "Đổi Chỉ Số",
+    Title = "Change Stats",
     Description = "",
     Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward", "Refund", "1");
@@ -8366,7 +8368,7 @@ v16.GeneralPlayer:AddButton({
     end
 });
 local v153 = v16.GeneralPlayer:AddToggle("ToggleAntiBand", {
-    Title = "Ant Ban",
+    Title = "AntiBan",
     Description = "",
     Default = true
 });
@@ -8664,7 +8666,7 @@ v165:OnChanged(function(v397)
     end
 end);
 local v166 = v16.Sea:AddParagraph({
-    Title = "Auto Trial Draco V4 (Sớm Ra)",
+    Title = "Auto Trial Draco V4 (Soon)",
     Content = ""
 });
 local v167 = v16.Sea:AddToggle("ToggleTrialTeleport", {
@@ -8940,5 +8942,6 @@ spawn(function()
     end
 end);
 v16:SelectTab(4)
+
 
 
