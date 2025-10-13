@@ -8918,8 +8918,4 @@ spawn(function()
         end
     end
 end);
-v14:Notify({
-    Title = "Banana Hub",
-    Content = "Tải Xong",
-    Duration = 10
-});
+v16:SelectTab(4)
