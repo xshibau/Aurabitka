@@ -33,6 +33,10 @@ local v16 = {
         Title = "General Farm",
         Icon = "user-cog"
     }),
+    Status = v15:AddTab({
+        Title = "Status",
+        Icon = "file-chart-line"
+    }),
     GeneralPlayer = v15:AddTab({
         Title = "Local Player",
         Icon = "user"
@@ -8909,3 +8913,4 @@ spawn(function()
     end
 
 end);
+
