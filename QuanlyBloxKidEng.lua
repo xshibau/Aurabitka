@@ -6085,55 +6085,36 @@ spawn(function()
 end);
 local v89 = require(game.ReplicatedStorage.Util.CameraShaker);
 v89:Stop();
-local v90 = v16.Setting:AddToggle("ToggleBringMob", {
-    Title = "Bring Mob",
-    Description = "",
-    Default = true
-});
-v90:OnChanged(function(v277)
-    _G.BringMob = v277;
-end);
-v17.ToggleBringMob:SetValue(true);
+local v90 = v16.Setting:AddToggle("ToggleBringMob",{Title="Bring Mob",Default=true})
+v90:OnChanged(function(v)v277=v _G.BringMob=v end)
+v17.ToggleBringMob:SetValue(true)
 spawn(function()
-    while wait() do
+    while task.wait() do
         pcall(function()
-            for v733, v734 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                if (_G.BringMob and bringmob) then
-                    if ((v734.Name == MonFarm) and v734:FindFirstChild("Humanoid") and (v734.Humanoid.Health > 0)) then
-                        if (v734.Name == "Factory Staff") then
-                            if ((v734.HumanoidRootPart.Position - FarmPos.Position).Magnitude <= 1000000000) then
-                                v734.Head.CanCollide = false;
-                                v734.HumanoidRootPart.CanCollide = false;
-                                v734.HumanoidRootPart.Size = Vector3.new(60, 60, 60);
-                                v734.HumanoidRootPart.CFrame = FarmPos;
-                                if v734.Humanoid:FindFirstChild("Animator") then
-                                    v734.Humanoid.Animator:Destroy();
-                                end
-                                sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge);
-                            end
-                        elseif (v734.Name == MonFarm) then
-                            if ((v734.HumanoidRootPart.Position - FarmPos.Position).Magnitude <= 1000000000) then
-                                v734.HumanoidRootPart.CFrame = FarmPos;
-                                v734.HumanoidRootPart.Size = Vector3.new(60, 60, 60);
-                                v734.HumanoidRootPart.Transparency = 1;
-                                v734.Humanoid.JumpPower = 0;
-                                v734.Humanoid.WalkSpeed = 0;
-                                if v734.Humanoid:FindFirstChild("Animator") then
-                                    v734.Humanoid.Animator:Destroy();
-                                end
-                                v734.HumanoidRootPart.CanCollide = false;
-                                v734.Head.CanCollide = false;
-                                v734.Humanoid:ChangeState(11);
-                                v734.Humanoid:ChangeState(14);
-                                sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge);
-                            end
+            if not (_G.BringMob and bringmob) then return end
+            for _,m in pairs(workspace.Enemies:GetChildren()) do
+                if m.Name==MonFarm and m:FindFirstChild("Humanoid") and m.Humanoid.Health>0 then
+                    local hrp=m:FindFirstChild("HumanoidRootPart")
+                    if hrp and (hrp.Position-FarmPos.Position).Magnitude<=999999999 then
+                        hrp.CFrame=FarmPos
+                        hrp.Size=Vector3.new(60,60,60)
+                        hrp.Transparency=1
+                        hrp.CanCollide=false
+                        m.Head.CanCollide=false
+                        m.Humanoid.JumpPower=0
+                        m.Humanoid.WalkSpeed=0
+                        if m.Humanoid:FindFirstChild("Animator") then
+                            m.Humanoid.Animator:Destroy()
                         end
+                        m.Humanoid:ChangeState(11)
+                        m.Humanoid:ChangeState(14)
+                        sethiddenproperty(game.Players.LocalPlayer,"SimulationRadius",math.huge)
                     end
                 end
             end
-        end);
+        end)
     end
-end);
+end)
 local v91 = v16.Setting:AddToggle("ToggleRemoveNotify", {
     Title = "Remove Notify",
     Description = "",
@@ -8942,6 +8923,7 @@ spawn(function()
     end
 end);
 v16:SelectTab(4)
+
 
 
 
