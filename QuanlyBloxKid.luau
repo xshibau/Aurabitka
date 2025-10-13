@@ -1,6 +1,6 @@
 repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
 getgenv().Image = "rbxthumb://type=Asset&id=106019376492019&w=420&h=420"
-getgenv().ToggleUI = "LeftControl"
+getgenv().ToggleUI = "RightControl"
 
 task.spawn(function()
     if not getgenv().LoadedMobileUI then
@@ -8939,3 +8939,4 @@ spawn(function()
     end
 end);
 v16:SelectTab(4)
+
