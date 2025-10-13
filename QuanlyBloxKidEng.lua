@@ -2954,28 +2954,28 @@ if Sea3 then
     end);
 end
 if Sea3 then
-    local v490 = v16.Main:AddSection("Tư Lệnh Bánh");
+    local v490 = v16.Main:AddSection("Cake Prince");
     local v491 = v16.Main:AddParagraph({
-        Title = "Status Cake",
+        Title = "Status Cake Prince",
         Content = ""
     });
     spawn(function()
         while wait() do
             pcall(function()
                 if (string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 88) then
-                    v491:SetDesc("Còn: " .. string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"), 39, 41) .. "");
+                    v491:SetDesc("Wait: " .. string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"), 39, 41) .. "");
                 elseif (string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 87) then
-                    v491:SetDesc("Còn: " .. string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"), 39, 40) .. "");
+                    v491:SetDesc("Wait: " .. string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"), 39, 40) .. "");
                 elseif (string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 86) then
-                    v491:SetDesc("Còn: " .. string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"), 39, 39) .. " ");
+                    v491:SetDesc("Wait: " .. string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"), 39, 39) .. " ");
                 else
-                    v491:SetDesc("Cake : ✅️");
+                    v491:SetDesc("Cake Prince : ✅️");
                 end
             end);
         end
     end);
     local v492 = v16.Main:AddToggle("ToggleCake", {
-        Title = "Farm Commander Cake",
+        Title = "Farm Cake Prince",
         Description = "",
         Default = false
     });
@@ -8942,6 +8942,7 @@ local v200 = v16.Webhook:AddToggle("Toggle", {
      end
 }); 
 v16:SelectTab(4)
+
 
 
 
