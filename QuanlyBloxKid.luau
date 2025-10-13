@@ -7300,6 +7300,7 @@ function UpdateIslandMirageEsp()
         end);
     end
 end
+local v56 = v16.GeneralFruit:AddSection("Raid");
 local v136 = {
     "Flame",
     "Ice",
@@ -8919,5 +8920,6 @@ spawn(function()
     end
 end);
 v16:SelectTab(4)
+
 
 
