@@ -2473,7 +2473,7 @@ spawn(function()
                         if (v1433:FindFirstChild("Humanoid") and v1433:FindFirstChild("HumanoidRootPart") and (v1433.Humanoid.Health > 0)) then
                             if (v1433.Name == Ms) then
                                 local targetHRP = v1433.HumanoidRootPart
-                                local farmPos = targetHRP.CFrame * CFrame.new(0,5,0)
+                                local farmPos = targetHRP.CFrame * CFrame.new(0,15,0)
                                 Tween(farmPos)
                                 repeat
                                     wait(_G.Fast_Delay);
@@ -8970,6 +8970,7 @@ local v200 = v16.Webhook:AddToggle("Toggle", {
      end
 }); 
 v16:SelectTab(4)
+
 
 
 
