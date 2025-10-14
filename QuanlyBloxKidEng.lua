@@ -2511,7 +2511,7 @@ spawn(function()
             end)
         end
     end
-end)
+end);
 local v50 = v16.Main:AddToggle("ToggleMobAura", {
 local v50 = v16.Main:AddToggle("ToggleMobAura", {
     Title = "Farm Mob Near",
@@ -8970,6 +8970,7 @@ local v200 = v16.Webhook:AddToggle("Toggle", {
      end
 }); 
 v16:SelectTab(4)
+
 
 
 
