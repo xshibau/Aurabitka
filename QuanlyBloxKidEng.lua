@@ -2454,8 +2454,6 @@ v49:OnChanged(function(v237)
     _G.AutoLevel = v237;
     if (v237 == false) then
         wait();
-        Tween(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame);
-        wait();
     end
 end);
 v17.ToggleLevel:SetValue(false);
@@ -2474,13 +2472,15 @@ spawn(function()
                     for v1432, v1433 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                         if (v1433:FindFirstChild("Humanoid") and v1433:FindFirstChild("HumanoidRootPart") and (v1433.Humanoid.Health > 0)) then
                             if (v1433.Name == Ms) then
+                                local targetHRP = v1433.HumanoidRootPart
+                                local farmPos = targetHRP.CFrame * CFrame.new(0,5,0)
+                                Tween(farmPos)
                                 repeat
                                     wait(_G.Fast_Delay);
                                     AttackNoCoolDown();
                                     bringmob = true;
                                     AutoHaki();
                                     EquipTool(SelectWeapon);
-                                    Tween(v1433.HumanoidRootPart.CFrame * Pos);
                                     v1433.HumanoidRootPart.Size = Vector3.new(60, 60, 60);
                                     v1433.HumanoidRootPart.Transparency = 1;
                                     v1433.Humanoid.JumpPower = 0;
@@ -2489,7 +2489,17 @@ spawn(function()
                                     FarmPos = v1433.HumanoidRootPart.CFrame;
                                     MonFarm = v1433.Name;
                                 until not _G.AutoLevel or not v1433.Parent or (v1433.Humanoid.Health <= 0) or not game:GetService("Workspace").Enemies:FindFirstChild(v1433.Name) or (game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false)
-                                bringmob = false;
+                                bringmob = false
+                                local char = game:GetService("Players").LocalPlayer.Character
+                                if char and char:FindFirstChild("Humanoid") and char:FindFirstChild("HumanoidRootPart") then
+                                    local hum = char.Humanoid
+                                    local hrp = char.HumanoidRootPart
+                                    hum.WalkSpeed = 16
+                                    hum.JumpPower = 50
+                                    hrp.CanCollide = true
+                                    hrp.Transparency = 0
+                                    hrp.Size = Vector3.new(2,2,1)
+                                end
                             end
                         end
                     end
@@ -8960,6 +8970,7 @@ local v200 = v16.Webhook:AddToggle("Toggle", {
      end
 }); 
 v16:SelectTab(4)
+
 
 
 
