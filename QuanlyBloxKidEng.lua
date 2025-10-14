@@ -2452,8 +2452,10 @@ local v49 = v16.Main:AddToggle("ToggleLevel", {
 });
 v49:OnChanged(function(v237)
     _G.AutoLevel = v237;
-    if (v237 == false) then
-        wait();
+    if v237 == false then
+        wait()
+        Tween(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+        wait()
     end
 end);
 v17.ToggleLevel:SetValue(false);
@@ -2461,60 +2463,56 @@ spawn(function()
     while task.wait() do
         if _G.AutoLevel then
             pcall(function()
-                CheckLevel();
+                local oldQuest = NameQuest
+                local oldMon = NameMon
+                local oldPos = CFrameQ
+                CheckLevel()
+                if (NameQuest ~= oldQuest) or (NameMon ~= oldMon) or (CFrameQ ~= oldPos) then
+                    Tween(CFrameQ)
+                    repeat task.wait() until (game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQ.Position).Magnitude <= 5)
+                end
                 if (not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) or (game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false)) then
-                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest");
-                    Tween(CFrameQ);
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+                    Tween(CFrameQ)
                     if ((CFrameQ.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5) then
-                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", NameQuest, QuestLv);
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", NameQuest, QuestLv)
                     end
                 elseif (string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) or (game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true)) then
                     for v1432, v1433 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                         if (v1433:FindFirstChild("Humanoid") and v1433:FindFirstChild("HumanoidRootPart") and (v1433.Humanoid.Health > 0)) then
                             if (v1433.Name == Ms) then
-                                local targetHRP = v1433.HumanoidRootPart
-                                local farmPos = targetHRP.CFrame * CFrame.new(0,15,0)
-                                Tween(farmPos)
                                 repeat
-                                    wait(_G.Fast_Delay);
-                                    AttackNoCoolDown();
-                                    bringmob = true;
-                                    AutoHaki();
-                                    EquipTool(SelectWeapon);
-                                    v1433.HumanoidRootPart.Size = Vector3.new(60, 60, 60);
-                                    v1433.HumanoidRootPart.Transparency = 1;
-                                    v1433.Humanoid.JumpPower = 0;
-                                    v1433.Humanoid.WalkSpeed = 0;
-                                    v1433.HumanoidRootPart.CanCollide = false;
-                                    FarmPos = v1433.HumanoidRootPart.CFrame;
-                                    MonFarm = v1433.Name;
+                                    wait(_G.Fast_Delay)
+                                    AttackNoCoolDown()
+                                    bringmob = true
+                                    AutoHaki()
+                                    EquipTool(SelectWeapon)
+                                    Tween(v1433.HumanoidRootPart.CFrame * CFrame.new(0,15,0))
+                                    v1433.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+                                    v1433.HumanoidRootPart.Transparency = 1
+                                    v1433.Humanoid.JumpPower = 0
+                                    v1433.Humanoid.WalkSpeed = 0
+                                    v1433.HumanoidRootPart.CanCollide = false
+                                    FarmPos = v1433.HumanoidRootPart.CFrame
+                                    MonFarm = v1433.Name
                                 until not _G.AutoLevel or not v1433.Parent or (v1433.Humanoid.Health <= 0) or not game:GetService("Workspace").Enemies:FindFirstChild(v1433.Name) or (game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false)
                                 bringmob = false
-                                local char = game:GetService("Players").LocalPlayer.Character
-                                if char and char:FindFirstChild("Humanoid") and char:FindFirstChild("HumanoidRootPart") then
-                                    local hum = char.Humanoid
-                                    local hrp = char.HumanoidRootPart
-                                    hum.WalkSpeed = 16
-                                    hum.JumpPower = 50
-                                    hrp.CanCollide = true
-                                    hrp.Transparency = 0
-                                    hrp.Size = Vector3.new(2,2,1)
-                                end
                             end
                         end
                     end
-                    for v1434, v1435 in pairs(game:GetService("Workspace")['_WorldOrigin'].EnemySpawns:GetChildren()) do
+                    for v1434, v1435 in pairs(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()) do
                         if string.find(v1435.Name, NameMon) then
                             if ((game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v1435.Position).Magnitude >= 10) then
-                                Tween(v1435.HumanoidRootPart.CFrame * Pos);
+                                Tween(v1435.CFrame * CFrame.new(0,5,0))
                             end
                         end
                     end
                 end
-            end);
+            end)
         end
     end
-end);
+end)
+local v50 = v16.Main:AddToggle("ToggleMobAura", {
 local v50 = v16.Main:AddToggle("ToggleMobAura", {
     Title = "Farm Mob Near",
     Description = "",
@@ -2537,19 +2535,21 @@ spawn(function()
                     if (v839:FindFirstChild("Humanoid") and v839:FindFirstChild("HumanoidRootPart") and (v839.Humanoid.Health > 0)) then
                         if v839.Name then
                             if ((game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v839:FindFirstChild("HumanoidRootPart").Position).Magnitude <= 5000) then
+                                local targetHRP = v839.HumanoidRootPart
+                                local farmPos = targetHRP.CFrame * CFrame.new(0,15,0) -- chỉnh offset lên đầu mob
+                                Tween(farmPos)
                                 repeat
                                     wait(_G.Fast_Delay);
                                     AttackNoCoolDown();
                                     bringmob = true;
                                     AutoHaki();
                                     EquipTool(SelectWeapon);
-                                    Tween(v839.HumanoidRootPart.CFrame * Pos);
-                                    v839.HumanoidRootPart.Size = Vector3.new(60, 60, 60);
-                                    v839.HumanoidRootPart.Transparency = 1;
+                                    targetHRP.Size = Vector3.new(60, 60, 60);
+                                    targetHRP.Transparency = 1;
                                     v839.Humanoid.JumpPower = 0;
                                     v839.Humanoid.WalkSpeed = 0;
-                                    v839.HumanoidRootPart.CanCollide = false;
-                                    FarmPos = v839.HumanoidRootPart.CFrame;
+                                    targetHRP.CanCollide = false;
+                                    FarmPos = targetHRP.CFrame;
                                     MonFarm = v839.Name;
                                 until not _G.AutoNear or not v839.Parent or (v839.Humanoid.Health <= 0) or not game.Workspace.Enemies:FindFirstChild(v839.Name)
                                 bringmob = false;
@@ -8970,6 +8970,7 @@ local v200 = v16.Webhook:AddToggle("Toggle", {
      end
 }); 
 v16:SelectTab(4)
+
 
 
 
