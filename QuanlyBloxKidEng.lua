@@ -34,7 +34,7 @@ local v15 = v14:CreateWindow({
     TabWidth = 160,
     Theme = "Dark",
     Acrylic = false,
-    Size = UDim2.fromOffset(500, 390),
+    Size = UDim2.fromOffset(485, 380),
     MinimizeKey = Enum.KeyCode.RightControl
 });
 local v16 = {
@@ -8969,6 +8969,7 @@ local v200 = v16.Webhook:AddToggle("Toggle", {
      end
 }); 
 v16:SelectTab(4)
+
 
 
 
