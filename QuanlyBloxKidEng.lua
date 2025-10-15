@@ -2649,7 +2649,7 @@ spawn(function()
     end
 end);
 local v55 = v16.Main:AddToggle("ToggleCollectChest", {
-    Title = "Auto Collect Chest",
+    Title = "Auto Farm Chest",
     Description = "",
     Default = false
 });
@@ -2814,7 +2814,7 @@ if Sea3 then
         pcall(function()
             while wait() do
                 local v768 = game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Bones", "Check");
-                v485:SetDesc("Your Has: " .. tostring(v768) .. " Xương");
+                v485:SetDesc("Your Has: " .. tostring(v768) .. " Bone");
             end
         end);
     end);
@@ -8969,6 +8969,7 @@ local v200 = v16.Webhook:AddToggle("Toggle", {
      end
 }); 
 v16:SelectTab(4)
+
 
 
 
