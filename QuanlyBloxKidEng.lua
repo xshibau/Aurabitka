@@ -3587,8 +3587,8 @@ if Sea3 then
             _G.AutoFindPrehistoric = false;
             if not v513 then
                 v14:Notify({
-                    Title = "Banana Hub Roblox",
-                    Content = "Đảo Dung Nham Tìm Thấy",
+                    Title = "Aura Hub",
+                    Content = "The island has been found.",
                     Duration = 10
                 });
                 v513 = true;
@@ -3681,8 +3681,8 @@ if Sea3 then
             _G.AutoFindMirage = false;
             if not v513 then
                 v14:Notify({
-                    Title = "Banana Hub Roblox",
-                    Content = "Đảo Bí Ẩn Tìm Thấy",
+                    Title = "Aura Hub",
+                    Content = "The island has been found.",
                     Duration = 10
                 });
                 v513 = true;
@@ -3775,8 +3775,8 @@ if Sea3 then
             _G.AutoFindFrozen = false;
             if not v513 then
                 v14:Notify({
-                    Title = "Banana Hub Roblox",
-                    Content = "Đảo Leviathan Tìm Thấy",
+                    Title = "Aura Hub",
+                    Content = "The island has been found.",
                     Duration = 10
                 });
                 v513 = true;
@@ -8969,6 +8969,7 @@ local v200 = v16.Webhook:AddToggle("Toggle", {
      end
 }); 
 v16:SelectTab(4)
+
 
 
 
