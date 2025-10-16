@@ -1,0 +1,65 @@
+--[=[
+ d888b  db    db d888888b      .d888b.      db      db    db  .d8b.  
+88' Y8b 88    88   `88'        VP  `8D      88      88    88 d8' `8b 
+88      88    88    88            odD'      88      88    88 88ooo88 
+88  ooo 88    88    88          .88'        88      88    88 88~~~88 
+88. ~8~ 88b  d88   .88.        j88.         88booo. 88b  d88 88   88    @uniquadev
+ Y888P  ~Y8888P' Y888888P      888888D      Y88888P ~Y8888P' YP   YP  CONVERTER 
+
+designed using localmaze gui creator
+]=]
+
+local CollectionService = game:GetService("CollectionService");
+local G2L = {};
+
+G2L["ScreenGui_1"] = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"));
+G2L["ScreenGui_1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling;
+
+CollectionService:AddTag(G2L["ScreenGui_1"], [[main]]);
+
+G2L["Frame_2"] = Instance.new("Frame", G2L["ScreenGui_1"]);
+G2L["Frame_2"]["BorderSizePixel"] = 0;
+G2L["Frame_2"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["Frame_2"]["Size"] = UDim2.new(0, 468, 0, 338);
+G2L["Frame_2"]["Position"] = UDim2.new(0.5, -240, 0.5, -200);
+G2L["Frame_2"]["BackgroundTransparency"] = 0.3;
+
+
+G2L["UICorner_3"] = Instance.new("UICorner", G2L["Frame_2"]);
+
+
+
+G2L["ImageLabel_4"] = Instance.new("ImageLabel", G2L["Frame_2"]);
+G2L["ImageLabel_4"]["BorderSizePixel"] = 0;
+G2L["ImageLabel_4"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+-- G2L["ImageLabel_4"]["ImageContent"] = ;
+G2L["ImageLabel_4"]["Image"] = [[rbxthumb://type=Asset&id=83230952715744&w=420&h=420]];
+G2L["ImageLabel_4"]["Size"] = UDim2.new(0, 202, 0, 202);
+G2L["ImageLabel_4"]["BackgroundTransparency"] = 0.4;
+G2L["ImageLabel_4"]["Position"] = UDim2.new(0, 132, 0, 4);
+
+
+G2L["UICorner_5"] = Instance.new("UICorner", G2L["ImageLabel_4"]);
+G2L["UICorner_5"]["CornerRadius"] = UDim.new(0, 15);
+
+
+G2L["TextLabel_6"] = Instance.new("TextLabel", G2L["Frame_2"]);
+G2L["TextLabel_6"]["TextWrapped"] = true;
+G2L["TextLabel_6"]["BorderSizePixel"] = 0;
+G2L["TextLabel_6"]["TextSize"] = 11;
+G2L["TextLabel_6"]["TextScaled"] = true;
+G2L["TextLabel_6"]["BackgroundColor3"] = Color3.fromRGB(255, 0, 0);
+G2L["TextLabel_6"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
+G2L["TextLabel_6"]["TextColor3"] = Color3.fromRGB(28, 43, 54);
+G2L["TextLabel_6"]["BackgroundTransparency"] = 0.7;
+G2L["TextLabel_6"]["Size"] = UDim2.new(0, 440, 0, 110);
+G2L["TextLabel_6"]["Text"] = [[We are sorry: the outdated script cannot be used anymore, The script is dead or outdated because of lazy updating, Send By: Ziugpro]];
+G2L["TextLabel_6"]["Position"] = UDim2.new(0, 14, 0, 216);
+
+
+G2L["UICorner_7"] = Instance.new("UICorner", G2L["TextLabel_6"]);
+
+
+
+
+return G2L["ScreenGui_1"], require;
