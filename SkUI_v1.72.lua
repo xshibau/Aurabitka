@@ -68,6 +68,7 @@ function SkUI:CreateWindow(title)
     local Screen = Create("ScreenGui", {
         Name = "SkUI_Library",
         ResetOnSpawn = false,
+        ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
         Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
     })
 
