@@ -68,17 +68,16 @@ local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.
 local Window = Fluent:CreateWindow({
     Title = "Aura Hub - Build a Zoo [Premium]" ,
     SubTitle = "Ziugpro",
-    TabWidth = 130,
-    Size = UDim2.fromOffset(505, 345),
+    TabWidth = 160,
+    Size = UDim2.fromOffset(490, 385),
     Acrylic = true, 
     Theme = "Dark",
     MinimizeKey = Enum.KeyCode.RightControl
 })
 local Tabs = {
-    Player = Window:AddTab({ Title = "Tab Players", Icon = "" }),
-    Main = Window:AddTab({ Title = "Tab Famring", Icon = "" }),
-    Anti = Window:AddTab({ Title = "Tab Anti", Icon = "" }),
-    Web = Window:AddTab({ Title = "Tab Webhooks", Icon = "" }),
+    Player = Window:AddTab({ Title = "Visual", Icon = "wrench" }),
+    Main = Window:AddTab({ Title = "Main", Icon = "house" }),
+    Sv = Window:AddTab({ Title = "Setting", Icon = "settings" }),
 }
 
 local Main = Tabs.Main:AddSection("Coins")
@@ -241,7 +240,7 @@ Tabs.Main:AddToggle("ActivatePrompts", {
     end
 })
 Tabs.Main:AddToggle("AutoHeach", {
-    Title = "Auto Heach Egg",
+    Title = "Auto Open Egg",
     Default = getgenv().Settings.AutoHeach or false,
     Callback = function(Value)
         getgenv().Settings.AutoHeach = Value
@@ -353,8 +352,8 @@ local AutoUsePet = Tabs.Main:AddToggle("AutoUsePet", {
         end
     end
 })
-local Main = Tabs.Anti:AddSection("Anti")
-local AntiServer = Tabs.Anti:AddToggle("AntiServer", {
+local Main = Tabs.Player:AddSection("Anti")
+local AntiServer = Tabs.Player:AddToggle("AntiServer", {
     Title = "Anti Server - แอนตี้เซิร์ฟเวอร์",
     Description = "Kick if server has more than 1 person - เตะออกหากเซิร์ฟเวอร์มีมากกว่า 1 คน",
     Default = getgenv().Settings.AntiServer or false,
@@ -376,6 +375,7 @@ local AntiServer = Tabs.Anti:AddToggle("AntiServer", {
         end
     end
 })
+local Main = Tabs.Player:AddSection("Visual")
 
 local SpeedToggle = Tabs.Player:AddToggle("SpeedToggle", {
     Title = "Speed Boost",
@@ -422,6 +422,7 @@ local InfJump = Tabs.Player:AddToggle("InfJump", {
         end
     end
 })
+local Main = Tabs.Player:AddSection("Hitbox")
 local HitboxToggles = {}
 local ShowHitbox = Tabs.Player:AddToggle("ShowHitbox", {
     Title = "Show Hitbox",
@@ -488,28 +489,6 @@ local MyHitbox = Tabs.Player:AddToggle("MyHitbox", {
             hrp.Material = Enum.Material.Plastic
         end
     end
-})
-
-local Input = Tabs.Web:AddInput("UrlWebhook", {
-        Title = "Url Webhooks",
-        Description = "URL เว็บฮุก",
-        Default = getgenv().Settings.UrlWebhook or "",
-        Placeholder = "",
-        Numeric = false, 
-        Finished = false, 
-        Callback = function(Value)
-        getgenv().Settings.UrlWebhook = Value
-        SaveSetting()
-        end
-    })
-local Toggle = Tabs.Web:AddToggle("Startwebhook", {
-     Title = "Start Webhook",
-     Description = "เริ่มเว็บฮุก",
-     Default = getgenv().Settings.Startwebhook or false,
-     Callback = function(Value)
-     getgenv().Settings.Startwebhook = Value
-     SaveSetting()
-     end
 })   
 
 repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
