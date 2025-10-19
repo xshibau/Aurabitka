@@ -180,18 +180,25 @@ end
 	local uitab = {}
 	
 	function uitab:Tab(text)
-		local TabButton = Instance.new("TextButton")
-		TabButton.Parent = ScrollTab
-		TabButton.Name = text.."Server"
-		TabButton.Text = text
-		TabButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-	    TabButton.BorderColor3 = Color3.fromRGB(147,112,219)
-        TabButton.BorderSizePixel = 0
-		TabButton.Size = UDim2.new(0, 130, 0, 23)
-		TabButton.Font = Enum.Font.GothamSemibold
-		TabButton.TextColor3 = Color3.fromRGB(225, 225, 225)
-		TabButton.TextSize = 19.000
-		TabButton.TextTransparency = 0
+local TabButton = Instance.new("TextButton")
+TabButton.Parent = ScrollTab
+TabButton.Name = text.."Server"
+TabButton.Text = text
+TabButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+TabButton.BorderColor3 = Color3.fromRGB(147,112,219)
+TabButton.BorderSizePixel = 0
+TabButton.Size = UDim2.new(0, 130, 0, 23)
+TabButton.Font = Enum.Font.GothamBold
+TabButton.TextColor3 = Color3.fromRGB(225, 225, 225)
+TabButton.TextSize = 19
+TabButton.TextTransparency = 0
+TabButton.TextXAlignment = Enum.TextXAlignment.Left
+TabButton.TextWrapped = true
+TabButton.TextTruncate = Enum.TextTruncate.None
+
+local Padding = Instance.new("UIPadding")
+Padding.Parent = TabButton
+Padding.PaddingLeft = UDim.new(0, 5)
 
 		local MainFramePage = Instance.new("ScrollingFrame")
 		MainFramePage.Name = text.."_Page"
