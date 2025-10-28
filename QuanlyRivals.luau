@@ -54,13 +54,13 @@ local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/d
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
 local Window = Fluent:CreateWindow({
-    Title = "Aura Hub - [Premium]" ,
+    Title = "Aura Hub - Rivals [Premium]" ,
     SubTitle = "Ziugpro",
     TabWidth = 160,
     Size = UDim2.fromOffset(490, 385),
     Acrylic = true, 
     Theme = "Dark",
-    MinimizeKey = Enum.KeyCode.RightControl
+    MinimizeKey = Enum.KeyCode.LeftControl
 })
 local Tabs = {
     Sv = Window:AddTab({ Title = "Setting GUI", Icon = "settings" }),
@@ -639,7 +639,7 @@ local Toggle = Tabs.Main:AddToggle("ToggleNoclip", {
 })
 repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
 getgenv().Image = "rbxthumb://type=Asset&id=106019376492019&w=420&h=420"
-getgenv().ToggleUI = "RightControl"
+getgenv().ToggleUI = "LeftControl"
 
 task.spawn(function()
     if not getgenv().LoadedMobileUI then
@@ -673,4 +673,5 @@ InterfaceManager:SetFolder("AuraHubSave")
 
 SaveManager:BuildConfigSection(Tabs.Sv)
 InterfaceManager:BuildInterfaceSection(Tabs.Sv)
+
 
