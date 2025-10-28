@@ -673,3 +673,4 @@ InterfaceManager:SetFolder("AuraHubSave")
 
 SaveManager:BuildConfigSection(Tabs.Sv)
 InterfaceManager:BuildInterfaceSection(Tabs.Sv)
+
