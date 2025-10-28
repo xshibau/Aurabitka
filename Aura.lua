@@ -1,5 +1,7 @@
 if game.GameId == 7326934954 then
   loadstring(game:HttpGet("https://raw.githubusercontent.com/xshibau/Aurabitka/refs/heads/main/Quanly99Night.lua"))()
+elseif game.GameId == 6035872082 then
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/xshibau/Aurabitka/refs/heads/main/QuanlyRivals.luau"))
 elseif game.PlaceId == 7449423635 or game.PlaceId == 2753915549 or game.PlaceId == 4442272183 or game.PlaceId == 122478697296975 then
   loadstring(game:HttpGet("https://raw.githubusercontent.com/xshibau/Aurabitka/refs/heads/main/QuanlyBloxKidEng.lua"))()
 elseif game.GameId == 8066283370 then
