@@ -7,6 +7,7 @@ getgenv().Settings = {
      ToggleESPHuman = nil,
      ToggleESPLine = nil,
      ToggleSpeed = nil,
+     ToggleAimbotAuto = nil,
 }
 local FileName = tostring(game.Players.LocalPlayer.UserId).."_Settings.json"
 local BaseFolder = "AuraHub"
@@ -685,6 +686,7 @@ InterfaceManager:SetFolder("AuraHubSave")
 
 SaveManager:BuildConfigSection(Tabs.Sv)
 InterfaceManager:BuildInterfaceSection(Tabs.Sv)
+
 
 
 
