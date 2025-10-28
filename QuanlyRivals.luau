@@ -124,49 +124,61 @@ local Toggle = Tabs.Main:AddToggle("ToggleTargetAimbot", {
         SaveSetting()
     end
 })
-local Toggle = Tabs.Main:AddToggle("ToggleAimbot", {
-    Title = "Aimbot (Head, Visible Only)",
-    Default = getgenv().Settings.ToggleAimbot or false,
+local Toggle = Tabs.Main:AddToggle("ToggleAimbotAuto", {
+    Title = "Aimbot (Fixed)",
+    Default = getgenv().Settings.ToggleAimbotAuto or false,
     Callback = function(Value)
-        getgenv().Settings.ToggleAimbot = Value
+        getgenv().Settings.ToggleAimbotAuto = Value
+        SaveSetting()
+
         local player = game.Players.LocalPlayer
         local camera = workspace.CurrentCamera
+        local Players = game:GetService("Players")
         local RunService = game:GetService("RunService")
-        local Mouse = player:GetMouse()
 
         if Value then
-            getgenv().AimbotConnection = RunService.RenderStepped:Connect(function()
-                local closestPlayer, shortestDistance = nil, math.huge
-                for _, target in pairs(game.Players:GetPlayers()) do
-                    if target ~= player and target.Character and target.Character:FindFirstChild("Head") then
-                        local head = target.Character.Head
-                        local headPos, onScreen = camera:WorldToViewportPoint(head.Position)
+            if getgenv().AimbotAutoConnection then
+                getgenv().AimbotAutoConnection:Disconnect()
+            end
+
+            local params = RaycastParams.new()
+            params.FilterDescendantsInstances = {player.Character}
+            params.FilterType = Enum.RaycastFilterType.Blacklist
+            params.IgnoreWater = true
+
+            getgenv().AimbotAutoConnection = RunService.RenderStepped:Connect(function()
+                local closest, closestDist = nil, math.huge
+                local origin = camera.CFrame.Position
+
+                for _, targetPlayer in ipairs(Players:GetPlayers()) do
+                    if targetPlayer ~= player and targetPlayer.Character and targetPlayer.Character:FindFirstChild("Head") then
+                        local head = targetPlayer.Character.Head
+                        local headVec, onScreen = camera:WorldToViewportPoint(head.Position)
                         if onScreen then
-                            local dist = (Vector2.new(Mouse.X, Mouse.Y) - Vector2.new(headPos.X, headPos.Y)).Magnitude
-                            if dist < shortestDistance and dist < 300 then -- 300 = độ nhạy aimbot
-                                local ray = Ray.new(camera.CFrame.Position, (head.Position - camera.CFrame.Position).Unit * 9999)
-                                local hit = workspace:FindPartOnRay(ray, player.Character)
-                                if hit and hit:IsDescendantOf(target.Character) then
-                                    closestPlayer = target
-                                    shortestDistance = dist
+                            local ray = workspace:Raycast(origin, (head.Position - origin), params)
+                            if ray and ray.Instance and ray.Instance:IsDescendantOf(targetPlayer.Character) then
+                                local dist = (head.Position - origin).Magnitude
+                                if dist < closestDist then
+                                    closest = head
+                                    closestDist = dist
                                 end
                             end
                         end
                     end
                 end
 
-                if closestPlayer and closestPlayer.Character and closestPlayer.Character:FindFirstChild("Head") then
-                    camera.CFrame = CFrame.new(camera.CFrame.Position, closestPlayer.Character.Head.Position)
+                if closest then
+                    local camCF = camera.CFrame
+                    local targetCF = CFrame.lookAt(camCF.Position, closest.Position)
+                    camera.CFrame = camCF:Lerp(targetCF, 0.25) -- độ mượt
                 end
             end)
         else
-            if getgenv().AimbotConnection then
-                getgenv().AimbotConnection:Disconnect()
-                getgenv().AimbotConnection = nil
+            if getgenv().AimbotAutoConnection then
+                getgenv().AimbotAutoConnection:Disconnect()
+                getgenv().AimbotAutoConnection = nil
             end
         end
-
-        SaveSetting()
     end
 })
 
@@ -673,5 +685,6 @@ InterfaceManager:SetFolder("AuraHubSave")
 
 SaveManager:BuildConfigSection(Tabs.Sv)
 InterfaceManager:BuildInterfaceSection(Tabs.Sv)
+
 
 
