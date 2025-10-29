@@ -491,33 +491,48 @@ local MyHitbox = Tabs.Player:AddToggle("MyHitbox", {
     end
 })   
 
-repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
-getgenv().Image = "rbxthumb://type=Asset&id=106019376492019&w=420&h=420"
-getgenv().ToggleUI = "RightControl"
+local p = game.Players.LocalPlayer
+local g = Instance.new("ScreenGui", p:WaitForChild("PlayerGui"))
+g.ResetOnSpawn = false
+g.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+local b = Instance.new("ImageButton", g)
+b.Size = UDim2.new(0, 55, 0, 55)
+b.Position = UDim2.new(0.9, 0, 0.8, 0)
+b.Draggable = true
+b.Active = true
+b.ZIndex = 9999
+b.Image = "rbxthumb://type=Asset&id=106019376492019&w=420&h=420"
+b.ScaleType = Enum.ScaleType.Crop
+
+local gradient = Instance.new("UIGradient", b)
+gradient.Color = ColorSequence.new{
+	ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 0, 255)),
+	ColorSequenceKeypoint.new(0.25, Color3.fromRGB(0, 255, 255)),
+	ColorSequenceKeypoint.new(0.5, Color3.fromRGB(0, 255, 0)),
+	ColorSequenceKeypoint.new(0.75, Color3.fromRGB(255, 255, 0)),
+	ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 0, 0))
+}
+gradient.Rotation = 0
 
 task.spawn(function()
-    if not getgenv().LoadedMobileUI then
-        getgenv().LoadedMobileUI = true
-        local OpenUI = Instance.new("ScreenGui")
-        local ImageButton = Instance.new("ImageButton")
-        local UICorner = Instance.new("UICorner")
-        OpenUI.Name = "OpenUI"
-        OpenUI.Parent = game:GetService("CoreGui")
-        OpenUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-        ImageButton.Parent = OpenUI
-        ImageButton.BackgroundColor3 = Color3.fromRGB(105, 105, 105)
-        ImageButton.BackgroundTransparency = 0.8
-        ImageButton.Position = UDim2.new(0, 20, 0, 25)
-        ImageButton.Size = UDim2.new(0, 50, 0, 50)
-        ImageButton.Image = getgenv().Image
-        ImageButton.Draggable = true
-        ImageButton.Transparency = 1
-        UICorner.CornerRadius = UDim.new(0,13)
-        UICorner.Parent = ImageButton
-        ImageButton.MouseButton1Click:Connect(function()
-            game:GetService("VirtualInputManager"):SendKeyEvent(true, getgenv().ToggleUI, false, game)
-        end)
-    end
+	while task.wait(0.03) do
+		gradient.Rotation = (gradient.Rotation + 3) % 360
+	end
+end)
+
+local glow = Instance.new("UIStroke", b)
+glow.Thickness = 2
+glow.Color = Color3.fromRGB(255, 255, 255)
+glow.Transparency = 0.3
+
+local uicorner = Instance.new("UICorner", b)
+uicorner.CornerRadius = UDim.new(1, 0)
+
+b.MouseButton1Click:Connect(function()
+	local vim = game:GetService("VirtualInputManager")
+	vim:SendKeyEvent(true, Enum.KeyCode.RightControl, false, game)
+	vim:SendKeyEvent(false, Enum.KeyCode.RightControl, false, game)
 end)
 SaveManager:SetLibrary(Fluent)
 InterfaceManager:SetLibrary(Fluent)
