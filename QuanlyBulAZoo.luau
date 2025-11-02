@@ -14,6 +14,8 @@ getgenv().Settings = {
      hitboxsize = nil,
      AutoUseBait = nil,
      AutoHeach = nil,
+     AutoBuyFood = nil,
+     SelectFood = nil,
      ActivatePrompts = nil,
      BaitSelector = nil,
      UrlWebhook = nil,
@@ -272,6 +274,41 @@ Tabs.Main:AddToggle("AutoHeach", {
     end
 })
 local Main = Tabs.Main:AddSection("Food")
+local Fruits = {
+ "Strawberry",
+ "Blueberry",
+ "Watermelon",
+ "Apple",
+ "Orange",
+ "Corn",
+ "Banana",
+ "Grape",
+ "Pear",
+ "Pineapple",
+ "Gold Mango",
+ "Bloodstone Cyad",
+ "Colossal Pinecone	",
+ "Volt Ginkgo",
+ "Deepsea Pearl",
+}
+local MultiDropdown = Tabs.Main:AddDropdown("SelectFood", {
+        Title = "Select Food",
+        Values = Fruits,
+        Multi = true,
+        Default = {"Strawberry"},
+        Callback = function(Value)
+        getgenv().Settings.SelectFood = Value
+        SaveSetting()
+        end
+    })
+local Toggle = Tabs.Main:AddToggle("AutoBuyFood", {
+     Title = "Auto Buy Food", 
+     Default = getgenv().Settings.AutoBuyFood or false,
+     Callback = function(Value)
+     getgenv().Settings.AutoBuyFood = Value
+     SaveSetting()
+     end
+})   
 local TeleportAndFire = Tabs.Main:AddToggle("TeleportAndFire", {
     Title = "Auto Buy Food (Good)",
     Description = "ซื้ออาหารอัตโนมัติ (ดี)",
