@@ -1,3 +1,5 @@
+script_key = "fl4ewb2qbzsn9x90z000uceoyvy7p8nv";
+loadstring(game:HttpGet("https://api.luarmor.net/files/v4/loaders/8a8bc616153e07c23e53388637f1620c.lua"))()
 if game.GameId == 7326934954 then
   loadstring(game:HttpGet("https://raw.githubusercontent.com/xshibau/Aurabitka/refs/heads/main/Quanly99Night.lua"))()
 elseif game.GameId == 6035872082 then
