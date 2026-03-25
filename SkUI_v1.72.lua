@@ -848,49 +848,5 @@ end
     return ui
 end
 
-return setmetatable({}, SkUI)
- DescLabel = Instance.new("TextLabel")
-    DescLabel.BackgroundTransparency = 1
-    DescLabel.Text = desc
-    DescLabel.Font = Enum.Font.Gotham
-    DescLabel.TextSize = 12
-    DescLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
-    DescLabel.TextWrapped = true
-    DescLabel.Size = UDim2.new(1, 0, 0, 0)
-    DescLabel.AutomaticSize = Enum.AutomaticSize.Y
-    DescLabel.Parent = Frame
-end
-function tab:Line(side)
-    local parent = (side == "Left") and LeftScroll or RightScroll
-
-    local Line = Instance.new("Frame")
-    Line.Size = UDim2.new(1, 0, 0, 2)
-    Line.AnchorPoint = Vector2.new(0.5, 0)
-    Line.Position = UDim2.new(0.5, 0, 0, 0)
-    Line.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    Line.BackgroundTransparency = 0.4
-    Line.BorderSizePixel = 0
-    Line.Parent = parent
-end 
-        Button.MouseButton1Click:Connect(function()
-            for _, p in pairs(Pages) do
-                p.Visible = false
-            end
-            Page.Visible = true
-        end)
-
-        Page.Visible = #Pages == 0
-        table.insert(Pages, Page)
-        return tab
-    end
-
-    UserInputService.InputBegan:Connect(function(input, gp)
-        if input.KeyCode == Enum.KeyCode.RightShift and not gp then
-            Holder.Visible = not Holder.Visible
-        end
-    end)
-
-    return ui
-end
 
 return setmetatable({}, SkUI)
