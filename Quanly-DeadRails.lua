@@ -20,6 +20,27 @@ function ForceTeleport(cf, holdTime)
     end
 end
 
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+local targetPos = Vector3.new(62.754150, 7.449450, -94.348206)
+
+Tab:AddToggle("Left", "Auto Join Plays", false, function(v)
+    if v then
+        task.spawn(function()
+            task.wait(3)
+
+            if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                player.Character.HumanoidRootPart.CFrame = CFrame.new(targetPos)
+            end
+        end)
+    end
+end)
+Tab:AddTextbox("Left", "Server ID", "", function(text)
+end)
+Tab:AddButton("Left", "Joins Server", function()
+end)
+
 Tab:AddTextLabel("Left", "Player")
 Tab:AddToggle("Left", "Full Bright", false, function(v)
     if v then
