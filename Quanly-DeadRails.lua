@@ -1,4 +1,4 @@
-local SkUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/xshibau/Aurabitka/refs/heads/main/SkUI_v1.72.lua"))()
+local SkUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/xshibau/Aurabitka/refs/heads/main/SkUI_v1.52.lua"))()
 
 local UI = SkUI:CreateWindow("Dead Rails")
 
